@@ -19,5 +19,4 @@ const Review = db.define('review', {
   }
 })
 
-Review.belongsTo(Product)
-Review.belongsTo(User)
+module.exports = Review;

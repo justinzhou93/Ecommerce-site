@@ -7,18 +7,17 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  description: {
+  body: {
     type: Sequelize.TEXT
   },
-  price: {
-    type: Sequelize.INTEGER,
-    allowNull: false
+  rating: {
+    type: Sequelize.INTEGER
   },
-  inventory: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
-  },
-  imgUrl: {
-    type: Sequelize.STRING
+  date: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
   }
 })
+
+Review.belongsTo(Product)
+Review.belongsTo(User)

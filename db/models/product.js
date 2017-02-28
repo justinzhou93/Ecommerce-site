@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('APP/db')
+const Sequelize = require('sequelize');
+const db = require('APP/db');
 
 
 const Product = db.define('product', {
@@ -21,6 +21,6 @@ const Product = db.define('product', {
   imgUrl: {
     type: Sequelize.STRING
   }
-})
+});
 
 module.exports = Product;

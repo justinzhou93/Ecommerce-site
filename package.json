@@ -1,5 +1,5 @@
 {
-  "name": "__BONES_NEEDS_A_NAME__",
+  "name": "Ecommerce-site",
   "version": "0.0.1",
   "description": "A happy little skeleton.",
   "main": "index.js",
@@ -72,7 +72,7 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.18.0",
-    "babel-eslint": "6",
+    "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",

@@ -8,6 +8,24 @@ const Cart = db.define('Cart', {
         type: Sequelize.INTEGER
     }
 }, {
+    classMethods: {
+        totalPrice: function (userId) {
+            let total = 0;
+            Cart.findAll({
+                where: {
+                    userId: userId
+                }
+            })
+                .then(function (cartItems) {
+                    cartItems.forEach(function(item) {
+                        total += item.price;
+                    })
+                })
+                .then(function () {
+                    return total;
+                })
+        }
+    },
     getterMethods: {
         price: function () {
             Product.findById(this.productId)

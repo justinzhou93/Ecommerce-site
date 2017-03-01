@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Order = require('APP/db/models/order');
 const LineItem = require('APP/db/models/lineitem');
+const Cart = require('APP/db/models/cart');
 
 // admin use only -- all orders
 router.get('/', function (req, res, next) {
@@ -20,7 +21,7 @@ router.get('/', function (req, res, next) {
 router.get('/:userId', function (req, res, next) {
     Order.findAll({
         where: {
-            userId: req.params.userId
+            user_id: req.params.userId
         },
         include: [{
             model: LineItem
@@ -41,11 +42,44 @@ router.get('/:orderId', function (req, res, next) {
         .catch(next);
 });
 
-// creating order
-router.post('/', function (req, res, next) {
-    Order.create(req.body)
-        .then((createdOrder) => {
-            res.json(createdOrder);
+// creating order, line items
+router.post('/:userId', function (req, res, next) {
+    const createLineItems = Cart.findAll({
+        where: {
+            user_id: req.params.userId
+        }
+    })
+        .then((foundCarts) => {
+            const lineItemPromises = foundCarts.map((cartItem) => {
+                return LineItem.create({
+                    product_id: cartItem.productId,
+                    quantity: cartItem.quantity,
+                    price: cartItem.price
+                });
+            });
+            return Promise.all(lineItemPromises);
+        })
+        .catch(next);
+
+    const createOrder = Cart.totalPrice(req.params.userId)
+        .then((cartTotal) => {
+            return Order.create({
+                status: 'Created',
+                totalPrice: cartTotal
+            })
+        })
+        .catch(next);
+
+    Promise.all([createLineItems, createOrder])
+        .then(() => {
+            return Cart.delete({
+                where: {
+                    user_id: req.params.userId
+                }
+            })
+        })
+        .then(() => {
+            res.send('Order created successfully!');
         })
         .catch(next);
 });

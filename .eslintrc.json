@@ -1,6 +1,7 @@
 {
   "extends": "fullstack",
   "parser": "babel-eslint",
+  "root": true,
   "rules": {
     "react/prop-types": 0
   }

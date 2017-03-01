@@ -50,4 +50,16 @@ router.post('/', function (req, res, next) {
         .catch(next);
 });
 
+//updating a specific order
+router.put('/:orderId', function (req, res, next) {
+    Order.findById(req.params.orderId)
+        .then((order) => {
+            return order.update({ status: req.body.status })
+        })
+        .then((updatedOrder) => {
+            res.json(updatedOrder);
+        })
+        .catch(next);
+});
+
 module.exports = router;

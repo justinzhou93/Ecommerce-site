@@ -36,35 +36,46 @@ router.get('/', (req, res, next) => {
 
 router.post('/:userId/billingaddress', (req, res, next) => {
   User.findById(req.params.userId)
-  .then(foundUser => {
+    .then(foundUser => {
     return BillingAddress.create(req.body)
     .then(createdBillingAddress => {
-      createdBillingAddress.setUser(foundUser);
+      return createdBillingAddress.setUser(foundUser);
+      })
     })
-  })
-  .catch(next);
+    .then(updatedBillingAddress => {
+      res.json(updatedBillingAddress);
+    })
+    .catch(next);
 });
 
 router.post('/:userId/shippingaddress', (req, res, next) => {
   User.findById(req.params.userId)
-  .then(foundUser => {
+    .then(foundUser => {
     return ShippingAddress.create(req.body)
     .then(createdShippingAddress => {
-      createdShippingAddress.setUser(foundUser);
+      return createdShippingAddress.setUser(foundUser);
+      })
     })
-  })
-  .catch(next);
+    .then(updatedShippingAddress => {
+      console.log(updatedShippingAddress);
+      res.json(updatedShippingAddress);
+    })
+   .catch(next);
 });
 
 router.post('/:userId/creditcard', (req, res, next) => {
   User.findById(req.params.userId)
-  .then(foundUser => {
+    .then(foundUser => {
     return CreditCard.create(req.body)
     .then(createdCreditCard => {
-      createdCreditCard.setUser(foundUser);
+      return createdCreditCard.setUser(foundUser);
+      })
     })
-  })
-  .catch(next);
+    .then(updatedCreditCard => {
+      console.log(updatedCreditCard);
+      res.json(updatedCreditCard);
+    })
+    .catch(next);
 });
 
 router.get('/:userId', (req, res, next) => {
@@ -101,6 +112,37 @@ router.get('/:userId/cart', (req, res, next) => {
       res.json(foundUser);
     })
     .catch(next);
+})
+
+router.post('/:userId/cart', (req, res, next) => {
+  Cart.create(req.body)
+  .then(cartItem => {
+    User.findById(req.params.userId)
+  .then(foundUser => {
+    return cartItem.setUser(foundUser);
+    })
+  .then(updatedCart => {
+    console.log(updatedCart);
+    res.json(updatedCart);
+    })
+  })
+})
+
+router.put('/:userId/cart/:productId', (req, res, next) => {
+  Cart.findOne({
+    where: {
+      user_id: req.params.userId,
+      product_id: req.params.productId
+    }
+  })
+  .then(foundCart => {
+    return foundCart.update(req.body)
+  })
+  .then(updatedCart => {
+    console.log(updatedCart);
+    res.json(updatedCart);
+  })
+  .catch(next);
 })
 
 module.exports = router;

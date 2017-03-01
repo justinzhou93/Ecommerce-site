@@ -21,6 +21,8 @@ User.hasOne(OAuth);
 User.hasMany(CreditCard);
 User.hasMany(ShippingAddress);
 User.hasMany(BillingAddress);
+BillingAddress.belongsTo(User);
+ShippingAddress.belongsTo(User);
 Review.belongsTo(Product);
 Review.belongsTo(User);
 Product.belongsToMany(Category, {through: 'ProductCategory'});

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('APP/db')
 
-const ShippingAddress = db.define('shipping addresses', {
+const ShippingAddress = db.define('shipping_addresses', {
   address1: {
     type: Sequelize.STRING,
     allowNull: false

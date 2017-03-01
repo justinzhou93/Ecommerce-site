@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('APP/db')
 
-const BillingAddress = db.define('billing addresses', {
+const BillingAddress = db.define('billing_addresses', {
   address1: {
     type: Sequelize.STRING,
     allowNull: false

@@ -7,6 +7,7 @@ const router = express.Router();
 const BillingAddress = db.model('billing_addresses');
 const CreditCard = db.model('credit_cards');
 const ShippingAddress = db.model('shipping_addresses');
+const Reviews = db.model('review');
 const Cart = db.model('Cart');
 
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
@@ -33,6 +34,39 @@ router.get('/', (req, res, next) => {
   .catch(next);
 });
 
+router.post('/:userId/billingaddress', (req, res, next) => {
+  User.findById(req.params.userId)
+  .then(foundUser => {
+    return BillingAddress.create(req.body)
+    .then(createdBillingAddress => {
+      createdBillingAddress.setUser(foundUser);
+    })
+  })
+  .catch(next);
+});
+
+router.post('/:userId/shippingaddress', (req, res, next) => {
+  User.findById(req.params.userId)
+  .then(foundUser => {
+    return ShippingAddress.create(req.body)
+    .then(createdShippingAddress => {
+      createdShippingAddress.setUser(foundUser);
+    })
+  })
+  .catch(next);
+});
+
+router.post('/:userId/creditcard', (req, res, next) => {
+  User.findById(req.params.userId)
+  .then(foundUser => {
+    return CreditCard.create(req.body)
+    .then(createdCreditCard => {
+      createdCreditCard.setUser(foundUser);
+    })
+  })
+  .catch(next);
+});
+
 router.get('/:userId', (req, res, next) => {
   User.findOne({
     where: {
@@ -41,7 +75,8 @@ router.get('/:userId', (req, res, next) => {
     include: [
       {model: BillingAddress, where: {user_id: req.params.userId}},
       {model: CreditCard, where: {user_id: req.params.userId}},
-      {model: ShippingAddress, where: {user_id: req.params.userId}}
+      {model: ShippingAddress, where: {user_id: req.params.userId}},
+      {model: Review,  where: {user_id: req.params.userId}}
     ]
     })
     .then(foundUser => {

@@ -57,7 +57,6 @@ router.post('/:userId/shippingaddress', (req, res, next) => {
       })
     })
     .then(updatedShippingAddress => {
-      console.log(updatedShippingAddress);
       res.json(updatedShippingAddress);
     })
    .catch(next);
@@ -114,18 +113,16 @@ router.get('/:userId/cart', (req, res, next) => {
     .catch(next);
 })
 
-router.post('/:userId/cart', (req, res, next) => {
-  Cart.create(req.body)
-  .then(cartItem => {
-    User.findById(req.params.userId)
-  .then(foundUser => {
-    return cartItem.setUser(foundUser);
-    })
-  .then(updatedCart => {
-    console.log(updatedCart);
-    res.json(updatedCart);
-    })
+router.post('/:userId/cart/:productId', (req, res, next) => {
+  Cart.create({
+    quantity: req.body.quantity,
+    user_id: req.params.userId,
+    product_id: req.params.productId
   })
+  .then(createdCart => {
+    res.json(createdCart);
+  })
+  .catch(next);
 })
 
 router.put('/:userId/cart/:productId', (req, res, next) => {
@@ -139,7 +136,6 @@ router.put('/:userId/cart/:productId', (req, res, next) => {
     return foundCart.update(req.body)
   })
   .then(updatedCart => {
-    console.log(updatedCart);
     res.json(updatedCart);
   })
   .catch(next);

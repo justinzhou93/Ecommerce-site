@@ -3,7 +3,6 @@
   "parser": "babel-eslint",
   "root": true,
   "rules": {
-    "react/prop-types": 0,
-    "new-cap": 0
+    "camelCase": 0
   }
 }

@@ -7,8 +7,9 @@ const router = express.Router();
 const BillingAddress = db.model('billing_addresses');
 const CreditCard = db.model('credit_cards');
 const ShippingAddress = db.model('shipping_addresses');
-const Reviews = db.model('review');
+const Review = db.model('review');
 const Cart = db.model('Cart');
+const Order = db.model('Order');
 
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -71,7 +72,6 @@ router.post('/:userId/creditcard', (req, res, next) => {
       })
     })
     .then(updatedCreditCard => {
-      console.log(updatedCreditCard);
       res.json(updatedCreditCard);
     })
     .catch(next);
@@ -83,13 +83,15 @@ router.get('/:userId', (req, res, next) => {
       id: req.params.userId
     },
     include: [
-      {model: BillingAddress, where: {user_id: req.params.userId}},
-      {model: CreditCard, where: {user_id: req.params.userId}},
-      {model: ShippingAddress, where: {user_id: req.params.userId}},
-      {model: Review,  where: {user_id: req.params.userId}}
+      {model: BillingAddress},
+      {model: CreditCard},
+      {model: ShippingAddress},
+      {model: Review},
+      {model: Order}
     ]
     })
     .then(foundUser => {
+      console.log(foundUser)
       res.json(foundUser);
     })
     .catch(next);

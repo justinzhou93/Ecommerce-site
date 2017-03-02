@@ -52,7 +52,7 @@ router.get('/categories', (req, res, next) => {
       // {all:true}
     ]
   })
-  .then(categories => res.send({msg: "hi"}))
+  .then(categories => res.send(categories))
   .catch(next)
 })
 

@@ -22,6 +22,7 @@ User.hasMany(CreditCard);
 User.hasMany(ShippingAddress);
 User.hasMany(BillingAddress);
 Review.belongsTo(Product);
+Product.hasMany(Review);
 Review.belongsTo(User);
 Product.belongsToMany(Category, {through: 'ProductCategory'});
 Category.belongsToMany(Product, {through: 'ProductCategory'});

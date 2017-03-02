@@ -1,4 +1,5 @@
 'use strict'; // eslint-disable-line semi
+/* eslint-disable */
 
 // const seedUsers = () => db.Promise.map([
 //   {name: 'so many', email: 'god@example.com', password: '1234'},

@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const db = require('../../db')
 const Product = require('../../db/models/product');
 const Category = require('../../db/models/category');
 const Review = require('../../db/models/review');
@@ -52,14 +51,26 @@ router.get('/categories', (req, res, next) => {
       // {all:true}
     ]
   })
-  .then(categories => res.send({msg: "hi"}))
+  .then(categories => res.send(categories))
   .catch(next)
 })
 
 // ADMIN: adds new categories
 router.post('/categories', (req, res, next) => {
-  Category.findOrCreate(req.body)
-  .spread((category, created) => res.status(201).send(category))
+  Category.findOrCreate({
+    where: {
+      title: req.body.title
+    }
+  })
+  .spread((category, created) => {
+    if (!created){
+      var err = new Error('already exists');
+      err.status = 400;
+      next(err);
+    } else {
+      res.status(204).send(category)
+    }
+  })
   .catch(next)
 })
 
@@ -89,7 +100,6 @@ router.post('/', (req, res, next) => {
   })
   // Product.create(req.body)
   .spread((createdproduct, created) => {
-    console.log(created);
     if (!created){
       var err = new Error('already exists');
       err.status = 400;

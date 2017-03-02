@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const db = require('../../db')
 const Product = require('../../db/models/product');
 const Category = require('../../db/models/category');
 const Review = require('../../db/models/review');

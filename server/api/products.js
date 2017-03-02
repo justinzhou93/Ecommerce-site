@@ -58,8 +58,20 @@ router.get('/categories', (req, res, next) => {
 
 // ADMIN: adds new categories
 router.post('/categories', (req, res, next) => {
-  Category.findOrCreate(req.body)
-  .spread((category, created) => res.status(201).send(category))
+  Category.findOrCreate({
+    where: {
+      title: req.body.title
+    }
+  })
+  .spread((category, created) => {
+    if (!created){
+      var err = new Error('already exists');
+      err.status = 400;
+      next(err);
+    } else {
+      res.status(204).send(category)
+    }
+  })
   .catch(next)
 })
 
@@ -89,7 +101,6 @@ router.post('/', (req, res, next) => {
   })
   // Product.create(req.body)
   .spread((createdproduct, created) => {
-    console.log(created);
     if (!created){
       var err = new Error('already exists');
       err.status = 400;

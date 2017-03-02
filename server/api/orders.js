@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Order = require('APP/db/models/order');
 const LineItem = require('APP/db/models/lineitem');
 const Cart = require('APP/db/models/cart');
+const Product = require('APP/db/models/product');
 
 // admin use only -- all orders
 router.get('/', function (req, res, next) {
@@ -13,22 +14,6 @@ router.get('/', function (req, res, next) {
     })
         .then((orders) => {
             res.json(orders);
-        })
-        .catch(next);
-});
-
-// all user-specific orders
-router.get('/:userId', function (req, res, next) {
-    Order.findAll({
-        where: {
-            user_id: req.params.userId
-        },
-        include: [{
-            model: LineItem
-        }]
-    })
-        .then((userOrders) => {
-            res.json(userOrders);
         })
         .catch(next);
 });
@@ -47,32 +32,59 @@ router.post('/:userId', function (req, res, next) {
     const createLineItems = Cart.findAll({
         where: {
             user_id: req.params.userId
-        }
+        },
+        include: [{
+            model: Product
+        }]
     })
         .then((foundCarts) => {
             const lineItemPromises = foundCarts.map((cartItem) => {
                 return LineItem.create({
-                    product_id: cartItem.productId,
+                    product_id: cartItem.product.id,
                     quantity: cartItem.quantity,
-                    price: cartItem.price
+                    price: cartItem.product.price
                 });
             });
             return Promise.all(lineItemPromises);
         })
         .catch(next);
 
-    const createOrder = Cart.totalPrice(req.params.userId)
-        .then((cartTotal) => {
+    const createOrder = Cart.findAll({
+        where: {
+            user_id: req.params.userId
+        },
+        include: [{
+            model: Product
+        }]
+    })
+        .then((foundCarts) => {
+            let total = 0;
+
+            foundCarts.forEach((cart) => {
+                total += cart.product.price * cart.quantity;
+            })
+            return total;
+        })
+        .then((total) => {
             return Order.create({
                 status: 'Created',
-                totalPrice: cartTotal
+                totalPrice: total,
+                user_id: req.params.userId
             })
+        })
+        .then((createdOrder) => {
+            return createdOrder;
         })
         .catch(next);
 
     Promise.all([createLineItems, createOrder])
+        .then(([createdLineItems, createdOrder]) => {
+            return createdLineItems.forEach((lineItem) => {
+                return lineItem.setOrder(createdOrder.id)
+            })
+        })
         .then(() => {
-            return Cart.delete({
+            return Cart.destroy({
                 where: {
                     user_id: req.params.userId
                 }

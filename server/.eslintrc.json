@@ -3,6 +3,6 @@
   "parser": "babel-eslint",
   "root": true,
   "rules": {
-    "camelCase": 0
+    "camelcase": 0
   }
 }

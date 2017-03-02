@@ -1,15 +1,15 @@
-'use strict'; // eslint-disable-line semi
+'use strict'; // eslint-disable-line semi camelcase
 
 const db = require('APP/db')
-const User = db.model('users')
 const express = require('express');
 const router = express.Router();
-const BillingAddress = db.model('billing_addresses');
+
+const User = db.model('users')
+const Address = db.model('addresses');
 const CreditCard = db.model('credit_cards');
-const ShippingAddress = db.model('shipping_addresses');
-const Review = db.model('review');
-const Cart = db.model('Cart');
-const Order = db.model('Order');
+const Review = db.model('reviews');
+const Order = db.model('orders');
+const LineItem = db.model('lineitems');
 
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -28,48 +28,78 @@ const Order = db.model('Order');
 //     .catch(next))
 
 
-// this is for admin use only
+// TODO: this is for admin use only
 router.get('/', (req, res, next) => {
   User.findAll()
   .then(users => res.json(users))
   .catch(next);
 });
 
-router.post('/:userId/billingaddress', (req, res, next) => {
-  User.findById(req.params.userId)
-    .then(foundUser => {
-    return BillingAddress.create(req.body)
-    .then(createdBillingAddress => {
-      return createdBillingAddress.setUser(foundUser);
-      })
+// finding details of specific user (for user profile page)
+router.get('/:userId', (req, res, next) => {
+  User.findById(req.params.userId, {
+      include: [
+        {model: Address},
+        {model: CreditCard},
+        {model: Review},
+        {model: Order}
+      ]
     })
-    .then(updatedBillingAddress => {
-      res.json(updatedBillingAddress);
+    .then(foundUser => {
+      res.json(foundUser);
     })
     .catch(next);
 });
 
-router.post('/:userId/shippingaddress', (req, res, next) => {
-  User.findById(req.params.userId)
-    .then(foundUser => {
-    return ShippingAddress.create(req.body)
-    .then(createdShippingAddress => {
-      return createdShippingAddress.setUser(foundUser);
-      })
+// gets all user addresses
+router.get('/:userId/address', (req, res, next) => {
+  Address.findAll({
+    where: {
+      user_id: req.params.userId
+    }
+  })
+    .then((foundAddresses) => {
+      res.json(foundAddresses);
     })
-    .then(updatedShippingAddress => {
-      res.json(updatedShippingAddress);
-    })
-   .catch(next);
+    .catch(next);
 });
 
+// adds a new user address
+router.post('/:userId/address', (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(foundUser => {
+      return Address.create(req.body)
+        .then(createdAddress => {
+            return createdAddress.setUser(foundUser);
+        })
+    })
+    .then(updatedAddress => {
+      res.json(updatedAddress);
+    })
+    .catch(next);
+});
+
+// gets all user credit credit_cards
+router.get('/:userId/creditcard', (req, res, next) => {
+  CreditCard.findAll({
+    where: {
+      user_id: req.params.userId
+    }
+  })
+    .then((foundCreditCards) => {
+      res.json(foundCreditCards);
+    })
+    .catch(next);
+});
+
+// adds a new user creditcard
 router.post('/:userId/creditcard', (req, res, next) => {
   User.findById(req.params.userId)
     .then(foundUser => {
-    return CreditCard.create(req.body)
-    .then(createdCreditCard => {
-      return createdCreditCard.setUser(foundUser);
-      })
+      return CreditCard.create(req.body)
+        .then(createdCreditCard => {
+          return createdCreditCard.setUser(foundUser);
+        })
     })
     .then(updatedCreditCard => {
       res.json(updatedCreditCard);
@@ -77,70 +107,74 @@ router.post('/:userId/creditcard', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/:userId', (req, res, next) => {
-  User.findOne({
-    where: {
-      id: req.params.userId
-    },
-    include: [
-      {model: BillingAddress},
-      {model: CreditCard},
-      {model: ShippingAddress},
-      {model: Review},
-      {model: Order}
-    ]
-    })
-    .then(foundUser => {
-      console.log(foundUser)
-      res.json(foundUser);
-    })
-    .catch(next);
-})
-
+/** --------------------------USER CART----------------------- */
+// get user's cart info
 router.get('/:userId/cart', (req, res, next) => {
-  User.findOne({
-    where: {
-      id: req.params.userId
-    },
-    include: [
-      {model: BillingAddress, where: {user_id: req.params.userId}},
-      {model: CreditCard, where: {user_id: req.params.userId}},
-      {model: ShippingAddress, where: {user_id: req.params.userId}},
-      {model: Cart, where: {user_id: req.params.userId}}
-    ]
-    })
-    .then(foundUser => {
-      res.json(foundUser);
-    })
-    .catch(next);
-})
+  User.findById(req.params.userId, {
+      include: [
+          {model: Address},
+          {model: CreditCard},
+          {model: LineItem}, 
+        ]
+      })
+      .then(foundUser => {
+        res.json(foundUser);
+      })
+      .catch(next);
+});
 
+// user adding product to cart
 router.post('/:userId/cart/:productId', (req, res, next) => {
-  Cart.create({
+  LineItem.create({
     quantity: req.body.quantity,
     user_id: req.params.userId,
-    product_id: req.params.productId
+    product_id: req.params.productId,
+    status: 'Cart'
   })
-  .then(createdCart => {
-    res.json(createdCart);
-  })
-  .catch(next);
-})
+    .then(createdCart => {
+      res.json(createdCart);
+    })
+    .catch(next);
+});
 
+// when changing quantity of cart
 router.put('/:userId/cart/:productId', (req, res, next) => {
-  Cart.findOne({
+  LineItem.findOne({
     where: {
       user_id: req.params.userId,
-      product_id: req.params.productId
+      product_id: req.params.productId,
+      status: 'Cart'
     }
   })
-  .then(foundCart => {
-    return foundCart.update(req.body)
+    .then(foundCart => {
+      return foundCart.update(req.body)
+    })
+    .then(updatedCart => {
+      res.json(updatedCart);
+    })
+    .catch(next);
+});
+
+// removing item from cart
+router.delete('/:userId/cart/:productId', (req, res, next) => {
+  LineItem.destroy({
+    where: {
+      user_id: req.params.userId,
+      product_id: req.params.productId,
+      status: 'Cart'
+    }
   })
-  .then(updatedCart => {
-    res.json(updatedCart);
-  })
-  .catch(next);
-})
+    .then(() => {
+      res.send('Item successfully removed from cart!');
+    })
+    .catch(next);
+});
+/** --------------------- USER PURCHASING CART ------------------- */
+
+// user purchases an order (from cart)
+router.post('/:userId/orders', (req, res, next) => {
+  LineItem.purchase(req.params.userId)
+    .catch(next);
+});
 
 module.exports = router;

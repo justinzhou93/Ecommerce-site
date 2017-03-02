@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('APP/db')
 
-const ShippingAddress = db.define('shipping_addresses', {
+const Address = db.define('addresses', {
   address1: {
     type: Sequelize.STRING,
     allowNull: false
@@ -27,4 +27,4 @@ const ShippingAddress = db.define('shipping_addresses', {
   }
 });
 
-module.exports = ShippingAddress;
+module.exports = Address;

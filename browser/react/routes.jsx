@@ -20,8 +20,6 @@ import AllProductsContainer from './containers/AllProductsContainer';
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {GetOrdersFromServer} from './action-creators/orders';
 import {GetUserFromServer} from './action-creators/users';
-// TODO - remember to query for cart inside of orders because merged cart and lineitems
-import {GetCartFromServer} from './action-creators/orders'
 
 /* -----------------     COMPONENT ROUTES     ------------------ */
 
@@ -67,9 +65,9 @@ const mapStateToDispatch = dispatch => ({
   fetchSingleOrder: (nextRouterState) => {
     const userid = nextRouterState.params.userid;
     const orderid = nextRouterState.params.orderid;
-    dispatch(GetOrdersFromServer(userid, orderid));
+    dispatch(GetSingleOrder(orderid));
   },
-  fetchUsers: (nextRouterState) => {
+  fetchUser: (nextRouterState) => {
     // TODO for this action creator, do not pass in userid if you want all users. otherwise, pass in userid for specific user
     const userid = nextRouterState.params.userid;
     dispatch(GetUserFromServer(userid));

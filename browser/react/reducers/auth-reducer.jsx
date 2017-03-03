@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 /** Auth Constants */
 import { SET_CURRENT_USER } from '../action-creators/auth';
 

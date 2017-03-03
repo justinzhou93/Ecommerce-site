@@ -75,7 +75,6 @@ const LineItem = db.define('lineitems', {
             }
         }
     }
-
 });
 
 module.exports = LineItem;

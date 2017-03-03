@@ -1,6 +1,7 @@
 // where you put ReactDOM.render...
 import React from 'react';
-import reacDOM from 'react-dom';
+import reactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import store from './store';
@@ -12,7 +13,6 @@ import Root from './components/Root';
 import OrderContainer from './containers/AllOrdersContainer';
 import ProductContainer from './containers/AllProductsContainer';
 import CartCheckOutContainer from './containers/CartCheckOutContainer';
-import FilterBarContainer from './containers/FilterBarContainer';
 import LoginContainer from './containers/LoginContainer';
 import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
 import SignupContainer from './container/SignupContainer';
@@ -84,4 +84,4 @@ const mapStateToDispatch = dispatch => ({
   }
 })
 
-export default connect(mapStateToProps, mapStateToDispatch)
+export default connect(mapStateToProps, mapStateToDispatch)(Routes);

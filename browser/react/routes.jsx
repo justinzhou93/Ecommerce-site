@@ -22,11 +22,11 @@ import UserProfileContainer from './containers/UserProfileContainer';
 
 
 // TODO need to create these thunk action creators (axios calls) in the action-creator files
-import {GetProductsFromServer} from './action-creators/products';
-import {GetOrdersFromServer} from './action-creators/orders';
-import {GetUserFromServer} from './action-creators/users';
+import {loadAllProducts} from './action-creators/products';
 // TODO - remember to query for cart inside of orders because merged cart and lineitems
-import {GetCartFromServer} from './action-creators/orders'
+import {GetOrdersFromServer, GetSingleOrder} from './action-creators/orders';
+import {GetUserFromServer} from './action-creators/users';
+
 
 /* -----------------     COMPONENT ROUTES     ------------------ */
 
@@ -37,12 +37,12 @@ const Routes = ({fetchProducts, fetchUserOrders, fetchSingleOrder, fetchUser}) =
       <Route path="products" component = {ProductContainer} />
       <Route path="login" component = {LoginContainer} />
       <Route path="signup" component = {SignupContainer} />
-      <Route path="users/:userid/orders" component = {OrderContainer} onEnter = {fetchUserOrders} />
+      <Route path="users/:userid/orders" component = {OrderContainer} onEnter = {fetchUser} />
       <Route path="users/:userid/orders/:orderid" component = {SingleOrder} onEnter = {fetchSingleOrder} />
         <Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />
       <Route path="products/:productid" component = {SingleProductContainer} />
       <Route path="users/:userid" component = {UserProfileContainer} onEnter = {fetchUser} />
-      <Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {GetCartFromServer} />
+      <Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {fetchUser} />
 
       {/*ADMIN ROUTES*/}
       <Route path="users/?admin" component = {UserProfileContainer} />
@@ -60,20 +60,16 @@ const mapStateToDispatch = dispatch => ({
   fetchProducts: () => {
     // TODO for this action creator, do not pass in productid if you want all products. otherwise, pass in productid for specific product
     const productid = nextRouterState.params.productid;
-    dispatch(GetProductsFromServer(productid));
-  },
-  fetchUserOrders: (nextRouterState) => {
-    const userid = nextRouterState.params.userid;
-    dispatch(GetOrdersFromServer(userid));
+    dispatch(loadAllProducts(productid));
   },
   // TODO do we need this? to keep consistent with other thunk action creators, we can just use previous (fetchUserOrders)
   // with optional second parameter (orderid). If orderid is undefined, then return all orders, else return single order...
   fetchSingleOrder: (nextRouterState) => {
     const userid = nextRouterState.params.userid;
     const orderid = nextRouterState.params.orderid;
-    dispatch(GetOrdersFromServer(userid, orderid));
+    dispatch(GetSingleOrder(orderid));
   },
-  fetchUsers: (nextRouterState) => {
+  fetchUser: (nextRouterState) => {
     // TODO for this action creator, do not pass in userid if you want all users. otherwise, pass in userid for specific user
     const userid = nextRouterState.params.userid;
     dispatch(GetUserFromServer(userid));

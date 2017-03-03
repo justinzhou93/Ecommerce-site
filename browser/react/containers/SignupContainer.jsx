@@ -1,5 +1,5 @@
 import {React, Component} from 'react';
-import {Connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {SignupComponent} from '../components/Signup';
 import {signup} from '../action-creators/auth';
 
@@ -23,7 +23,7 @@ class SignupContainer extends Component {
 
   render () {
     return (
-      <SignupComponent handleSubmit={this.handleSubmit}/>
+      <SignupComponent handleSubmit={this.handleSubmit} />
     )
   }
 }

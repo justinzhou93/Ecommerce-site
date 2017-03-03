@@ -10,28 +10,28 @@ const SignupComponent = props => (
       <div className="form-group">
         <label htmlFor="name" className="col-sm-2 control-label">First Name</label>
         <div className="col-sm-10">
-          <input name="firstName" type="text" className="form-control"/>
+          <input name="firstName" type="text" className="form-control" />
         </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="name" className="col-sm-2 control-label">Last Name</label>
         <div className="col-sm-10">
-          <input name="lastName" type="text" className="form-control"/>
+          <input name="lastName" type="text" className="form-control" />
         </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="email" className="col-sm-2 control-label"> Email</label>
         <div className="col-sm-10">
-          <input name="email" type="text" className="form-control"/>
+          <input name="email" type="text" className="form-control" />
         </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="title" className="col-sm-2 control-label">Password</label>
         <div className="col-sm-10">
-          <input name="password" type="text" className="form-control"/>
+          <input name="password" type="text" className="form-control" />
         </div>
       </div>
 
@@ -43,5 +43,3 @@ const SignupComponent = props => (
   </div>
 
 );
-
-

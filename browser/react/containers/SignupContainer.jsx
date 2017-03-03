@@ -1,43 +1,41 @@
 import {React, Component} from 'react';
 import {Connect} from 'react-redux';
-import {Signup} from '../components/Signup';
+import {SignupComponent} from '../components/Signup';
+import {signup} from '../action-creators/auth';
 
 class SignupContainer extends Component {
-  constructor() {
-    super();
-    this.state = this.initialState();
-    this.handleChange = this.hangleChange.bind(this);
+  constructor(props) {
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
-
-  intiialState () {
-    return {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    }
-  }
-
-  reset() {
-    this.setState(this.intiialState());
-  }
-
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value
-    });
-  }
-
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.submitUser(this.state)
-      .then(() => this.reset())
-      .catch(error => console.error(error));
+    const credentials = {
+      firstName: evt.target.firstName.value,
+      lastName: evt.target.lastName.value,
+      password: evt.target.password.value,
+      email: evt.target.email.value
+    };
+    this.props.signupAction(credentials)
   }
 
+  render () {
+    return (
+      <SignupComponent handleSubmit={this.handleSubmit}/>
+    )
+  }
 }
 
-const mapDispatchToProps = {addUser}
+/* -----------------    CONTAINER     ------------------ */
+
+const mapDispatchToProps = dispatch  => {
+  return {
+    signupAction: function (credentials) {
+      dispatch(signup(credentials))
+    }
+  }
+};
+
+export default connect(null, mapDispatchToProps)(SignupContainer);

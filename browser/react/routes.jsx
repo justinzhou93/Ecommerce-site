@@ -20,10 +20,29 @@ import AllProductsContainer from './containers/AllProductsContainer';
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {GetOrdersFromServer} from './action-creators/orders';
 import {GetUserFromServer} from './action-creators/users';
+
+import Home from './components/Home'
+import Root from './components/App';
+import OrderContainer from './containers/AllOrdersContainer';
+import ProductContainer from './containers/AllProductsContainer';
+import CartCheckOutContainer from './containers/CartCheckOutContainer';
+import LoginContainer from './containers/LoginContainer';
+import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
+import SignupContainer from './container/SignupContainer';
+import SingleOrder from './containers/SingleOrder';
+import SingleProductContainer from './containers/SingleProductContainer';
+import UserProfileContainer from './containers/UserProfileContainer';
+
+
+// TODO need to create these thunk action creators (axios calls) in the action-creator files
+import {loadAllProducts} from './action-creators/products';
 // TODO - remember to query for cart inside of orders because merged cart and lineitems
-import {GetCartFromServer} from './action-creators/orders'
+import {GetOrdersFromServer, GetSingleOrder} from './action-creators/orders';
+import {GetUserFromServer} from './action-creators/users';
+
 
 /* -----------------     COMPONENT ROUTES     ------------------ */
+
 
 export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetchSingleOrder, fetchUser}) {
   return (
@@ -67,9 +86,9 @@ const mapStateToDispatch = dispatch => ({
   fetchSingleOrder: (nextRouterState) => {
     const userid = nextRouterState.params.userid;
     const orderid = nextRouterState.params.orderid;
-    dispatch(GetOrdersFromServer(userid, orderid));
+    dispatch(GetSingleOrder(orderid));
   },
-  fetchUsers: (nextRouterState) => {
+  fetchUser: (nextRouterState) => {
     // TODO for this action creator, do not pass in userid if you want all users. otherwise, pass in userid for specific user
     const userid = nextRouterState.params.userid;
     dispatch(GetUserFromServer(userid));

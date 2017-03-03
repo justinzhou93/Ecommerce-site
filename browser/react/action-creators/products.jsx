@@ -34,7 +34,6 @@ export const loadAllProducts = () => {
         axios.get('/api/products')
             .then((res => res.data))
             .then((products) => {
-                console.log(products);
                 dispatch(settingProductList(products));
             });
     }

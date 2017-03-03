@@ -93,20 +93,10 @@ router.get('/:id', (req, res, next) => {
 
 // ADMIN: post new product
 router.post('/', (req, res, next) => {
-  Product.findOrCreate({
-    where: {
-      title: req.body.title
-    }
-  })
+  Product.create(req.body)
   // Product.create(req.body)
-  .spread((createdproduct, created) => {
-    if (!created){
-      var err = new Error('already exists');
-      err.status = 400;
-      next(err);
-    } else {
-      res.json(createdproduct);
-    }
+  .then((createdproduct) => {
+    res.json(createdproduct);
   })
   .catch(next)
 })

@@ -32,6 +32,7 @@ const removeProduct = () => {
 export const loadAllProducts = () => {
     return dispatch => {
         axios.get('/api/products')
+            .then((res => res.data))
             .then((products) => {
                 dispatch(settingProductList(products));
             });
@@ -43,6 +44,7 @@ export const loadAllProducts = () => {
 export const loadSingleProduct = (productId) => {
     return dispatch => {
         axios.get(`/api/products/${productId}`)
+            .then((res => res.data))
             .then((product) => {
                 dispatch(setSingleProduct(product));
             });

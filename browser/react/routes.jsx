@@ -8,15 +8,16 @@ import App from './components/App';
 import AllOrdersContainer from './containers/AllOrdersContainer';
 import AllProductsContainer from './containers/AllProductsContainer';
 // import CartCheckOutContainer from './containers/CartCheckOutContainer';
-import LoginContainer from './containers/LoginContainer';
+// import OrderContainer from './containers/AllOrdersContainer';
+import AllProductsContainer from './containers/AllProductsContainer';
+// import CartCheckOutContainer from './containers/CartCheckOutContainer';
+// import LoginContainer from './containers/LoginContainer';
 // import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
-import SignupContainer from './containers/SignupContainer';
-// import SingleOrderContainer from './containers/SingleOrderContainer';
+// // import SignupContainer from './container/SignupContainer';
+// import SingleOrder from './containers/SingleOrder';
 // import SingleProductContainer from './containers/SingleProductContainer';
 // import UserProfileContainer from './containers/UserProfileContainer';
 
-
-// TODO need to create these thunk action creators (axios calls) in the action-creator files
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {GetOrdersFromServer} from './action-creators/orders';
 import {GetUserFromServer} from './action-creators/users';

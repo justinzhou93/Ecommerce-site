@@ -7,14 +7,12 @@ import { connect } from 'react-redux';
 import App from './components/App';
 import AllOrdersContainer from './containers/AllOrdersContainer';
 import AllProductsContainer from './containers/AllProductsContainer';
+// import OrderContainer from './containers/AllOrdersContainer';';
 // import CartCheckOutContainer from './containers/CartCheckOutContainer';
-// import OrderContainer from './containers/AllOrdersContainer';
-import AllProductsContainer from './containers/AllProductsContainer';
-// import CartCheckOutContainer from './containers/CartCheckOutContainer';
-// import LoginContainer from './containers/LoginContainer';
+import LoginContainer from './containers/LoginContainer';
 // import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
-// // import SignupContainer from './container/SignupContainer';
-// import SingleOrder from './containers/SingleOrder';
+import SignupContainer from './containers/SignupContainer';
+// import SingleOrder from './containers/SingleOrderContainer';
 // import SingleProductContainer from './containers/SingleProductContainer';
 // import UserProfileContainer from './containers/UserProfileContainer';
 

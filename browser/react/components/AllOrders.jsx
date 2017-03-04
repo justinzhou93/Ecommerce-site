@@ -1,5 +1,5 @@
 import React from 'react';
-import {SingleOrder} from '../containers/SingleOrder'
+import {SingleOrderContainer} from '../containers/SingleOrderContainer'
 
 export default class Orders extends React.Component{
   constructor(props){
@@ -12,7 +12,7 @@ export default class Orders extends React.Component{
         <ul>
           {
             this.props.orders && this.props.orders
-              .map(order => <SingleOrder SingleOrder={order} key={order.id} />)
+              .map(order => <SingleOrderContainer SingleOrder={order} key={order.id} />)
           }
         </ul>
       </div>

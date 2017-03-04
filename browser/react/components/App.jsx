@@ -5,8 +5,7 @@ import FilterBarContainer from '../containers/FilterBarContainer'
 export default function App ({children}) {
   return (
     <div>
-      <h3>NAVBAR is here</h3>
-      {/*<NavbarContainer />*/}
+      <NavbarContainer />
       {/*<FilterBarContainer />*/}
       { children }
     </div>

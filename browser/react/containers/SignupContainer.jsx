@@ -1,13 +1,13 @@
-import {React, Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import {SignupComponent} from '../components/Signup';
+import Signup from '../components/Signup';
+
 import {signup} from '../action-creators/auth';
 
-class SignupContainer extends Component {
+export class SignupContainer extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   handleSubmit(evt) {
@@ -18,12 +18,14 @@ class SignupContainer extends Component {
       password: evt.target.password.value,
       email: evt.target.email.value
     };
-    this.props.signupAction(credentials)
+    this.props.createNewAccount(credentials)
   }
 
   render () {
     return (
-      <SignupComponent handleSubmit={this.handleSubmit} />
+      <Signup
+        handleSubmit={this.handleSubmit}
+      />
     )
   }
 }
@@ -32,9 +34,7 @@ class SignupContainer extends Component {
 
 const mapDispatchToProps = dispatch  => {
   return {
-    signupAction: function (credentials) {
-      dispatch(signup(credentials))
-    }
+    createNewAccount: credentials => dispatch(signup(credentials))
   }
 };
 

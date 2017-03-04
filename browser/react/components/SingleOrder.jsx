@@ -1,7 +1,6 @@
 import React from 'react';
-import {SingleOrder} from '../containers/SingleOrder'
 
-export default SingleOrder = (props) => {
+export default function (props) {
   return (
     <div>
       <ul>
@@ -11,5 +10,5 @@ export default SingleOrder = (props) => {
           }
       </ul>
     </div>
-  )
+  );
 }

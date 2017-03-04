@@ -39,7 +39,6 @@ export const loadAllProducts = () => {
     }
 };
 
-
 // loads single product
 export const loadSingleProduct = (productId) => {
     return dispatch => {

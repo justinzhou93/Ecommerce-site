@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 /* -----------------   IMPORTED COMPONENTS   ------------------ */
 
 import App from './components/App';
+import AllOrdersContainer from './containers/AllOrdersContainer';
+import AllProductsContainer from './containers/AllProductsContainer';
+// import CartCheckOutContainer from './containers/CartCheckOutContainer';
 // import OrderContainer from './containers/AllOrdersContainer';
 import AllProductsContainer from './containers/AllProductsContainer';
 // import CartCheckOutContainer from './containers/CartCheckOutContainer';
@@ -15,8 +18,6 @@ import AllProductsContainer from './containers/AllProductsContainer';
 // import SingleProductContainer from './containers/SingleProductContainer';
 // import UserProfileContainer from './containers/UserProfileContainer';
 
-
-// TODO need to create these thunk action creators (axios calls) in the action-creator files
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {GetOrdersFromServer} from './action-creators/orders';
 import {GetUserFromServer} from './action-creators/users';
@@ -29,10 +30,10 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetch
       <Route path="/" component = {App} onEnter = {fetchProducts} >
         {/*<IndexRoute component = {App} />*/}
         <Route path="products" component = {AllProductsContainer} onEnter = {fetchProducts} />
-        {/*<Route path="login" component = {LoginContainer} />
-        {/*<Route path="signup" component = {SignupContainer} />*/}
-        {/*<Route path="users/:userid/orders" component = {OrderContainer} onEnter = {fetchUserOrders} />
-        <Route path="users/:userid/orders/:orderid" component = {SingleOrder} onEnter = {fetchSingleOrder} />
+        <Route path="login" component = {LoginContainer} />
+        <Route path="signup" component = {SignupContainer} />
+        <Route path="users/:userid/orders" component = {AllOrdersContainer} onEnter = {fetchUserOrders} />
+        {/*<Route path="users/:userid/orders/:orderid" component = {SingleOrder} onEnter = {fetchSingleOrder} />
           <Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />
         <Route path="products/:productid" component = {SingleProductContainer} onEnter = {fetchSingleProduct} />
         <Route path="users/:userid" component = {UserProfileContainer} onEnter = {fetchUser} />

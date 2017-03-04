@@ -18,8 +18,7 @@ const User = db.define('users', {
   email: {
     type: Sequelize.STRING,
     validate: {
-			isEmail: true,
-			notEmpty: true,
+			notEmpty: true
 		}
   },
   isAdmin: {

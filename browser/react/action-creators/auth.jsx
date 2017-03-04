@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 /** Constants */
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -27,6 +28,7 @@ export const localLogin = (credentials) => {
         const {username, password} = credentials;
         axios.post('/api/auth/login/local', {username, password})
             .then(() => dispatch(loadLoggedInUser()))
+            .then(() => browserHistory.push('/'))
             .catch(() => dispatch(loadLoggedInUser()))
     }
 };
@@ -36,6 +38,7 @@ export const signup = (credentials) => {
         axios.post('/api/auth/signup/local', credentials)
             .then(res => res.data)
             .then(user => dispatch(setCurrentUser(user)))
+            .then(() => browserHistory.push('/'))
             .catch(() => dispatch(setCurrentUser(null)))
     }
 };
@@ -44,6 +47,7 @@ export const logout = () => {
     return dispatch => {
         axios.post('/api/auth/logout')
             .then(() => dispatch(loadLoggedInUser()))
+            .then(() => browserHistory.push('/'))
             .catch(() => dispatch(loadLoggedInUser()))
     }
 };

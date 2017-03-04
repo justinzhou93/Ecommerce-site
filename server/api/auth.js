@@ -129,8 +129,8 @@ auth.post('/login/local', passport.authenticate('local', { successRedirect: '/' 
 // POST request for local signup:
 auth.post('/signup/local', (req, res, next) => {
   User.create(req.body)
-    .then(() => {
-      res.sendStatus(202);
+    .then((createdUser) => {
+      res.status(202).json(createdUser);
     })
     .catch(next);
 });

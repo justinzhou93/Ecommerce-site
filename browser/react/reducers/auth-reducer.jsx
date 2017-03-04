@@ -4,7 +4,11 @@ import { SET_CURRENT_USER } from '../action-creators/auth';
 /** InitialState */
 
 const initialAuthState = {
-  currentUser: {}
+  currentUser: {},
+  addresses: [],
+  creditcards: [],
+  orders: [],
+  reviews: []
 };
 
 /** Auth Reducer */
@@ -14,7 +18,11 @@ const authReducer = (state = initialAuthState, action) => {
   switch (action.type) {
 
     case SET_CURRENT_USER:
-      newState.currentUser = action.currentUser
+      newState.currentUser = action.currentUser;
+      newState.addresses = action.addresses;
+      newState.creditcards = action.creditCards;
+      newState.orders = action.orders;
+      newState.reviews = action.reviews;
       break;
 
     default:

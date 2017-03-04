@@ -12,31 +12,29 @@ const settingOrderList = (orders) => {
   }
 }
 
-const settingSingleOrder = (order) => {
+const setSingleOrder = (order) => {
   return {
     type: SET_SINGLE_ORDER,
-    order: order
+    currentOrder: order
   }
 }
 
 /* -----------------    THUNK ACTION CREATORS    ------------------ */
 
 // load all orders
-export const GetOrdersFromServer = () => {
-  return dispatch => {
-    axios.get('/api/orders')
-        .then((orders) => {
-          dispatch(settingOrderList(orders))
-        })
-  }
-}
+export const loadAllUserOrders = () => {
+    return dispatch => {
+        axios.get('/api/auth/whoami')
+            .then(res => res.data)
+            .then(user => dispatch(settingOrderList(user.orders)));
+    };
+};
 
 // load single orders
-export const GetSingleOrder = (orderId) => {
+export const loadSingleOrder = (orderId) => {
   return dispatch => {
     axios.get(`/api/orders/${orderId}`)
-        .then((order) => {
-            dispatch(settingSingleOrder(order))
-        })
-  }
-}
+        .then(res => res.data)
+        .then(order => dispatch(setSingleOrder(order)));
+  };
+};

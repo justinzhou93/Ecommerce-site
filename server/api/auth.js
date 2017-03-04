@@ -1,14 +1,18 @@
 'use strict'; // eslint-disable-line semi
 
-const app = require('APP')
+const app = require('APP');
 const {env} = app
-const debug = require('debug')(`${app.name}:auth`)
-const passport = require('passport')
+const debug = require('debug')(`${app.name}:auth`);
+const passport = require('passport');
+const auth = require('express').Router(); // eslint-disable-line new-cap
 
-const User = require('APP/db/models/user')
-const OAuth = require('APP/db/models/oauth')
-const auth = require('express').Router() // eslint-disable-line new-cap
-
+const User = require('APP/db/models/user');
+const Address = require('APP/db/models/address');
+const CreditCard = require('APP/db/models/creditcard');
+const Review = require('APP/db/models/review');
+const Order = require('APP/db/models/order');
+const OAuth = require('APP/db/models/oauth');
+const LineItem = require('APP/db/models/lineitem');
 
 /*************************
  * Auth strategies
@@ -85,7 +89,14 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(
   (id, done) => {
     debug('will deserialize user.id=%d', id)
-    User.findById(id)
+    User.findById(id, {
+      include: [
+        {model: Address},
+        {model: CreditCard},
+        {model: Review},
+        {model: Order, include: [{model: LineItem}]}
+      ]
+    })
       .then(user => {
         debug('deserialize did ok user.id=%d', user.id)
         done(null, user)

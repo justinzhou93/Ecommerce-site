@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 /* -----------------   IMPORTED COMPONENTS   ------------------ */
 
 import App from './components/App';
-// import OrderContainer from './containers/AllOrdersContainer';
+import AllOrdersContainer from './containers/AllOrdersContainer';
 import AllProductsContainer from './containers/AllProductsContainer';
 // import CartCheckOutContainer from './containers/CartCheckOutContainer';
-// import LoginContainer from './containers/LoginContainer';
+import LoginContainer from './containers/LoginContainer';
 // import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
-// // import SignupContainer from './container/SignupContainer';
-// import SingleOrder from './containers/SingleOrder';
+import SignupContainer from './containers/SignupContainer';
+// import SingleOrderContainer from './containers/SingleOrderContainer';
 // import SingleProductContainer from './containers/SingleProductContainer';
 // import UserProfileContainer from './containers/UserProfileContainer';
 
@@ -20,8 +20,6 @@ import AllProductsContainer from './containers/AllProductsContainer';
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {GetOrdersFromServer} from './action-creators/orders';
 import {GetUserFromServer} from './action-creators/users';
-// TODO - remember to query for cart inside of orders because merged cart and lineitems
-import {GetCartFromServer} from './action-creators/orders'
 
 /* -----------------     COMPONENT ROUTES     ------------------ */
 
@@ -31,10 +29,10 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetch
       <Route path="/" component = {App} onEnter = {fetchProducts} >
         {/*<IndexRoute component = {App} />*/}
         <Route path="products" component = {AllProductsContainer} onEnter = {fetchProducts} />
-        {/*<Route path="login" component = {LoginContainer} />
-        {/*<Route path="signup" component = {SignupContainer} />*/}
-        {/*<Route path="users/:userid/orders" component = {OrderContainer} onEnter = {fetchUserOrders} />
-        <Route path="users/:userid/orders/:orderid" component = {SingleOrder} onEnter = {fetchSingleOrder} />
+        <Route path="login" component = {LoginContainer} />
+        <Route path="signup" component = {SignupContainer} />
+        <Route path="users/:userid/orders" component = {AllOrdersContainer} onEnter = {fetchUserOrders} />
+        {/*<Route path="users/:userid/orders/:orderid" component = {SingleOrder} onEnter = {fetchSingleOrder} />
           <Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />
         <Route path="products/:productid" component = {SingleProductContainer} onEnter = {fetchSingleProduct} />
         <Route path="users/:userid" component = {UserProfileContainer} onEnter = {fetchUser} />
@@ -67,9 +65,9 @@ const mapStateToDispatch = dispatch => ({
   fetchSingleOrder: (nextRouterState) => {
     const userid = nextRouterState.params.userid;
     const orderid = nextRouterState.params.orderid;
-    dispatch(GetOrdersFromServer(userid, orderid));
+    dispatch(GetSingleOrder(orderid));
   },
-  fetchUsers: (nextRouterState) => {
+  fetchUser: (nextRouterState) => {
     // TODO for this action creator, do not pass in userid if you want all users. otherwise, pass in userid for specific user
     const userid = nextRouterState.params.userid;
     dispatch(GetUserFromServer(userid));

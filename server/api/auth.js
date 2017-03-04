@@ -128,23 +128,9 @@ auth.post('/login/local', passport.authenticate('local', { successRedirect: '/' 
 
 // POST request for local signup:
 auth.post('/signup/local', (req, res, next) => {
-  User.findOrCreate({
-    where: {
-      email: req.body.email
-    },
-    defaults: { 
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password
-    }})
-    .spread((user, created) => {
-      if (created) {
-        req.login()
-        res.json(user);
-      } else {
-        res.sendStatus(404); // user already exists, cannot sign up!
-      }
+  User.create(req.body)
+    .then(() => {
+      res.sendStatus(202);
     })
     .catch(next);
 });

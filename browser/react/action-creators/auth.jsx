@@ -24,7 +24,8 @@ export const loadLoggedInUser = () => {
 
 export const localLogin = (credentials) => {
     return dispatch => {
-        axios.post('/api/auth/login/local', credentials)
+        const {username, password} = credentials;
+        axios.post('/api/auth/login/local', {username, password})
             .then(() => dispatch(loadLoggedInUser()))
             .catch(() => dispatch(loadLoggedInUser()))
     }

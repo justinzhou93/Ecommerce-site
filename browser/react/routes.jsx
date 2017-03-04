@@ -21,28 +21,7 @@ import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {GetOrdersFromServer} from './action-creators/orders';
 import {GetUserFromServer} from './action-creators/users';
 
-import Home from './components/Home'
-import Root from './components/App';
-import OrderContainer from './containers/AllOrdersContainer';
-import ProductContainer from './containers/AllProductsContainer';
-import CartCheckOutContainer from './containers/CartCheckOutContainer';
-import LoginContainer from './containers/LoginContainer';
-import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
-import SignupContainer from './container/SignupContainer';
-import SingleOrder from './containers/SingleOrder';
-import SingleProductContainer from './containers/SingleProductContainer';
-import UserProfileContainer from './containers/UserProfileContainer';
-
-
-// TODO need to create these thunk action creators (axios calls) in the action-creator files
-import {loadAllProducts} from './action-creators/products';
-// TODO - remember to query for cart inside of orders because merged cart and lineitems
-import {GetOrdersFromServer, GetSingleOrder} from './action-creators/orders';
-import {GetUserFromServer} from './action-creators/users';
-
-
 /* -----------------     COMPONENT ROUTES     ------------------ */
-
 
 export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetchSingleOrder, fetchUser}) {
   return (

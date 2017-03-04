@@ -33,10 +33,8 @@ export const loadAllProducts = () => {
     return dispatch => {
         axios.get('/api/products')
             .then((res => res.data))
-            .then((products) => {
-                dispatch(settingProductList(products));
-            });
-    }
+            .then(products => dispatch(settingProductList(products)));
+    };
 };
 
 // loads single product
@@ -44,11 +42,9 @@ export const loadSingleProduct = (productId) => {
     return dispatch => {
         axios.get(`/api/products/${productId}`)
             .then((res => res.data))
-            .then((product) => {
-                dispatch(setSingleProduct(product));
-            });
-    }
-}
+            .then(product => dispatch(setSingleProduct(product)));
+    };
+};
 
 /** ADMIN thunks */
 

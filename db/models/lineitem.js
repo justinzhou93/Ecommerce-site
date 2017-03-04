@@ -25,7 +25,7 @@ const LineItem = db.define('lineitems', {
                     })
                 })
 
-            const getAndUpdateCart = LineItem.scope({method: ['card', userId]}).findAll()
+            const getAndUpdateCart = LineItem.scope({method: ['cart', userId]}).findAll()
                 .then((foundCart) => {
                     const updatedCart = foundCart.map((item) => {
                         return item.update({
@@ -53,6 +53,7 @@ const LineItem = db.define('lineitems', {
                     foundLineItems.forEach((cart) => {
                         total += cart.totalPrice;
                     });
+                    console.log(total);
                     return total;
                 })
                 .then((total) => {

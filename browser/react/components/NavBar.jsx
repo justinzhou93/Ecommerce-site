@@ -21,7 +21,6 @@ export default class NavBar extends React.Component {
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav">
                             <li><Link to="/products">Products <span className="sr-only">(current)</span></Link></li>
-                            <li><Link to="/">Link</Link></li>
                         </ul>
 
                         {this.props.currentUser ? this.renderLogout() : this.renderLoginSignup()}
@@ -34,9 +33,13 @@ export default class NavBar extends React.Component {
 
     renderLogout() {
         return (
-            <ul className="nav navbar-nav navbar-right">
-                <li><a onClick={this.props.loggingOut}>LOGOUT {this.props.currentUser.email}</a></li>
-            </ul>
+            <div>
+                <ul className="nav navbar-nav navbar-right">
+                    <li><Link to="/orders">Orders</Link></li>
+                    <li><Link to="/user">{this.props.currentUser.firstName} {this.props.currentUser.lastName}</Link></li>
+                    <li><a onClick={this.props.loggingOut}>LOGOUT {this.props.currentUser.email}</a></li>
+                </ul>
+            </div>
         );
     }
 

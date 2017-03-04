@@ -7,22 +7,22 @@ import { connect } from 'react-redux';
 import App from './components/App';
 import AllOrdersContainer from './containers/AllOrdersContainer';
 import AllProductsContainer from './containers/AllProductsContainer';
-// import OrderContainer from './containers/AllOrdersContainer';';
 // import CartCheckOutContainer from './containers/CartCheckOutContainer';
 import LoginContainer from './containers/LoginContainer';
 // import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
 import SignupContainer from './containers/SignupContainer';
 // import SingleOrder from './containers/SingleOrderContainer';
-// import SingleProductContainer from './containers/SingleProductContainer';
-// import UserProfileContainer from './containers/UserProfileContainer';
+import SingleProductContainer from './containers/SingleProductContainer';
+import UserProfileContainer from './containers/UserProfileContainer';
 
+import {loadLoggedInUser} from './action-creators/auth';
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
-import {GetOrdersFromServer} from './action-creators/orders';
+import {loadSingleOrder} from './action-creators/orders';
 import {GetUserFromServer} from './action-creators/users';
 
 /* -----------------     COMPONENT ROUTES     ------------------ */
 
-export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetchSingleOrder, fetchUser}) {
+export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetchSingleOrder, fetchCurrentUser}) {
   return (
     <Router history = {browserHistory} >
       <Route path="/" component = {App} onEnter = {fetchProducts} >
@@ -30,12 +30,12 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetch
         <Route path="products" component = {AllProductsContainer} onEnter = {fetchProducts} />
         <Route path="login" component = {LoginContainer} />
         <Route path="signup" component = {SignupContainer} />
-        <Route path="users/:userid/orders" component = {AllOrdersContainer} onEnter = {fetchUserOrders} />
-        {/*<Route path="users/:userid/orders/:orderid" component = {SingleOrder} onEnter = {fetchSingleOrder} />
-          <Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />
-        <Route path="products/:productid" component = {SingleProductContainer} onEnter = {fetchSingleProduct} />
-        <Route path="users/:userid" component = {UserProfileContainer} onEnter = {fetchUser} />
-        <Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {GetCartFromServer} />*/}
+        <Route path="orders" component = {AllOrdersContainer} onEnter= {fetchCurrentUser} />
+        {/*<Route path="users/:userid/orders/:orderid" component = {SingleOrder} onEnter = {fetchSingleOrder} />*/}
+          {/*<Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />*/}
+        <Route path="products/:productId" component = {SingleProductContainer} onEnter = {fetchSingleProduct} />
+        <Route path="user" component = {UserProfileContainer} onEnter = {fetchCurrentUser} />
+        {/*<Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {GetCartFromServer} />*/}
 
         {/*ADMIN ROUTES*/}
         {/*<Route path="users/?admin" component = {UserProfileContainer} />
@@ -48,24 +48,11 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetch
 
 /* -----------------    CONTAINER/ONENTER HOOKS    ------------------ */
 
-const mapStateToDispatch = dispatch => ({
-  fetchProducts: () => {
-    dispatch(loadAllProducts());
-  },
-  fetchSingleProduct: (nextRouterState) => {
-    dispatch(loadSingleProduct(nextRouterState.params.productId));
-  },
-  fetchUserOrders: (nextRouterState) => {
-    const userid = nextRouterState.params.userid;
-    dispatch(GetOrdersFromServer(userid));
-  },
-  // TODO do we need this? to keep consistent with other thunk action creators, we can just use previous (fetchUserOrders)
-  // with optional second parameter (orderid). If orderid is undefined, then return all orders, else return single order...
-  fetchSingleOrder: (nextRouterState) => {
-    const userid = nextRouterState.params.userid;
-    const orderid = nextRouterState.params.orderid;
-    dispatch(GetSingleOrder(orderid));
-  },
+const mapDispatchToProps = dispatch => ({
+  fetchProducts: () => dispatch(loadAllProducts()),
+  fetchSingleProduct: nextRouterState => dispatch(loadSingleProduct(nextRouterState.params.productId)),
+  fetchCurrentUser: () => dispatch(loadLoggedInUser()),
+  fetchSingleOrder: nextRouterState => dispatch(loadSingleOrder(nextRouterState.params.orderid)),
   fetchUser: (nextRouterState) => {
     // TODO for this action creator, do not pass in userid if you want all users. otherwise, pass in userid for specific user
     const userid = nextRouterState.params.userid;
@@ -75,6 +62,6 @@ const mapStateToDispatch = dispatch => ({
     const userid = nextRouterState.params.userid;
     dispatch(GetCartFromServer(userid));
   }
-})
+});
 
-export default connect(null, mapStateToDispatch)(Root);
+export default connect(null, mapDispatchToProps)(Root);

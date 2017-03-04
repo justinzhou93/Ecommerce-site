@@ -1,21 +1,19 @@
 import React from 'react';
-import {SingleOrderContainer} from '../containers/SingleOrderContainer'
+import SingleOrderContainer from '../containers/SingleOrderContainer'
 
-export default class Orders extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
-  render() {
+export default function (props) {
     return (
-      <div className="ordersGroup">
-        <ul>
+      <div>
+        <h3>Orders</h3>
           {
-            this.props.orders && this.props.orders
-              .map(order => <SingleOrderContainer SingleOrder={order} key={order.id} />)
+            props.orders.length && props.orders
+              .map(order => {
+                return (
+                  <ul key={order.id}>
+                    <SingleOrderContainer order={order} />
+                  </ul>
+              )})
           }
-        </ul>
       </div>
     )
-  }
 }

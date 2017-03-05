@@ -6,14 +6,10 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 
 /** Action-creators */
-const setCurrentUser = (user, addresses, creditCards, orders, reviews) => {
+const setCurrentUser = (user) => {
     return {
         type: SET_CURRENT_USER,
-        currentUser: user,
-        addresses,
-        creditCards,
-        orders,
-        reviews
+        currentUser: user
     }
 };
 
@@ -23,8 +19,7 @@ export const loadLoggedInUser = () => {
         axios.get('/api/auth/whoami')
             .then(res => res.data)
             .then(user => {
-                const { addresses, credit_cards, orders, reviews } = user;
-                dispatch(setCurrentUser(user, addresses, credit_cards, orders, reviews))
+                dispatch(setCurrentUser(user))
             })
             .catch(() => dispatch(setCurrentUser(null)))
     }

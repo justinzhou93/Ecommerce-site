@@ -6,10 +6,14 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 
 /** Action-creators */
-const setCurrentUser = (user) => {
+const setCurrentUser = (user, addresses, creditCards, orders, reviews) => {
     return {
         type: SET_CURRENT_USER,
-        currentUser: user
+        currentUser: user,
+        addresses,
+        creditCards,
+        orders,
+        reviews
     }
 };
 

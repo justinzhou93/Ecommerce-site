@@ -42,7 +42,9 @@ router.get('/:userId', (req, res, next) => {
         {model: Address},
         {model: CreditCard},
         {model: Review},
-        {model: Order}
+        {model: Order, include: [
+            {model: LineItem}
+        ]}
       ]
     })
     .then(foundUser => {
@@ -110,17 +112,17 @@ router.post('/:userId/creditcard', (req, res, next) => {
 /** --------------------------USER CART----------------------- */
 // get user's cart info
 router.get('/:userId/cart', (req, res, next) => {
-  User.findById(req.params.userId, {
-      include: [
-          {model: Address},
-          {model: CreditCard},
-          {model: LineItem}, 
+    User.findById(req.params.userId, {
+        include: [
+            {model: Address},
+            {model: CreditCard},
+            {model: LineItem},
         ]
-      })
-      .then(foundUser => {
-        res.json(foundUser);
-      })
-      .catch(next);
+    })
+    .then(foundUser => {
+      res.json(foundUser);
+    })
+    .catch(next);
 });
 
 // user adding product to cart
@@ -129,6 +131,7 @@ router.post('/:userId/cart/:productId', (req, res, next) => {
     quantity: req.body.quantity,
     user_id: req.params.userId,
     product_id: req.params.productId,
+    price: req.body.price,
     status: 'Cart'
   })
     .then(createdCart => {
@@ -156,11 +159,11 @@ router.put('/:userId/cart/:productId', (req, res, next) => {
 });
 
 // removing item from cart
-router.delete('/:userId/cart/:productId', (req, res, next) => {
+router.delete('/:userId/cart/:LineItemId', (req, res, next) => {
   LineItem.destroy({
     where: {
       user_id: req.params.userId,
-      product_id: req.params.productId,
+      id: req.params.LineItemId,
       status: 'Cart'
     }
   })
@@ -174,7 +177,9 @@ router.delete('/:userId/cart/:productId', (req, res, next) => {
 // user purchases an order (from cart)
 router.post('/:userId/orders', (req, res, next) => {
   LineItem.purchase(req.params.userId)
+    .then(order => res.status(201).send(order))
     .catch(next);
 });
+
 
 module.exports = router;

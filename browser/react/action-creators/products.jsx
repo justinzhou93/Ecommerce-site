@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 /** Constants */
 export const SET_PRODUCT_LIST = 'SET_PRODUCT_LIST';
@@ -47,6 +48,22 @@ export const loadSingleProduct = (productId) => {
 };
 
 /** ADMIN thunks */
+export const addProduct = (productInfo) => {
+    return dispatch => {
+        axios.post('/api/products', productInfo)
+            .then(() => {
+                dispatch(loadAllProducts());
+                browserHistory.push('/products');
+            })
+    };
+};
 
-
-
+export const deleteProduct = (productId) => {
+    return dispatch => {
+        axios.delete(`/api/products/${productId}`)
+            .then(() => {
+                dispatch(loadAllProducts());
+                browserHistory.push('/products');
+            })
+    };
+};

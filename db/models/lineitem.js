@@ -18,12 +18,22 @@ const LineItem = db.define('lineitems', {
         purchase: function (userId) {
             const creatingOrder = LineItem.totalCartPrice(userId)
                 .then((total) => {
-                    return Order.create({
-                        status: 'Created',
-                        totalPrice: total,
-                        user_id: userId
-                    })
+                    // TODO not sure how to pass this error down through to the routes.
+                    // just checking to make sure cart is not empty. right now, it doesn't allow
+                    // orders to go through if cart is empty, but it doesn't pass error thru correctly
+                    if (!total){
+                      const err = new Error('no items in cart!')
+                      err.status = 400;
+                      return err;
+                    } else {
+                      return Order.create({
+                          status: 'Created',
+                          totalPrice: total,
+                          user_id: userId
+                      })
+                    }
                 })
+                .catch(err => err)
 
             const getAndUpdateCart = LineItem.scope({method: ['cart', userId]}).findAll()
                 .then((foundCart) => {
@@ -35,25 +45,25 @@ const LineItem = db.define('lineitems', {
 
                     return Promise.all(updatedCart);
                 })
+                .catch(err => err)
 
-            Promise.all([creatingOrder, getAndUpdateCart])
+            return Promise.all([creatingOrder, getAndUpdateCart])
                 .then(([createdOrder, updatedCart]) => {
                     const settingOrderIdToCart = updatedCart.map((item) => {
                         return item.setOrder(createdOrder);
                     })
-
                     return Promise.all(settingOrderIdToCart);
                 })
+                // .catch(err => err)
         },
         totalCartPrice: function (userId) {
-            LineItem.scope({ method: ['cart', userId]}).findAll()
+            return LineItem.scope({ method: ['cart', userId]}).findAll()
                 .then((foundLineItems) => {
                     let total = 0;
 
                     foundLineItems.forEach((cart) => {
                         total += cart.totalPrice;
                     });
-                    console.log(total);
                     return total;
                 })
                 .then((total) => {

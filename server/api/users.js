@@ -11,6 +11,7 @@ const Review = db.model('reviews');
 const Order = db.model('orders');
 const LineItem = db.model('lineitems');
 
+
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
 // module.exports = require('express').Router() // eslint-disable-line new-cap
@@ -81,6 +82,23 @@ router.post('/:userId/address', (req, res, next) => {
     .catch(next);
 });
 
+// updates an address
+router.put('/:userId/address/:addressId', (req, res, next) => {
+  Address.findById(req.params.addressId)
+  .then(foundAddress => {
+    return foundAddress.update(req.body)
+  })
+  .then(updatedAddress => res.status(201).json(updatedAddress))
+  .catch(next)
+})
+
+// deletes address
+router.delete('/:userId/address/:addressId', (req, res, next) => {
+  Address.findById(req.params.addressId)
+  .then(foundAddress => foundAddress.destroy())
+  .then(() => res.redirect(204, '/'))
+})
+
 // gets all user credit credit_cards
 router.get('/:userId/creditcard', (req, res, next) => {
   CreditCard.findAll({
@@ -109,6 +127,23 @@ router.post('/:userId/creditcard', (req, res, next) => {
     .catch(next);
 });
 
+// updates card
+router.put('/:userId/creditcard/:cardId', (req, res, next) => {
+  CreditCard.findById(req.params.cardId)
+  .then(foundCard => {
+    return foundCard.update(req.body)
+  })
+  .then(updatedCard => res.status(201).json(updatedCard))
+  .catch(next)
+})
+
+// deletes card
+router.delete('/:userId/creditcard/:cardId', (req, res, next) => {
+  CreditCard.findById(req.params.cardId)
+  .then(foundCard => foundCard.destroy())
+  .then(() => res.redirect(204, '/'))
+})
+
 /** --------------------------USER CART----------------------- */
 // get user's cart info
 router.get('/:userId/cart', (req, res, next) => {
@@ -135,7 +170,7 @@ router.post('/:userId/cart/:productId', (req, res, next) => {
     status: 'Cart'
   })
     .then(createdCart => {
-      res.json(createdCart);
+      res.status(201).json(createdCart);
     })
     .catch(next);
 });
@@ -144,8 +179,10 @@ router.post('/:userId/cart/:productId', (req, res, next) => {
 router.put('/:userId/cart/:productId', (req, res, next) => {
   LineItem.findOne({
     where: {
+      quantity: req.body.quantity,
       user_id: req.params.userId,
       product_id: req.params.productId,
+      price: req.body.price,
       status: 'Cart'
     }
   })

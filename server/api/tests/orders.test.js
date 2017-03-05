@@ -1,5 +1,5 @@
 'use strict';
-
+/*eslint-disable*/
 var expect = require('chai').expect;
 var request = require('supertest-as-promised');
 
@@ -14,19 +14,45 @@ var Product = require('APP/db/models/product');
 var User = require('APP/db/models/user');
 
 describe('Orders Route: ', function(){
+  var category, user, product;
   //clear db before beginning each run
   beforeEach(function () {
     db.sync({force: true})
     .then(()=>console.log('hi'))
 
-    Category.create({title:"easy"})
-    .then(category => Product.create({
+    category = Category.create({title:"easy"})
 
-    }))
+    product = Product.create({
+      title: 'newgame',
+      description: 'some description',
+      price: 5,
+      inventory: 10,
+      imgUrl: 'www.google.com'
+    })
 
+    user = User.create({
+      firstName: 'asdf',
+      lastName: 'qwerty',
+      email: 'asdf@gmail.com',
+      isAdmin: 'FALSE',
+      password_digest: 'asdfasfd'
+    })
 
-
-    User.create()
+    Promise.all([category, product, user])
+    .spread((newCategory, newProduct, newUser) => {
+      product.setCategories(category)
+      return LineItem.create({
+        quantity: 2,
+        user_id: user.id,
+        product_id: product.id,
+        price: 5,
+        status: 'Cart'
+      })
+    })
+    .then(newlineitem =>
+      LineItem.purchase(user.id)
+      .then()
+    )
 
 
   });
@@ -35,59 +61,49 @@ describe('Orders Route: ', function(){
   afterEach(function () {
     return Promise.all([
       Order.truncate({ cascade: true }),
-      LineItem.truncate({ cascade: true })
+      LineItem.truncate({ cascade: true }),
+      Category.truncate({cascade: true}),
+      User.truncate({cascade: true}),
+      Product.truncate({cascade: true})
     ]);
   });
 
   describe('GET /orders', function(){
     it('returns all orders in db', function () {
-
-      return Order.create({
-        totalPrice: 123
-      }).then(() =>
-        agent
-        .get('/orders')
-        .expect(200)
-        .expect(function (res) {
-          expect(res.body).to.be.an.instanceOf(Array);
-          expect(res.body[0].totalPrice).to.equal(123);
-        })
-      ).catch(err => {throw err})
+      agent
+      .get('/orders')
+      .expect(200)
+      .expect(function (res) {
+        expect(res.body).to.be.an.instanceOf(Array);
+        expect(res.body[0].totalPrice).to.equal(10);
+      })
     })
   });
   //
   describe('GET /orders/:id', function(){
     it('returns order, given id', function () {
-
-      return Order.create({
-        totalPrice: 123
-      }).then(() =>
-        agent
-        .get('/orders/1')
-        .expect(200)
-        .expect(function (res) {
-          expect(res.body[0].totalPrice).to.equal(123);
-        })
-      )
+      agent
+      .get(`/orders/${user.id}`)
+      .expect(200)
+      .expect(function (res) {
+        expect(res.body).to.be.an.instanceOf(Array);
+        expect(res.body.totalPrice).to.equal(10);
+      })
     });
 
   });
 
   describe('PUT /orders/:id', function(){
     it('updates article given id', function () {
-      Order.create({
-        totalPrice: 123
-      }).then(() =>
         agent
-        .put('/orders/1')
+        .put(`/orders/${user.id}`)
         .send({
-          totalPrice: 234
+          status: 'Processing'
         })
         .expect(200)
         .expect(function (res) {
-          expect(res.body[0].totalPrice).to.equal(234);
+          expect(res.body.status).to.equal('Processing');
         })
-      )
     });
 
   });

@@ -4,7 +4,7 @@ import { SET_PRODUCT_LIST, SET_SINGLE_PRODUCT, REMOVE_SINGLE_PRODUCT } from '../
 /** Initial State */
 const initialProductState = {
     productList: [],
-    currentProduct: {}
+    currentProduct: null
 };
 
 /** Products reducer */

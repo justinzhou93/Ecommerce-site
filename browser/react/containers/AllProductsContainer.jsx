@@ -2,7 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AllProducts from '../components/AllProducts';
+import AdminProductsContainer from '../containers/AdminProductsContainer';
 
-const mapStateToProps = (state) => ({productList: state.products.productList});
+export class AllProductsContainer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-export default connect(mapStateToProps)(AllProducts);
+    render() {
+        return (
+            <div>
+                <AllProducts productList={this.props.productList} />
+
+                {this.props.currentUser && this.props.currentUser.isAdmin ? <AdminProductsContainer productList={this.props.productList} /> : null}
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        productList: state.products.productList,
+        currentUser: state.auth.currentUser
+    }
+};
+
+export default connect(mapStateToProps)(AllProductsContainer);

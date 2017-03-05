@@ -10,48 +10,36 @@ export default class NavBar extends React.Component {
 
     render() {
         return (
-            <nav className="navbar navbar-default" id="navbar">
-                <div className="container-fluid">
-
-                    <div className="navbar-header">
-                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" />
-                        <Link className="navbar-brand" to={'/'}>Boardgames Galore</Link>
-                    </div>
-
-                    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul className="nav navbar-nav">
-                            <li><Link to="/products">Products <span className="sr-only">(current)</span></Link></li>
-                        </ul>
-
-                        {this.props.currentUser ? this.renderLogout() : this.renderLoginSignup()}
-
-                    </div>
+            <div className="banner">
+                <div className="logo">
+                    <h1><Link to="/" className="m_1">Boardgames Galore</Link></h1>
                 </div>
-            </nav>
+                <div className="menu">
+                    <ul className="megamenu skyblue">
+                        <li><Link to={'/products'} className="color2">Products</Link></li>
+                        <li><Link to={'/categories'} className="color4">Categories</Link></li>
+                        {this.props.currentUser ? this.renderLogout() : this.renderLoginSignup()}
+                    </ul>
+                </div>
+            </div>
         );
     }
 
     renderLogout() {
         return (
-            <div>
-                <ul className="nav navbar-nav navbar-right">
-                    <li><Link to="/orders">Orders</Link></li>
-                    <li><Link to="/user">{this.props.currentUser.firstName} {this.props.currentUser.lastName}</Link></li>
-                    <li><a onClick={this.props.loggingOut}>LOGOUT {this.props.currentUser.email}</a></li>
-                </ul>
+            <div className="megamenu skyblue">
+                <li><Link to={'/orders'} className="color4">Orders</Link></li>
+                <li><Link to={'/user'} className="color4">My Account</Link></li>
+                <li><a className="color4" onClick={this.props.loggingOut}>Logout</a></li>
             </div>
         );
     }
 
     renderLoginSignup() {
         return (
-            <div>
-                <ul className="nav navbar-nav navbar-right">
-                    <li><Link to={'/signup'}>SIGNUP</Link></li>
-                </ul>
-                <ul className="nav navbar-nav navbar-right">
-                    <li><Link to={'/login'}>LOGIN</Link></li>
-                </ul>
+            <div className="megamenu skyblue">
+                <li><Link to={'/signup'} className="color4">Sign Up</Link></li>
+                <li><Link to={'/login'} className="color4">Login</Link></li>
             </div>
         );
     }

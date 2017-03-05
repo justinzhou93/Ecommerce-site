@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import AllOrders from '../components/AllOrders';
 import LoginContainer from '../containers/LoginContainer';
 
-export class AllOrdersContainers extends React.Component {
+export class AllOrdersContainer extends React.Component {
     constructor(props) {
         super(props);
         this.renderUserOrders = this.renderUserOrders.bind(this);
@@ -17,7 +17,6 @@ export class AllOrdersContainers extends React.Component {
         return (
             <AllOrders
                 currentUser={this.props.currentUser}
-                orders={this.props.orders}
             />
         );
     }
@@ -25,9 +24,8 @@ export class AllOrdersContainers extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.auth.currentUser,
-        orders: state.auth.orders
+        currentUser: state.auth.currentUser
     }
 }
 
-export default connect(mapStateToProps)(AllOrdersContainers);
+export default connect(mapStateToProps)(AllOrdersContainer);

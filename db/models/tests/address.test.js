@@ -8,6 +8,8 @@ chai.use(chaiThings);
 const expect = chai.expect;
 const db = require('APP/db');
 const Address = require('APP/db/models/address');
+const User = require('APP/db/models/user');
+let Promise = require('bluebird');
 
 describe('Address model', function() {
 	
@@ -69,4 +71,39 @@ describe('Address model', function() {
                 });
         });
      })
+
+    describe('assocations', () => {
+        it('belongs to a user', () => {
+            
+            let creatingUser = User.create({
+                firstName: 'Ben',
+                lastName: 'Gu',
+                email: 'TheBenjimoto@gmail.com',
+                isAdmin: false
+            })
+            let creatingAddress = Address.create({
+                address1: '1235 Park Ave',
+                city: 'New York',
+                state: 'NY',
+                zipCode: 10128
+            })
+        
+        return Promise.all([creatingUser, creatingAddress])
+            .spread((createdUser, createdAddress) => {
+                return createdAddress.setUser(createdUser)
+            })
+            .then(() => {
+                Address.findOne({
+                    where: {
+                        address1: '1235 Park Ave',
+                        include: {model: User}
+                    }
+                })
+            })
+            .then(foundAddress => {
+                // TODO: this should work after tables populate?
+                // expect(foundAddress.user).to.exist;
+            })
+        })
+    })
 })

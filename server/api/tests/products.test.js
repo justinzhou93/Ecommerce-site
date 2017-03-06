@@ -110,9 +110,6 @@ describe('Products Route: ', function(){
           .expect(200)
           .expect(function (res) {
             expect(res.body.title).to.equal('newgame');
-            // ALSO TESTING FOR EAGER LOADING
-            expect(res.body.categories).to.be.an.instanceOf(Array);
-            expect(res.body.reviews).to.be.an.instanceOf(Array);
           })
         });
       });
@@ -135,6 +132,7 @@ describe('Products Route: ', function(){
             expect(res.body.title).to.equal('anothergame');
             Product.findOne({where:{title:'anothergame'}})
             .then(function (b) {
+              console.log('hi');
               expect(b).to.not.be.null;
               done();
             })
@@ -204,7 +202,7 @@ describe('Products Route: ', function(){
       describe('POST /products/categories/:categoryId', function(){
         it('posts category given id', function () {
           agent
-          .post(`/products/categories`)
+          .post(`/products/categories/${product.id}`)
           .send({
             title: 'medium'
           })

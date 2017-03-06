@@ -64,7 +64,6 @@ const LineItem = db.define('lineitems', {
                     foundLineItems.forEach((cart) => {
                         total += cart.totalPrice;
                     });
-                    console.log(total);
                     return total;
                 })
                 .then((total) => {

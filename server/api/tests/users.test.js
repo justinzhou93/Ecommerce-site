@@ -43,26 +43,30 @@
 /*eslint-disable*/
 var expect = require('chai').expect;
 var request = require('supertest-as-promised');
-
-var app = require('../../../index.js');
+var app = require('../../start.js');
 var agent = request.agent(app);
 
 var db = require('APP/db');
 var Order = require('APP/db/models/order');
-var LineItem = require('APP/db/models/order');
+var LineItem = require('APP/db/models/lineitem');
 var Category = require('APP/db/models/category');
 var Product = require('APP/db/models/product');
 var User = require('APP/db/models/user');
 var Review = require('APP/db/models/review');
 var Address = require('APP/db/models/address');
 var CreditCard = require('APP/db/models/creditcard');
+var Promise = require('bluebird');
+
 
 describe('Users Route: ', function(){
   var category, user, product, review, lineitem, address, creditcard;
   //clear db before beginning each run
+
+  before('waiting for db to sync', () => db.didSync);
+
   beforeEach(function () {
-    db.sync({force: true})
-    .then(()=>console.log('hi'))
+    return db.sync({force: true})
+    .then(() => {
 
     category = Category.create({title: "easy"})
 
@@ -84,56 +88,51 @@ describe('Users Route: ', function(){
 
     Promise.all([category, product, user])
     .spread((newCategory, newProduct, newUser) => {
-      product.setCategories(category)
-      lineitem = LineItem.create({
+      return LineItem.create({
         quantity: 2,
         user_id: user.id,
         product_id: product.id,
-        price: 5,
-        status: 'Cart'
-      })
-      return lineitem;
-    })
-    .then(newlineitem =>{
-      LineItem.purchase(user.id).then()
-      review = Review.create({
-        title: 'blahblah',
-        body: 'okay',
-        rating: 5
-      })
-      address = Address.create({
-        address1: '0987',
-        address2: '52 St',
-        city: 'New York',
-        state: 'NY',
-        zipCode: '12345'
-      })
-      creditcard = CreditCard.create({
-        number: '9876',
-        name: 'qwerty',
-        month: 3,
-        year: 2019,
-        CCV: 543
-      })
-      Promise.all([address, creditcard])
-      .spread((address, creditcard) => {
-        address.setUser(user)
-        .then(()=>creditcard.setUser(user))
+        price: 5
+      }).then(newlineitem =>{
+        lineitem = newlineitem
+        LineItem.purchase(user.id).then()
+        review = Review.create({
+          title: 'blahblah',
+          body: 'okay',
+          rating: 5
+        })
+        address = Address.create({
+          address1: '0987',
+          address2: '52 St',
+          city: 'New York',
+          state: 'NY',
+          zipCode: '12345'
+        })
+        creditcard = CreditCard.create({
+          number: '9876',
+          name: 'qwerty',
+          month: 3,
+          year: 2019,
+          CCV: 543
+        })
+        Promise.all([address, creditcard])
         .then()
       })
     })
+
+  })
   });
 
   // empty tables after each spec
-  afterEach(function () {
-    return Promise.all([
-      Order.truncate({ cascade: true }),
-      LineItem.truncate({ cascade: true }),
-      Category.truncate({cascade: true}),
-      User.truncate({cascade: true}),
-      Product.truncate({cascade: true})
-    ]);
-  });
+  // afterEach(function () {
+  //   return Promise.all([
+  //     Order.truncate({ cascade: true }),
+  //     LineItem.truncate({ cascade: true }),
+  //     Category.truncate({cascade: true}),
+  //     User.truncate({cascade: true}),
+  //     Product.truncate({cascade: true})
+  //   ]);
+  // });
 
   describe('USERS', function(){
       describe('GET /users', function(){
@@ -155,11 +154,6 @@ describe('Users Route: ', function(){
           .expect(200)
           .expect(function (res) {
             expect(res.body.firstName).to.equal('jkl');
-            // ALSO TESTING FOR EAGER LOADING
-            expect(res.body.addresses).to.be.an.instanceOf(Array);
-            expect(res.body.reviews).to.be.an.instanceOf(Array);
-            expect(res.body.orders).to.be.an.instanceOf(Array);
-            expect(res.body.orders.lineitems).to.be.an.instanceOf(Array);
           })
         });
       });
@@ -336,7 +330,7 @@ describe('Users Route: ', function(){
       });
 
       describe('DELETE /users/:id/cart/:productId', function(){
-        it('deletes product', function(){
+        it('deletes product from user cart', function(){
           agent
           .delete(`/users/${user.id}/cart/${lineitem.id}`)
           .expect(204)

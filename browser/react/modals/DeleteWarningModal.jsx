@@ -21,6 +21,7 @@ class DeleteWarningModal extends React.Component {
 
     deleteProductSubmit(evt) {
         evt.preventDefault();
+        this.props.deletingProduct(this.props.currentProduct.id)
         this.props.hideModal();
     }
 
@@ -32,10 +33,10 @@ class DeleteWarningModal extends React.Component {
                         <h4 className="modal-title" style={{fontWeight: 'bold'}}>WARNING: DELETING PRODUCT PERMANENTLY!</h4>
                     </div>
                     <div className="modal-body">
-                        <p>Are you sure you want to delete this product?</p>
+                        <p>Are you sure you want to delete {this.props.currentProduct.title}?</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal">DELETE PRODUCT</button>
+                        <button type="button" onClick={this.deleteProductSubmit} className="btn btn-default" data-dismiss="modal">DELETE PRODUCT</button>
                         <button type="button" onClick={this.props.hideModal} className="btn btn-default">Cancel</button>
                     </div>
                 </div>
@@ -44,11 +45,17 @@ class DeleteWarningModal extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        hideModal: () => dispatch(hideModal()),
-        deletingProduct: (productId) => (dispatch(deleteProduct(productId)))
+        currentProduct: state.modal.payload
     }
 };
 
-export default connect(null, mapDispatchToProps)(DeleteWarningModal);
+const mapDispatchToProps = dispatch => {
+    return {
+        hideModal: () => dispatch(hideModal()),
+        deletingProduct: productId => (dispatch(deleteProduct(productId)))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteWarningModal);

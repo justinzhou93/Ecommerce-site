@@ -3,7 +3,8 @@ import { SHOW_MODAL, HIDE_MODAL } from '../action-creators/modals';
 
 /** Initial State */
 const initialModalState = {
-    modalType: null
+    modalType: null,
+    payload: null
 };
 
 /** Modal reducer */
@@ -14,6 +15,7 @@ export default function (state = initialModalState, action) {
 
         case SHOW_MODAL:
             newState.modalType = action.modalType;
+            newState.payload = action.payload;
             break;
 
         case HIDE_MODAL:

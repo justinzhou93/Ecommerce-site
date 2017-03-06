@@ -44,8 +44,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 .admin-product-img-box {
 	display: flex;
-	width: 15%;
-	height: 15%;
+	width: 10%;
+	height: 10%;
+	align-self: center;
 }
 
 .admin-product-img {
@@ -54,10 +55,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	height: 80px;
 }
 
+.admin-product-title {
+	width: 10%;
+	align-self: center;
+}
+
 .admin-product-desc {
 	margin-left: 30px;
-	width: 70%;
-	max-width: 70%;
+	width: 65%;
+	max-width: 65%;
 }
 
 .admin-product-price {

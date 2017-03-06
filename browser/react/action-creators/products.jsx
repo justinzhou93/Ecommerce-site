@@ -58,6 +58,16 @@ export const addProduct = (productInfo) => {
     };
 };
 
+export const editProduct = (productId, productInfo) => {
+    return dispatch => {
+        axios.put(`/api/products/${productId}`, productInfo)
+            .then(() => {
+                dispatch(loadAllProducts());
+                browserHistory.push('/products');
+            })
+    };
+};
+
 export const deleteProduct = (productId) => {
     return dispatch => {
         axios.delete(`/api/products/${productId}`)

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import AdminSingleProduct from './AdminSingleProduct';
+
 export default function (props) {
     return (
         <div className="flex-container">
@@ -11,28 +13,12 @@ export default function (props) {
             <div className="admin-products-list">
                 {props.productList && props.productList.map((product) => {
                     return (
-                        <div key={product.id}className="admin-products">
-                          <div className="admin-product-img-box">
-                            <img src={product.imgUrl} className="admin-product-img" />
-                          </div>
-                          <div className="admin-product-desc">
-                            <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>Product Description</h4>
-                            {product.description}
-                          </div>
-                          <div className="admin-product-price">
-                            <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>Price</h4><br />
-                              ${product.price}
-                          </div>
-                          <div className="admin-product-inv">
-                            <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>Inventory</h4><br />
-                                {product.inventory}
-                          </div>
-                          <div className="admin-links">
-                            <a className="admin-remove-link">Edit</a><br />
-                            <a onClick={props.showDeleteWarningModal} value={product.id} className="admin-remove-link">Remove</a>
-                          </div>
-                        </div>
-                    )
+                        <AdminSingleProduct
+                            key={product.id}
+                            product={product}
+                            loadModal={props.loadModal}
+                        />
+                    );
                 })}
             </div>
         </div>

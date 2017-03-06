@@ -18,12 +18,13 @@ var User = require('APP/db/models/user');
 var Review = require('APP/db/models/review');
 var Promise = require('bluebird');
 
+before('waiting for db to sync', () => db.didSync);
 
 describe('Products Route: ', function(){
   var category, user, product, review;
   //clear db before beginning each run
 
-  before('waiting for db to sync', () => db.didSync);
+
 
   beforeEach(function () {
     return db.sync({force: true})

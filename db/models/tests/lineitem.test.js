@@ -1,5 +1,5 @@
 // TOOD: Everyone please npm install, I installed chai-properties and chai-things to dev
-
+/* eslint-disable */
 import chai from 'chai';
 import chaiProperties from 'chai-properties';
 import chaiThings from 'chai-things';

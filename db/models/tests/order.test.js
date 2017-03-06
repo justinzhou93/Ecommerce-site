@@ -1,3 +1,4 @@
+/* eslint-disable */
 import chai from 'chai';
 import chaiProperties from 'chai-properties';
 import chaiThings from 'chai-things';

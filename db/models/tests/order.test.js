@@ -6,7 +6,10 @@ chai.use(chaiThings);
 const expect = chai.expect;
 const db = require('APP/db');
 const Order = require('APP/db/models/order');
+const User = require('APP/db/models/user');
+const Promise = require('bluebird');
 
+before('wait for the db', () => db.didSync);
 describe('Order model', function() {
 
   it('has the expected schema definition', () => {
@@ -41,16 +44,8 @@ describe('Order model', function() {
         .spread((createdUser, createdOrder) => {
           return createdOrder.setUser(createdUser)
         })
-        .then(() => {
-          Order.findOne({
-            where: {
-              order: 'Processing',
-              include: {model: User}
-            }
-          })
-        })
         .then(foundOrder => {
-          expect(foundOrder.user).to.exist();
+          expect(foundOrder.user_id).to.exist;
         })
     })
   })

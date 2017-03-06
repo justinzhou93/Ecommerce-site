@@ -1,6 +1,7 @@
 'use strict';
 /*eslint-disable*/
 var expect = require('chai').expect;
+
 var app = require('../../start.js');
 var supertest = require('supertest');
 var agent = supertest.agent(app);
@@ -13,9 +14,11 @@ var Product = require('APP/db/models/product');
 var User = require('APP/db/models/user');
 var Promise = require('bluebird');
 
+
 describe('Orders Route: ', function(){
   var category, user, product;
   //clear db before beginning each run
+
   before('waiting for db to sync', () => db.didSync);
 
   beforeEach(function () {
@@ -62,6 +65,7 @@ describe('Orders Route: ', function(){
   //     Product.truncate({cascade: true})
   //   ]);
   // });
+
 
   describe('GET /orders', function(){
     it('returns all orders in db', function () {

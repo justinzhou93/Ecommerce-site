@@ -18,7 +18,6 @@ import UserProfileContainer from './containers/UserProfileContainer';
 import AddAddressContainer from './containers/AddAddressContainer';
 import EditReviewContainer from './containers/EditReviewContainer';
 
-import {loadLoggedInUser} from './action-creators/auth';
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {loadSingleOrder} from './action-creators/orders';
 
@@ -35,10 +34,10 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetch
         <Route path="login" component={LoginContainer} />
         <Route path="signup" component={SignupContainer} />
 
-        <Route path="orders" component={AllOrdersContainer} onEnter={fetchCurrentUser} />
+        <Route path="orders" component={AllOrdersContainer} />
 
-        <Route path="user" component={UserProfileContainer} onEnter={fetchCurrentUser} />
-        <Route path="address/add" component={AddAddressContainer} onEnter={fetchCurrentUser} />
+        <Route path="user" component={UserProfileContainer} />
+        <Route path="address/add" component={AddAddressContainer} />
 
         {/*<Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {GetCartFromServer} />*/}
         {/*<Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />*/}
@@ -56,7 +55,6 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchUserOrders, fetch
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(loadAllProducts()),
   fetchSingleProduct: nextRouterState => dispatch(loadSingleProduct(nextRouterState.params.productId)),
-  fetchCurrentUser: () => dispatch(loadLoggedInUser()),
   fetchSingleOrder: nextRouterState => dispatch(loadSingleOrder(nextRouterState.params.orderid)),
   fetchUserCart: (nextRouterState) => {
     const userid = nextRouterState.params.userid;

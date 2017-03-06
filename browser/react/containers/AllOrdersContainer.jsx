@@ -6,6 +6,7 @@ import LoginContainer from '../containers/LoginContainer';
 export class AllOrdersContainer extends React.Component {
     constructor(props) {
         super(props);
+
         this.renderUserOrders = this.renderUserOrders.bind(this);
     }
 

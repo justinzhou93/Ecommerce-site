@@ -12,9 +12,7 @@ export class AllProductsContainer extends React.Component {
     render() {
         return (
             <div>
-                <AllProducts productList={this.props.productList} />
-
-                {this.props.currentUser && this.props.currentUser.isAdmin ? <AdminProductsContainer productList={this.props.productList} /> : null}
+                {this.props.currentUser && this.props.currentUser.isAdmin ? <AdminProductsContainer productList={this.props.productList} /> : <AllProducts productList={this.props.productList} />}
             </div>
         )
     }

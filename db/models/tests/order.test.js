@@ -33,12 +33,12 @@ describe('Order model', function() {
       let creatingUser = User.create({
         firstName: 'Ben',
         lastName: 'Gu',
-        email: 'TheBenjimoto@gmail.com',
+        email: 'test@test.com',
         isAdmin: false
       })
       let creatingOrders = Order.create({
-        status: 'Processing',
-        totalPrice: 200,
+        status: 'Created',
+        totalPrice: 20
       })
 
       return Promise.all([creatingUser, creatingOrders])

@@ -34,7 +34,7 @@ class LoginModal extends React.Component {
                     <div className="modal-content">
 
                         <div className="modal-header">
-                            <h4 className="modal-title" id="myModalLabel">Log in</h4>
+                            <h4 className="modal-title" style={{fontWeight: 'bold'}}>Log in</h4>
                         </div>
 
                         <div className="modal-body">
@@ -54,7 +54,7 @@ class LoginModal extends React.Component {
                                 </div>
 
                                 <div className="modal-footer">
-                                    <button type="submit" className="btn btn-primary" style={{borderRadius: '4px'}}>Login</button>
+                                    <button type="submit" className="btn btn-default" style={{borderRadius: '4px'}}>Login</button>
                                 </div>
 
                             </form>

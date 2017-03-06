@@ -36,7 +36,7 @@ class SignupModal extends React.Component {
                     <div className="modal-content">
 
                         <div className="modal-header">
-                            <h4 className="modal-title" id="myModalLabel">Sign Up</h4>
+                            <h4 className="modal-title" style={{fontWeight: 'bold'}}>Sign Up</h4>
                         </div>
 
                         <div className="modal-body">
@@ -70,7 +70,7 @@ class SignupModal extends React.Component {
                                 </div>
 
                                 <div className="modal-footer">
-                                    <button type="submit" className="btn btn-primary" style={{borderRadius: '4px'}}>Sign Up</button>
+                                    <button type="submit" className="btn btn-default" style={{borderRadius: '4px'}}>Sign Up</button>
                                 </div>
 
                             </form>

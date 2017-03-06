@@ -4,81 +4,87 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
-/* --------- LOGIN MODAL ------- */
+/* --------- ADMIN PRODUCTS ---- */
 
-.modal-dialog {
-    width: 300px;
-}
-.modal-footer {
-    height: 70px;
-    margin: 0;
-}
-
-.modal-footer-progress {
-    display: none;
-    height: 32px;
-    margin: 0;
+.admin-products-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 20px 10px 0px 10px;
+	width: 80%;
 }
 
-.modal-footer .btn {
-    font-weight: bold;
+.admin-add-product {
+	font-size: 20px;
+	width: auto;
+	text-align: right;
+	align-self: flex-end;
 }
 
-.input-group-addon {
-    color: #fff;
-    background: #3276B1;
-}
-
-/* --------- MODAL DEFAULTS ------- */
-
-.modal-buttons {
+.admin-products-list {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	border: 1px solid grey;
 	border-radius: 4px;
+	width: 80%;
+	margin-bottom: 20px;
 }
 
-.modal-overlay-div {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, .80);
+.admin-products {
+	display: flex;
+	flex-direction: row;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 20px;
+	border-bottom: 1px solid grey;
+	width: auto;
+	justify-content: space-between;
 }
 
-.modal-content-div {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 10000;
-    overflow: auto;
-    text-align: center;
-    padding: 4px;
-    cursor: pointer;
+.admin-product-img-box {
+	display: flex;
+	width: 15%;
+	height: 15%;
 }
 
-.modal-content-div:after {
-    vertical-align: middle;
-    display: inline-block;
-    height: 100%;
-    margin-left: -.05em;
-    content: '';
+.admin-product-img {
+	align-self: center;
+	width: 80px;
+	height: 80px;
 }
 
-.modal-dialog-div {
-    position: relative;
-    outline: 0;
-    width: auto;
-    display: inline-block;
-    vertical-align: middle;
-    box-sizing: border-box;
-    max-width: 520px;
-    cursor: default;
-    border-radius: 4px;
+.admin-product-desc {
+	margin-left: 30px;
+	width: 70%;
+	max-width: 70%;
 }
+
+.admin-product-price {
+	margin-left: 30px;
+	text-align: center;
+}
+
+.admin-product-inv {
+	margin-left: 20px;
+	text-align: center;
+}
+
+.admin-links {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: 10%;
+	margin-right: 20px;
+}
+
+.admin-remove-link {
+	margin-left: 70px;
+	align-self: flex-start;
+}
+
+
 
 /* ------------ NAV BAR ------------------- */
 
@@ -160,7 +166,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 }
 
 .header-link-text {
-	font-size: 13px;
+	font-size: 16px;
 	width: 50%;
 	margin-bottom: 10px;
 	text-align: right;
@@ -238,8 +244,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	display: flex;
 	position: relative;
 	align-self: center;
-	width: 75%;
-	max-width: 450px;
+	height: 350px;
+	width: 350px;
 }
 
 /* ------------ SINGLE PRODUCT -------------- */
@@ -558,4 +564,79 @@ span.m_1 {
 	-moz-transition: all 0.4s ease;
 	-o-transition: all 0.4s ease;
 	transition: all 0.4s ease;
+}
+
+/* --------- LOGIN MODAL ------- */
+
+.modal-dialog {
+    width: 300px;
+}
+.modal-footer {
+    height: 70px;
+    margin: 0;
+}
+
+.modal-footer-progress {
+    display: none;
+    height: 32px;
+    margin: 0;
+}
+
+.modal-footer .btn {
+    font-weight: bold;
+}
+
+.input-group-addon {
+    color: #fff;
+    background: #3276B1;
+}
+
+/* --------- MODAL DEFAULTS ------- */
+
+.modal-buttons {
+	border-radius: 4px;
+}
+
+.modal-overlay-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .80);
+}
+
+.modal-content-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    overflow: auto;
+    text-align: center;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.modal-content-div:after {
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    margin-left: -.05em;
+    content: '';
+}
+
+.modal-dialog-div {
+    position: relative;
+    outline: 0;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: default;
+    border-radius: 4px;
 }

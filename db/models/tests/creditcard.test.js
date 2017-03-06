@@ -118,4 +118,5 @@ describe('Credit Card model', function() {
             })
         })
     })
+     })
 })

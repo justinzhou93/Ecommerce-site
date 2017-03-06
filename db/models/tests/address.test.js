@@ -71,7 +71,6 @@ describe('Address model', function() {
                 });
         });
      })
-
     describe('assocations', () => {
         it('belongs to a user', () => {
             

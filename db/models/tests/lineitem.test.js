@@ -12,6 +12,7 @@ const User = require('APP/db/models/user');
 const Product = require('APP/db/models/product');
 
 describe('Line Item model', () => {
+describe('Line Item model', function() {
 	
     it('has the expected schema definition', () => {
         expect(LineItem.attributes.quantity).to.be.an('object');
@@ -21,9 +22,14 @@ describe('Line Item model', () => {
 
     describe('virtual getters', () => {
 	// The `title` column should be a required field.
+
       describe('totalPrice', () => {
 
           it('returns the total price for the items in line item', () => {
+
+      describe('totalPrice', function() {
+
+          it('returns the total price for the items in line item', function() {
             var lineitem = LineItem.build({
                 quantity: 5,
                 price: 50
@@ -34,7 +40,7 @@ describe('Line Item model', () => {
           });
       });
   });
-
+        
     describe('class methods', () => {
 
         beforeEach(() => {

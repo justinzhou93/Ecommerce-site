@@ -141,7 +141,16 @@ auth.post('/login/local', passport.authenticate('local', { successRedirect: '/' 
 auth.post('/signup/local', (req, res, next) => {
   User.create(req.body)
     .then((createdUser) => {
-      res.status(202).json(createdUser);
+      User.findById(createdUser.id, {
+        include: [
+          {model: Address},
+          {model: CreditCard},
+          {model: Review},
+          {model: Order, include: [{model: LineItem}]}
+        ]
+      }).then((foundUser) => {
+        res.status(202).json(foundUser);
+      })
     })
     .catch(next);
 });

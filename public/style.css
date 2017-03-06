@@ -1,0 +1,643 @@
+/*
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+*/
+/* --------- ADMIN PRODUCTS ---- */
+
+.admin-products-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 20px 10px 0px 10px;
+	width: 80%;
+}
+
+.admin-add-product {
+	font-size: 20px;
+	width: auto;
+	text-align: right;
+	align-self: flex-end;
+}
+
+.admin-products-list {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 4px;
+	width: 80%;
+	margin-bottom: 20px;
+}
+
+.admin-products {
+	display: flex;
+	flex-direction: row;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 20px;
+	border-bottom: 1px solid grey;
+	width: auto;
+	justify-content: space-between;
+}
+
+.admin-product-img-box {
+	display: flex;
+	width: 15%;
+	height: 15%;
+}
+
+.admin-product-img {
+	align-self: center;
+	width: 80px;
+	height: 80px;
+}
+
+.admin-product-desc {
+	margin-left: 30px;
+	width: 70%;
+	max-width: 70%;
+}
+
+.admin-product-price {
+	margin-left: 30px;
+	text-align: center;
+}
+
+.admin-product-inv {
+	margin-left: 20px;
+	text-align: center;
+}
+
+.admin-links {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: 10%;
+	margin-right: 20px;
+}
+
+.admin-remove-link {
+	margin-left: 70px;
+	align-self: flex-start;
+}
+
+
+
+/* ------------ NAV BAR ------------------- */
+
+.cart-link {
+	font-size: 15px;
+	color: white;
+	position: absolute;
+	top: 0;
+	right: 0;
+	letter-spacing: 2px;
+}
+
+/* ------------ ADDRESS BOOK -------------- */
+
+.address-form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 10px;
+}
+
+#address-headers {
+	display: flex;
+	width: 25%;
+	text-align: left;
+	font-size: 18px;
+	align-items: center;
+	font-weight: bold;
+	margin: 0px;
+}
+
+.address-input {
+	width: 75%;
+}
+
+.form-blocks {
+	display: flex;
+	flex-direction: row;
+}
+
+.address-items {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 4px;
+	width: 800px;
+	max-width: 800px;
+	margin-bottom: 20px;
+	justify-content: center;
+}
+
+/* ------------ ALL ORDERS ---------------- */
+
+.order-items {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 10px;
+}
+
+/* ------------ USER PROFILE -------------- */
+
+.my-account-header {
+	display: flex;
+	padding-top: 20px;
+	width: 800px;
+	max-width: 800px;
+}
+
+.my-account-text {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.profile-item-header {
+	font-size: 21px;
+	width: 50%;
+}
+
+.header-link-text {
+	font-size: 16px;
+	width: 50%;
+	margin-bottom: 10px;
+	text-align: right;
+}
+
+.profile-header {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-profile-items {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 4px;
+	width: 800px;
+	max-width: 800px;
+	margin-bottom: 20px;
+}
+
+.profile-items {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin: 10px;
+}
+
+.managed-items {
+	padding-left: 10px;
+	margin-top: 10px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.small-link-text {
+	font-size: 13px;
+	padding-right: 20px;
+}
+
+/* ------------ ADD CREDIT CARD ----------- */
+
+.credit-card-header {
+	padding-bottom: 3px;
+}
+
+
+/* ------------ ALL PRODUCTS -------------- */
+.products-container {
+	display: flex;
+	flex-flow: row wrap;
+	margin-top: 2em;
+	justify-content: space-around;
+}
+.products-items {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.product-images {
+	display: flex;
+	position: relative;
+	align-self: center;
+	height: 350px;
+	width: 350px;
+}
+
+/* ------------ SINGLE PRODUCT -------------- */
+.sing-product-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.sing-product-img-container {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+}
+
+.sing-product-img {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 60%;
+	padding: 20px;
+}
+
+.sing-product-desc {
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 40%;
+	padding: 20px;
+}
+
+.sing-product-reviews {
+	display:flex;
+	justify-content: center;
+}
+
+h4, h5, h6,
+h1, h2, h3 {margin-top: 0;}
+ul, ol {margin: 0;}
+p {margin: 0;}
+html, body{
+   font-family: 'PT Sans Narrow', sans-serif;
+   font-size: 100%;
+   background:#fff; 
+}
+
+.banner {
+	background: url(http://www.dudaite.com/i/2016/12/board-games-wallpaper-1080p.jpg) no-repeat center top;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	min-height:150px;
+	text-align: center;
+	padding-top:1em;
+}
+.header_top_left{
+	float:left;
+}
+.header_top_right{
+	float:right;
+	width:23%;
+}
+
+ul.header_user_info {
+	float: left;
+	border-right: 1px solid #555;
+	width:50%;
+	padding:0;
+	min-height: 30px;
+}
+ul.header_user_info a{
+	color:#fff;
+}
+ul.header_user_info a:hover{
+	color:#fd926d;
+}
+ul.header_user_info a:hover{
+	text-decoration:none;
+	color:#fd926d;
+}
+i.user{
+	width: 17px;
+	height: 17px;
+	background: url(../images/img-sprite.png) no-repeat -241px -67px;
+	float: left;
+	margin:6px 10px 0 5px;
+}
+ul.header_user_info li.user_desc{
+	display: block;
+	font-size: 12px;
+    text-transform: uppercase;
+	cursor: pointer;
+	/* background: #fb5c22; */
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	-webkit-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+	float: left;
+	margin-top:6px;
+}
+.search-box {
+	position: relative;
+}
+.sb-search {
+	position: absolute;
+	top:0px;
+	right:0px;
+	width: 0%;
+	min-width: 30px;
+	height: 28px;
+	float: right;
+	overflow: hidden;
+	-webkit-transition: width 0.3s;
+	-moz-transition: width 0.3s;
+	transition: width 0.3s;
+	-webkit-backface-visibility: hidden;
+}
+.sb-search-input {
+	position: absolute;
+	top: 0;
+	left: 0px;
+	border: none;
+	outline: none;
+	background:#555;
+	width: 100%;
+	height: 28px;
+	margin: 0;
+	z-index: 10;
+	padding: 5px 10px;
+	font-size: 13px;
+	color: #ffffff;
+}
+.sb-search-input::-webkit-input-placeholder {
+	color: #ffffff;
+}
+.sb-search-input:-moz-placeholder {
+	color: #ffffff;
+}
+.sb-search-input::-moz-placeholder {
+	color: #efb480;
+}
+.sb-search-input:-ms-input-placeholder {
+	color: #ffffff;
+}
+.sb-icon-search,.sb-search-submit  {
+	width:30px;
+	height:28px;
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 0;
+	margin: 0;
+	line-height: 45px;
+	text-align: center;
+	cursor: pointer;
+}
+.sb-search-submit {
+	background: #333 url('../images/search.png') no-repeat 0px 1px;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
+    filter: alpha(opacity=0); /* IE 5-7 */
+  	color: transparent;
+	border: none;
+	outline: none;
+	z-index: -1;
+	-webkit-appearance: none;
+}
+.sb-icon-search {
+	color: #FFF;
+	background: #000 url('../images/search.png') no-repeat 7px 5px;
+	z-index: 90;
+}
+/* Open state */
+.sb-search.sb-search-open,.no-js .sb-search {
+	width:100%;
+}
+.sb-search.sb-search-open .sb-search-submit,.no-js .sb-search .sb-search-submit {
+	z-index: 90;
+}
+.header_bottom {
+	padding: 2em 0;
+}
+.logo h1{
+    text-transform: uppercase;
+    font-family: 'Dorsa', sans-serif;
+    letter-spacing: 5px;
+}
+span.m_1 {
+  color:#F9D9BE;
+}
+.logo{
+	float:left;
+	margin-top: 2em;
+	margin-left: 2em;
+}
+.logo h1 a{
+	font-size: 50px;
+	color:#fff;
+}
+.logo h1 a:hover{
+   text-decoration:none;
+}
+.menu {
+   float:right;
+   margin: 3em 0 0 0;
+}
+.h_nav ul li a {
+	display: block;
+	font-size: 0.85em;
+	color: #555;
+	text-transform: capitalize;
+	line-height: 1.8em;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	line-height: 2.5em;
+}
+.h_nav ul li a:hover{
+	text-decoration:none;
+	color:#f84545;
+}
+.h_nav h4 {
+	font-size: 1em;
+	color: #000;
+	line-height: 1.8em;
+	text-transform: uppercase;
+	margin-bottom:1em;
+}
+.price{
+	font-weight: 100;
+	font-size: 20px;
+	text-align: center;
+}
+.view {
+   overflow: hidden;
+   position: relative;
+   text-align: center;
+   cursor: default;
+}
+
+
+.btn.btn-primary {
+	font-size: 1.1em;
+	font-weight: 300;
+	font-style: normal;
+	text-shadow: none;
+	text-transform: uppercase;
+	color:#000;
+	padding: 10px 30px;
+	position: relative;
+	letter-spacing: 0;
+	background: transparent;
+	border-radius: 0;
+	box-shadow: none;
+	border: none;
+	outline: none;
+	border-radius: 0;
+	z-index: 1;
+	overflow: hidden;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+.btn {
+	display: inline-block;
+	padding: 4px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #333;
+	border: 1px solid #ccc;
+	border-bottom-color: #b3b3b3;
+}
+.btn-primary {
+	color: #fff;
+}
+.btn.btn-primary:before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 100%;
+	bottom: 0;
+	right: 0;
+	top: 0;
+	z-index: -1;
+	border-radius: 0;
+	background:#E7BF9E;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+.btn.btn-primary:hover:before {
+	width: 100%;
+	left: 0;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.btn.btn-primary:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	bottom: 0;
+	left: 0;
+	border-radius: 0;
+	background:#F9D9BE;
+	z-index: -2;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+/* --------- LOGIN MODAL ------- */
+
+.modal-dialog {
+    width: 300px;
+}
+.modal-footer {
+    height: 70px;
+    margin: 0;
+}
+
+.modal-footer-progress {
+    display: none;
+    height: 32px;
+    margin: 0;
+}
+
+.modal-footer .btn {
+    font-weight: bold;
+}
+
+.input-group-addon {
+    color: #fff;
+    background: #3276B1;
+}
+
+/* --------- MODAL DEFAULTS ------- */
+
+.modal-buttons {
+	border-radius: 4px;
+}
+
+.modal-overlay-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .80);
+}
+
+.modal-content-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    overflow: auto;
+    text-align: center;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.modal-content-div:after {
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    margin-left: -.05em;
+    content: '';
+}
+
+.modal-dialog-div {
+    position: relative;
+    outline: 0;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: default;
+    border-radius: 4px;
+}

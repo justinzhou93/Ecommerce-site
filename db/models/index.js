@@ -14,19 +14,20 @@ const Category = require('./category');
 const LineItem = require('./lineitem');
 const Order = require('./order');
 
-OAuth.belongsTo(User);
-User.hasOne(OAuth);
-User.hasMany(CreditCard);
-User.hasMany(Address);
+// NOTE: added cascade for certain items in order to delete all associated items if it gets deleted
+OAuth.belongsTo(User, {onDelete: 'cascade', hooks: true})
+User.hasOne(OAuth, {onDelete: 'cascade', hooks: true});
+User.hasMany(CreditCard, {onDelete: 'cascade', hooks: true});
+User.hasMany(Address, {onDelete: 'cascade', hooks: true});
 User.hasMany(Review);
 User.hasMany(Order);
 User.hasMany(LineItem);
 Address.belongsTo(User);
 CreditCard.belongsTo(User);
 Review.belongsTo(Product);
-Product.hasMany(Review);
 Review.belongsTo(User);
-Product.belongsToMany(Category, {through: 'ProductCategory'});
+Product.hasMany(Review, {onDelete: 'cascade', hooks: true});
+Product.belongsToMany(Category, {through: 'ProductCategory', onDelete: 'cascade', hooks: true});
 Category.belongsToMany(Product, {through: 'ProductCategory'});
 Order.belongsTo(User);
 Order.hasMany(LineItem);

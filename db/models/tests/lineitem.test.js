@@ -8,7 +8,10 @@ chai.use(chaiThings);
 const expect = chai.expect;
 const db = require('APP/db');
 const LineItem = require('APP/db/models/lineitem');
+const User = require('APP/db/models/user');
+const Product = require('APP/db/models/product');
 
+describe('Line Item model', () => {
 describe('Line Item model', function() {
 	
     it('has the expected schema definition', () => {
@@ -19,6 +22,11 @@ describe('Line Item model', function() {
 
     describe('virtual getters', () => {
 	// The `title` column should be a required field.
+
+      describe('totalPrice', () => {
+
+          it('returns the total price for the items in line item', () => {
+
       describe('totalPrice', function() {
 
           it('returns the total price for the items in line item', function() {
@@ -32,4 +40,41 @@ describe('Line Item model', function() {
           });
       });
   });
+        
+    describe('class methods', () => {
+
+        beforeEach(() => {
+        var theseLineItems = [1, 3, 5].map(num => {
+          return LineItem.create({
+            quantity: num,
+            price: 10 + num,
+            status: 'Cart',
+            order_id: num,
+            product_id: num,
+            user_id: 1
+          });
+        });
+        return Promise.all(theseLineItems);
+      });
+
+        // TODO: finish this test, does it have multiple it statements within it? Do I need to create orders? Not sure how to tackle
+        describe('purchase', () => {
+            it('sets all the line items of the specific user to Purchased', () => {
+                return LimeItem.purchase(1)
+                .then(result => {
+                    expect()
+                })
+            })
+        })
+
+        describe('totalCartPrice', () => {
+            it('returns the total price of every line item for that specific user', () => {
+                return LineItem.totalCartPrice(1)
+                .then(total => {
+                    expect(total).to.be(125);
+                })
+                
+            })
+        })
+    })
 });

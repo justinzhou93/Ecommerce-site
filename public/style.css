@@ -192,6 +192,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 }
 
 .user-profile-items {
@@ -299,6 +300,9 @@ html, body{
 }
 
 .banner {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
 	background: url(http://www.dudaite.com/i/2016/12/board-games-wallpaper-1080p.jpg) no-repeat center top;
 	background-size: cover;
 	-webkit-background-size: cover;
@@ -444,7 +448,7 @@ span.m_1 {
   color:#F9D9BE;
 }
 .logo{
-	float:left;
+	width: 60%;
 	margin-top: 2em;
 	margin-left: 2em;
 }
@@ -456,7 +460,7 @@ span.m_1 {
    text-decoration:none;
 }
 .menu {
-   float:right;
+   width: 40%;
    margin: 3em 0 0 0;
 }
 .h_nav ul li a {

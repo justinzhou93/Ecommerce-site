@@ -52,7 +52,6 @@ export class UserProfileContainer extends React.Component {
         if (this.state.cardsOpen) this.setState({cardsOpen: false});
         else this.setState({cardsOpen: true});
     }
-
     render() {
         return (
             <UserProfile

@@ -21,6 +21,7 @@ export class AdminProductsContainer extends React.Component {
 
     showDeleteWarningModal() {
         this.props.loadModal(DELETE_WARNING_MODAL);
+
     }
 
     render() {

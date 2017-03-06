@@ -28,6 +28,7 @@ export default function (props) {
         </div>
           {props.viewItemsOpen ? renderLineItems(props.order) : null}
       </div>
+
     </div>
   )
 }

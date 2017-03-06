@@ -24,6 +24,7 @@ export default class NavBar extends React.Component {
                 <ul className="megamenu skyblue cart-link">
                     <li><a className="color2">Cart</a></li>
                 </ul>
+
             </div>
         );
     }

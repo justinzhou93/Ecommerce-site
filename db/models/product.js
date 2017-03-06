@@ -4,15 +4,15 @@ const db = require('APP/db');
 
 const Product = db.define('products', {
   title: {
-    type: Sequelize.STRING
-    // allowNull: false
+    type: Sequelize.STRING,
+    allowNull: false
   },
   description: {
     type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.INTEGER
-    // allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   inventory: {
     type: Sequelize.INTEGER,

@@ -57,6 +57,7 @@ export default class UserProfile extends React.Component {
                                 {this.props.reviewsOpen ? this.renderReviews() : null}
                         </div>
                     </div>
+
                 </div>
             );
         } else { return <h2>Loading user profile...</h2> }
@@ -94,6 +95,7 @@ export default class UserProfile extends React.Component {
                     })
                 }
             </div>
+
         );
     }
 

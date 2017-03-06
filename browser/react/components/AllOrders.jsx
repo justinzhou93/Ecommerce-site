@@ -16,6 +16,7 @@ export default function (props) {
           }
       </div>
     );
+
   } else {
     return <h3>Loading Past Orders...</h3>
   }

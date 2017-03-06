@@ -4,6 +4,218 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
+/* --------- LOGIN MODAL ------- */
+
+.modal-dialog {
+    width: 300px;
+}
+.modal-footer {
+    height: 70px;
+    margin: 0;
+}
+
+.modal-footer-progress {
+    display: none;
+    height: 32px;
+    margin: 0;
+}
+
+.modal-footer .btn {
+    font-weight: bold;
+}
+
+.input-group-addon {
+    color: #fff;
+    background: #3276B1;
+}
+
+/* --------- MODAL DEFAULTS ------- */
+
+.modal-buttons {
+	border-radius: 4px;
+}
+
+.modal-overlay-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .80);
+}
+
+.modal-content-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    overflow: auto;
+    text-align: center;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.modal-content-div:after {
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    margin-left: -.05em;
+    content: '';
+}
+
+.modal-dialog-div {
+    position: relative;
+    outline: 0;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    max-width: 520px;
+    cursor: default;
+    border-radius: 4px;
+}
+
+/* ------------ NAV BAR ------------------- */
+
+.cart-link {
+	font-size: 15px;
+	color: white;
+	position: absolute;
+	top: 0;
+	right: 0;
+	letter-spacing: 2px;
+}
+
+/* ------------ ADDRESS BOOK -------------- */
+
+.address-form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 10px;
+}
+
+#address-headers {
+	display: flex;
+	width: 25%;
+	text-align: left;
+	font-size: 18px;
+	align-items: center;
+	font-weight: bold;
+	margin: 0px;
+}
+
+.address-input {
+	width: 75%;
+}
+
+.form-blocks {
+	display: flex;
+	flex-direction: row;
+}
+
+.address-items {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 4px;
+	width: 800px;
+	max-width: 800px;
+	margin-bottom: 20px;
+	justify-content: center;
+}
+
+/* ------------ ALL ORDERS ---------------- */
+
+.order-items {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 10px;
+}
+
+/* ------------ USER PROFILE -------------- */
+
+.my-account-header {
+	display: flex;
+	padding-top: 20px;
+	width: 800px;
+	max-width: 800px;
+}
+
+.my-account-text {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.profile-item-header {
+	font-size: 21px;
+	width: 50%;
+}
+
+.header-link-text {
+	font-size: 13px;
+	width: 50%;
+	margin-bottom: 10px;
+	text-align: right;
+}
+
+.profile-header {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-profile-items {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 4px;
+	width: 800px;
+	max-width: 800px;
+	margin-bottom: 20px;
+}
+
+.profile-items {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin: 10px;
+}
+
+.managed-items {
+	padding-left: 10px;
+	margin-top: 10px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.small-link-text {
+	font-size: 13px;
+	padding-right: 20px;
+}
+
+/* ------------ ADD CREDIT CARD ----------- */
+
+.credit-card-header {
+	padding-bottom: 3px;
+}
 
 /* ------------ ALL PRODUCTS -------------- */
 .products-container {

@@ -10,11 +10,14 @@ export class UserProfileContainer extends React.Component {
         this.state = {
             addressesOpen: false,
             creditCardFormOpen: false,
-            reviewsOpen: false
+            reviewsOpen: false,
+            cardsOpen: false
         }
         this.handleAddressClick = this.handleAddressClick.bind(this);
         this.handleCardFormClick = this.handleCardFormClick.bind(this);
         this.handleReviewsClick = this.handleReviewsClick.bind(this);
+        this.handleCardsClick = this.handleCardsClick.bind(this);
+        this.handleAddCardSubmit = this.handleAddCardSubmit.bind(this);
     }
 
     handleAddressClick(evt) {
@@ -44,16 +47,25 @@ export class UserProfileContainer extends React.Component {
         this.setState({creditCardFormOpen: false})
     }
 
+    handleCardsClick(evt) {
+        evt.preventDefault();
+        if (this.state.cardsOpen) this.setState({cardsOpen: false});
+        else this.setState({cardsOpen: true});
+    }
+
     render() {
         return (
             <UserProfile
                 addressesOpen={this.state.addressesOpen}
-                creditCardFormOpen={this.state.creditCardFormOpen}
                 reviewsOpen={this.state.reviewsOpen}
+                creditCardFormOpen={this.state.creditCardFormOpen}
+                cardsOpen={this.state.cardsOpen}
                 currentUser={this.props.currentUser}
                 handleAddressClick={this.handleAddressClick}
+                handleCardsClick={this.handleCardsClick}
                 handleCardFormClick={this.handleCardFormClick}
                 handleReviewsClick={this.handleReviewsClick}
+                handleAddCardSubmit={this.handleAddCardSubmit}
             />
         )
     }

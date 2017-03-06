@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function (props) {
     return (
-        <div className="container">
+        <div>
             <form className="form-horizontal" role="form">
                 <fieldset>
-                    <legend>Payment</legend>
+                    <legend className="credit-card-header">Add New Credit Card</legend>
                     <div className="form-group">
-                        <label className="col-sm-3 control-label" htmlFor="card-holder-name">Name on Card</label>
+                        <label className="col-sm-3 control-label" htmlFor="card-holder-name">Name</label>
                         <div className="col-sm-9">
                             <input type="text" className="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name" />
                         </div>
@@ -41,10 +41,6 @@ export default function (props) {
                                 </div>
                                 <div className="col-xs-3">
                                     <select className="form-control" name="expiry-year">
-                                        <option value="13">2013</option>
-                                        <option value="14">2014</option>
-                                        <option value="15">2015</option>
-                                        <option value="16">2016</option>
                                         <option value="17">2017</option>
                                         <option value="18">2018</option>
                                         <option value="19">2019</option>
@@ -60,7 +56,7 @@ export default function (props) {
                     <div className="form-group">
                         <label className="col-sm-3 control-label" htmlFor="cvv">Card CVV</label>
                         <div className="col-sm-3">
-                            <input type="text" className="form-control" name="cvv" id="cvv" placeholder="Security Code" />
+                            <input type="text" className="form-control" name="cvv" id="cvv" placeholder="CVV" />
                         </div>
                     </div>
                     <div className="form-group">

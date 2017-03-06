@@ -97,7 +97,9 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Product.create(req.body)
   .then((createdproduct) => {
-      var categories = req.body.categories.map(category => createdproduct.setCategories(+category))
+      var categories = req.body.categories.map(category => {
+          createdproduct.setCategories(+category)
+      })
       Promise.all(categories)
       .then(() => res.json(createdproduct))
       .catch(next)

@@ -29,7 +29,8 @@ const expect = chai.expect;
 const db = require('APP/db');
 const User = require('APP/db/models/user');
 
-describe('User model', function() {
+before('wait for the db', () => db.didSync);
+describe('User model', function () {
 
   it('has the expected schema definition', () => {
     expect(User.attributes.firstName).to.be.an('object');

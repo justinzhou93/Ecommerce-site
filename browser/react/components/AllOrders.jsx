@@ -5,18 +5,18 @@ export default function (props) {
   if (props.currentUser) {
     const userOrders = props.currentUser.orders;
     return (
-      <div>
-        <h3>Orders</h3>
+      <div className="flex-container">
+          <div className="my-account-header">
+              <h2 className="my-account-text">My Orders</h2>
+          </div>
           {
             userOrders.map(order => {
-              return (
-                <ul key={order.id}>
-                  <SingleOrderContainer order={order} />
-                </ul>
-            )})
+              return <SingleOrderContainer key={order.id} order={order} />
+            })
           }
       </div>
-    )
+    );
+
   } else {
     return <h3>Loading Past Orders...</h3>
   }

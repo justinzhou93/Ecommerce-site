@@ -16,6 +16,7 @@ var Promise = require('bluebird');
 describe('Orders Route: ', function(){
   var category, user, product;
   //clear db before beginning each run
+
   before('waiting for db to sync', () => db.didSync);
 
   beforeEach(function () {

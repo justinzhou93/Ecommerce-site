@@ -1,5 +1,6 @@
 // 'use strict'; // eslint-disable-line semi
 /*eslint-disable*/
+
 // const request = require('supertest-as-promised')
 // const {expect} = require('chai')
 // require('APP/db')
@@ -43,14 +44,12 @@
 /*eslint-disable*/
 var expect = require('chai').expect;
 var request = require('supertest-as-promised');
-
 var app = require('../../start.js');
 var agent = request.agent(app);
 
 var db = require('APP/db');
 var Order = require('APP/db/models/order');
 var LineItem = require('APP/db/models/lineitem');
-console.log(LineItem);
 var Category = require('APP/db/models/category');
 var Product = require('APP/db/models/product');
 var User = require('APP/db/models/user');
@@ -62,6 +61,7 @@ var Promise = require('bluebird');
 describe('Users Route: ', function(){
   var category, user, product, review, lineitem, address, creditcard;
   //clear db before beginning each run
+
   before('waiting for db to sync', () => db.didSync);
 
   beforeEach(function () {

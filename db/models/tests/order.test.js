@@ -22,4 +22,36 @@ describe('Order model', function() {
       expect(order.status).to.equal('Created');
     });
   });
+
+  describe('associations', () => {
+    it('belongs to a user', () => {
+
+      let creatingUser = User.create({
+        firstName: 'Ben',
+        lastName: 'Gu',
+        email: 'TheBenjimoto@gmail.com',
+        isAdmin: false
+      })
+      let creatingOrders = Order.create({
+        status: 'Processing',
+        totalPrice: 200,
+      })
+
+      return Promise.all([creatingUser, creatingOrders])
+        .spread((createdUser, createdOrder) => {
+          return createdOrder.setUser(createdUser)
+        })
+        .then(() => {
+          Order.findOne({
+            where: {
+              order: 'Processing',
+              include: {model: User}
+            }
+          })
+        })
+        .then(foundOrder => {
+          expect(foundOrder.user).to.exist();
+        })
+    })
+  })
 });

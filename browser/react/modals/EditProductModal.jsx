@@ -27,21 +27,13 @@ class EditProductModal extends React.Component {
             inventory: evt.target.inventory.value,
             imgUrl: evt.target.imgUrl.value
         }
-        this.props.editingProduct(this.props.product.id, updatedInfo);
+        this.props.editingProduct(this.props.currentProduct.id, updatedInfo);
         this.props.hideModal();
     }
 
     render() {
+       const product = this.props.currentProduct;
        return (
-           <div>
-                {this.props.currentProduct ? this.renderEditForm() : null}
-           </div>
-       )
-    }
-
-    renderEditForm() {
-        const product = this.props.currentProduct;
-        return (
             <Modal onClose={this.onClose}>
                 <div className="modal-lg">
                     <div className="modal-content">
@@ -54,35 +46,35 @@ class EditProductModal extends React.Component {
                             <form onSubmit={this.editProductSubmit} role="form">
                                 <div className="form-group">
                                     <div className="input-group">
-                                        <input type="text" name="title" className="form-control" id="uLogin" defaultValue={product.title} />
+                                        <input type="text" name="title" className="form-control" id="uLogin" placeholder="Enter product title..." defaultValue={product.title} />
                                         <label htmlFor="uLogin" className="input-group-addon glyphicon glyphicon-info-sign" />
                                     </div>
                                 </div>
 
                                 <div className="form-group">
                                     <div className="input-group">
-                                        <textarea type="text" name="description" className="form-control" rows="7" placeholder="Enter product description..." />
+                                        <textarea type="text" name="description" className="form-control" rows="7" placeholder="Enter product description..." defaultValue={product.description} />
                                         <label htmlFor="uPassword" className="input-group-addon glyphicon glyphicon-info-sign" />
                                     </div>
                                 </div>
 
                                 <div className="form-group">
                                     <div className="input-group">
-                                        <input type="text" name="price" className="form-control" id="uPassword" placeholder="Enter product price..." />
+                                        <input type="text" name="price" className="form-control" id="uPassword" placeholder="Enter product price..." defaultValue={product.price} />
                                         <label htmlFor="uPassword" className="input-group-addon glyphicon glyphicon-usd" />
                                     </div>
                                 </div>
 
                                 <div className="form-group">
                                     <div className="input-group">
-                                        <input type="text" name="inventory" className="form-control" id="uPassword" placeholder="Enter inventory stock..." />
+                                        <input type="text" name="inventory" className="form-control" id="uPassword" placeholder="Enter inventory stock..." defaultValue={product.inventory} />
                                         <label htmlFor="uPassword" className="input-group-addon glyphicon glyphicon-list-alt" />
                                     </div>
                                 </div>
 
                                 <div className="form-group">
                                     <div className="input-group">
-                                        <input type="text" name="imgUrl" className="form-control" id="uPassword" placeholder="Enter image URL..." />
+                                        <input type="text" name="imgUrl" className="form-control" id="uPassword" placeholder="Enter image URL..." defaultValue={product.imgUrl} />
                                         <label htmlFor="uPassword" className="input-group-addon glyphicon glyphicon-globe" />
                                     </div>
                                 </div>
@@ -102,7 +94,7 @@ class EditProductModal extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentProduct: state.products.currentProduct
+        currentProduct: state.modal.payload
     }
 };
 

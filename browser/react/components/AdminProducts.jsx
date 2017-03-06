@@ -17,7 +17,6 @@ export default function (props) {
                             key={product.id}
                             product={product}
                             loadModal={props.loadModal}
-                            loadCurrentProduct={props.loadCurrentProduct}
                         />
                     );
                 })}

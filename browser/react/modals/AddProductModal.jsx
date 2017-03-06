@@ -21,6 +21,16 @@ class AddProductModal extends React.Component {
 
     addProductSubmit(evt) {
         evt.preventDefault();
+        console.log([evt.target.categories.value])
+        const productInfo = {
+            title: evt.target.title.value,
+            description: evt.target.description.value,
+            categories: [evt.target.categories.value],
+            price: evt.target.price.value,
+            inventory: evt.target.inventory.value,
+            imgUrl: evt.target.imgUrl.value
+        }
+        this.props.addingProduct(productInfo);
         this.props.hideModal();
     }
 
@@ -38,7 +48,7 @@ class AddProductModal extends React.Component {
                             <form onSubmit={this.addProductSubmit} role="form">
                                 <div className="form-group">
                                     <div className="input-group">
-                                        <input type="text" name="email" className="form-control" id="uLogin" placeholder="Enter product title..." />
+                                        <input type="text" name="title" className="form-control" id="uLogin" placeholder="Enter product title..." />
                                         <label htmlFor="uLogin" className="input-group-addon glyphicon glyphicon-info-sign" />
                                     </div>
                                 </div>
@@ -46,6 +56,13 @@ class AddProductModal extends React.Component {
                                 <div className="form-group">
                                     <div className="input-group">
                                         <textarea type="text" name="description" className="form-control" rows="7" placeholder="Enter product description..." />
+                                        <label htmlFor="uPassword" className="input-group-addon glyphicon glyphicon-info-sign" />
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <div className="input-group">
+                                        <input type="text" name="categories" className="form-control" id="uPassword" placeholder="Enter product categories..." />
                                         <label htmlFor="uPassword" className="input-group-addon glyphicon glyphicon-info-sign" />
                                     </div>
                                 </div>

@@ -33,7 +33,7 @@ class DeleteWarningModal extends React.Component {
                         <h4 className="modal-title" style={{fontWeight: 'bold'}}>WARNING: DELETING PRODUCT PERMANENTLY!</h4>
                     </div>
                     <div className="modal-body">
-                        <p>Are you sure you want to delete this product?</p>
+                        <p>Are you sure you want to delete {this.props.currentProduct.title}?</p>
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={this.deleteProductSubmit} className="btn btn-default" data-dismiss="modal">DELETE PRODUCT</button>
@@ -47,7 +47,7 @@ class DeleteWarningModal extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentProduct: state.products.currentProduct
+        currentProduct: state.modal.payload
     }
 };
 

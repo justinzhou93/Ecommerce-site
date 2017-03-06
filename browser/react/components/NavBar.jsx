@@ -21,6 +21,10 @@ export default class NavBar extends React.Component {
                         {this.props.currentUser ? this.renderLogout() : this.renderLoginSignup()}
                     </ul>
                 </div>
+                <ul className="megamenu skyblue cart-link">
+                    <li><a className="color2">Cart</a></li>
+                </ul>
+
             </div>
         );
     }
@@ -38,8 +42,8 @@ export default class NavBar extends React.Component {
     renderLoginSignup() {
         return (
             <div className="megamenu skyblue">
-                <li><Link to={'/signup'} className="color4">Sign Up</Link></li>
-                <li><Link to={'/login'} className="color4">Login</Link></li>
+                <li><a onClick={this.props.showSignupMenu} className="color4">Sign Up</a></li>
+                <li><a onClick={this.props.showLoginMenu} className="color4">Login</a></li>
             </div>
         );
     }

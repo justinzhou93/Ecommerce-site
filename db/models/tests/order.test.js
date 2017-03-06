@@ -1,3 +1,4 @@
+/* eslint-disable */
 import chai from 'chai';
 import chaiProperties from 'chai-properties';
 import chaiThings from 'chai-things';
@@ -6,7 +7,10 @@ chai.use(chaiThings);
 const expect = chai.expect;
 const db = require('APP/db');
 const Order = require('APP/db/models/order');
+const User = require('APP/db/models/user');
+const Promise = require('bluebird');
 
+before('wait for the db', () => db.didSync);
 describe('Order model', function() {
 
   it('has the expected schema definition', () => {
@@ -22,4 +26,28 @@ describe('Order model', function() {
       expect(order.status).to.equal('Created');
     });
   });
+
+  describe('associations', () => {
+    it('belongs to a user', () => {
+
+      let creatingUser = User.create({
+        firstName: 'Ben',
+        lastName: 'Gu',
+        email: 'test@test.com',
+        isAdmin: false
+      })
+      let creatingOrders = Order.create({
+        status: 'Created',
+        totalPrice: 20
+      })
+
+      return Promise.all([creatingUser, creatingOrders])
+        .spread((createdUser, createdOrder) => {
+          return createdOrder.setUser(createdUser)
+        })
+        .then(foundOrder => {
+          expect(foundOrder.user_id).to.exist;
+        })
+    })
+  })
 });

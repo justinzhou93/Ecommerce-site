@@ -1,5 +1,5 @@
 // TOOD: Everyone please npm install, I installed chai-properties and chai-things to dev
-
+/* eslint-disable */
 import chai from 'chai';
 import chaiProperties from 'chai-properties';
 import chaiThings from 'chai-things';
@@ -9,10 +9,10 @@ const expect = chai.expect;
 const db = require('APP/db');
 const Address = require('APP/db/models/address');
 const User = require('APP/db/models/user');
-let Promise = require('bluebird');
+const Promise = require('bluebird');
 
 describe('Address model', function() {
-	
+
     it('has the expected schema definition', () => {
         expect(Address.attributes.address1).to.be.an('object');
         expect(Address.attributes.address2).to.be.an('object');
@@ -34,7 +34,7 @@ describe('Address model', function() {
                     });
                 });
         });
-    
+
     it('requires city', () => {
         const address = Address.build();
             return address.validate()
@@ -73,7 +73,7 @@ describe('Address model', function() {
      })
     describe('assocations', () => {
         it('belongs to a user', () => {
-            
+
             let creatingUser = User.create({
                 firstName: 'Ben',
                 lastName: 'Gu',
@@ -86,22 +86,13 @@ describe('Address model', function() {
                 state: 'NY',
                 zipCode: 10128
             })
-        
+
         return Promise.all([creatingUser, creatingAddress])
             .spread((createdUser, createdAddress) => {
                 return createdAddress.setUser(createdUser)
             })
-            .then(() => {
-                Address.findOne({
-                    where: {
-                        address1: '1235 Park Ave',
-                        include: {model: User}
-                    }
-                })
-            })
             .then(foundAddress => {
-                // TODO: this should work after tables populate?
-                // expect(foundAddress.user).to.exist;
+                expect(foundAddress.user_id).to.exist;
             })
         })
     })

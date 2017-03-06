@@ -6,15 +6,17 @@ import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
 import AddProductModal from './AddProductModal';
 import DeleteWarningModal from './DeleteWarningModal';
+import EditProductModal from './EditProductModal';
 
 /** Modal Type Constants */
-import { LOGIN_MODAL, SIGNUP_MODAL, ADD_PRODUCT_MODAL, DELETE_WARNING_MODAL } from './modaltypes';
+import { LOGIN_MODAL, SIGNUP_MODAL, ADD_PRODUCT_MODAL, DELETE_WARNING_MODAL, EDIT_PRODUCT_MODAL } from './modaltypes';
 
 const MODAL_COMPONENTS = {
     LOGIN_MODAL: LoginModal,
     SIGNUP_MODAL: SignupModal,
     ADD_PRODUCT_MODAL: AddProductModal,
-    DELETE_WARNING_MODAL: DeleteWarningModal
+    DELETE_WARNING_MODAL: DeleteWarningModal,
+    EDIT_PRODUCT_MODAL: EditProductModal
 };
 
 const ModalContainer = (props) => {
@@ -24,12 +26,13 @@ const ModalContainer = (props) => {
 
     const SpecificModal = MODAL_COMPONENTS[props.modalType];
 
-    return <SpecificModal />;
+    return <SpecificModal payload={props.payload} />;
 };
 
 const mapStateToProps = state => {
     return {
-        modalType: state.modal.modalType
+        modalType: state.modal.modalType,
+        payload: state.modal.payload
     };
 };
 

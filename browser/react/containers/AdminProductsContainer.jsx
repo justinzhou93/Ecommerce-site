@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import AdminProducts from '../components/AdminProducts';
 
+import { loadSingleProduct } from '../action-creators/products';
 import { loadModal } from '../action-creators/modals';
 import { ADD_PRODUCT_MODAL, DELETE_WARNING_MODAL } from '../modals/modaltypes';
 
@@ -12,23 +13,18 @@ export class AdminProductsContainer extends React.Component {
         super(props);
 
         this.showAddProductModal = this.showAddProductModal.bind(this);
-        this.showDeleteWarningModal = this.showDeleteWarningModal.bind(this);
     }
 
     showAddProductModal() {
         this.props.loadModal(ADD_PRODUCT_MODAL);
     }
 
-    showDeleteWarningModal() {
-        this.props.loadModal(DELETE_WARNING_MODAL);
-
-    }
-
     render() {
         return (
             <AdminProducts
+                loadModal={this.props.loadModal}
                 showAddProductModal={this.showAddProductModal}
-                showDeleteWarningModal={this.showDeleteWarningModal}
+                loadCurrentProduct={this.props.loadCurrentProduct}
                 productList={this.props.productList}
             />
         );
@@ -43,7 +39,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadModal: modelType => dispatch(loadModal(modelType))
+        loadModal: (modelType, payload) => dispatch(loadModal(modelType, payload)),
+        loadCurrentProduct: productId => dispatch(loadSingleProduct(productId))
     }
 }
 

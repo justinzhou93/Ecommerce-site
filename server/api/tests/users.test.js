@@ -58,7 +58,6 @@ var Address = require('APP/db/models/address');
 var CreditCard = require('APP/db/models/creditcard');
 var Promise = require('bluebird');
 
-
 describe('Users Route: ', function(){
   var category, user, product, review, lineitem, address, creditcard;
   //clear db before beginning each run

@@ -344,8 +344,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 }
 
 .sing-product-reviews {
-	display:flex;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+  align-items: center;
 }
 
 h4, h5, h6,
@@ -355,7 +358,7 @@ p {margin: 0;}
 html, body{
    font-family: 'PT Sans Narrow', sans-serif;
    font-size: 100%;
-   background:#fff; 
+   background:#fff;
 }
 
 .banner {
@@ -708,4 +711,22 @@ span.m_1 {
     box-sizing: border-box;
     cursor: default;
     border-radius: 4px;
+}
+
+.reviews {
+		padding: 20px 10px 0px 10px;
+		margin: 3% 10% 3% 10%;
+		float:left;
+		display: inline-block
+}
+
+.reviews-title {
+  font-size: 21px;
+  width: 50%;
+  justify-content: center;
+}
+
+.reviews-title-heading {
+  font-size: 42px;
+  text-decoration: underline;
 }

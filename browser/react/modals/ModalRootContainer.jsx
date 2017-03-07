@@ -12,6 +12,7 @@ import CartModal from './CartModal';
 /** Modal Type Constants */
 import { LOGIN_MODAL, SIGNUP_MODAL, ADD_PRODUCT_MODAL, DELETE_WARNING_MODAL, EDIT_PRODUCT_MODAL, CART_MODAL } from './modaltypes';
 
+
 const MODAL_COMPONENTS = {
     LOGIN_MODAL: LoginModal,
     SIGNUP_MODAL: SignupModal,

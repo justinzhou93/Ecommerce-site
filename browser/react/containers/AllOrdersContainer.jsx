@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import AllOrders from '../components/AllOrders';
-import LoginContainer from '../containers/LoginContainer';
 
 export class AllOrdersContainer extends React.Component {
     constructor(props) {
@@ -11,7 +10,7 @@ export class AllOrdersContainer extends React.Component {
     }
 
     render () {
-        return this.props.currentUser ? this.renderUserOrders() : <LoginContainer />;
+        return this.props.currentUser ? this.renderUserOrders() : null;
     }
 
     renderUserOrders () {

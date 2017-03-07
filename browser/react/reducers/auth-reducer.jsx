@@ -18,7 +18,7 @@ const authReducer = (state = initialAuthState, action) => {
       break;
 
     default:
-      return state
+      return state;
 
   }
   return newState;

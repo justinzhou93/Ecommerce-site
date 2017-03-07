@@ -4,6 +4,35 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
+
+/* --------- CART MODAL -------- */
+.cart-header {
+	font-size: 25px;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+}
+
+.cart-hr-box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	border-bottom: 1px solid black;
+}
+
+.cart-items-box {
+	display: flex;
+	flex-direction: row;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 20px;
+	border-bottom: 1px solid #e5e5e5;
+	width: auto;
+	justify-content: space-between;
+}
+
 /* --------- ADMIN PRODUCTS ---- */
 
 .admin-products-header {
@@ -235,25 +264,55 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 .products-container {
 	display: flex;
 	flex-flow: row wrap;
-	margin-top: 2em;
+	margin: 0 2em 2em 2em;
 	justify-content: space-around;
-}
-.products-items {
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  width: 25%;
-  margin-top: 10px;
-  font-size: 20px;
-  text-align: center;
+	padding: 20px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
-.product-images {
+.products-header {
 	display: flex;
-	position: relative;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-left: 4em;
+	padding-top: 20px;
+	width: 100%;
+}
+
+.products-items {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 16%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.product-image-box {
+	display: flex;
+	align-items: center;
 	align-self: center;
-	height: 350px;
-	width: 350px;
+	width: auto;
+}
+
+.product-img {
+	align-self: center;
+	width: 165px;
+	height: 165px;
+}
+
+.product-title {
+	font-size: 18px;
+	margin-top: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.product-price {
+	margin-top: 5px;
+	font-size: 16px;
+	text-align: center;
 }
 
 /* ------------ SINGLE PRODUCT -------------- */
@@ -305,6 +364,7 @@ html, body{
 .banner {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	width: 100%;
 	background: url(http://www.dudaite.com/i/2016/12/board-games-wallpaper-1080p.jpg) no-repeat center top;
 	background-size: cover;
@@ -451,7 +511,6 @@ span.m_1 {
   color:#F9D9BE;
 }
 .logo{
-	width: 60%;
 	margin-top: 2em;
 	margin-left: 2em;
 }
@@ -463,7 +522,6 @@ span.m_1 {
    text-decoration:none;
 }
 .menu {
-   width: 40%;
    margin: 3em 0 0 0;
 }
 .h_nav ul li a {

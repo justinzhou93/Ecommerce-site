@@ -296,7 +296,7 @@ p {margin: 0;}
 html, body{
    font-family: 'PT Sans Narrow', sans-serif;
    font-size: 100%;
-   background:#fff; 
+   background:#fff;
 }
 
 .banner {
@@ -650,4 +650,16 @@ span.m_1 {
     box-sizing: border-box;
     cursor: default;
     border-radius: 4px;
+}
+
+.reviews {
+		padding: 20px 10px 0px 10px;
+		margin: 3% 10% 3% 10%;
+		float:left;
+		display: inline-block
+}
+
+.reviews-title {
+		display: block;
+		margin: 3% 10% 3% 10%
 }

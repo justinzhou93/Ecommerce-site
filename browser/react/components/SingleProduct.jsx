@@ -2,37 +2,43 @@ import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 
 export default function (props) {
+    const changeDate = (dateStr) => dateStr.slice(0, 10).split('-').join('/');
     if (props.currentProduct) {
         const productReviews = props.currentProduct.reviews;
         return (
-            <div className="sing-product-container">
-                <div className="sing-product-img-container">
-                    <div className="sing-product-img">
-                        <img src={props.currentProduct.imgUrl} className="product-images" />
+            <div>
+                <div className="sing-product-container">
+                    <div className="sing-product-img-container">
+                        <img src={props.currentProduct.imgUrl} className="sing-product-img" />
                     </div>
-                    <div className="sing-product-desc">
-                        <h2>{props.currentProduct.title}</h2>
-                        <p>{props.currentProduct.description}</p>
-                        <h4 className="price">${props.currentProduct.price}</h4>
-                        <a onClick={props.addToCartOnClick} className="button">Add to cart</a>
-                    </div>
+                    <div className="sing-product-desc-box">
+                        <div className="sing-product-desc">
+                            <h2>{props.currentProduct.title}</h2>
+                            <p>{props.currentProduct.description}</p>
+                        </div>
+                        <div className="sing-product-cart">
+                            <h3 className="sing-product-price">${props.currentProduct.price}</h3>
+                            <button onClick={props.addToCartOnClick} className="sing-product-price">Add to cart</button>
+                        </div>
+                    </div> 
                 </div>
-                <div className="sing-product-reviews">
-                    <div className = "reviews-title">
-                      <h1 className = 'reviews-title-heading'>REVIEWS</h1>
-                    </div>
-                      {
-                        // Each individual review
-                        productReviews.map(review => {
-                          return (
-                            <div key={review.id} className = "sing-product-desc">
-                              <h2>{review.title}</h2>
-                                 <StarRatingComponent  name="boardgame-rating" starCount={5} value={review.rating} />
-                              <p>{review.body}</p>
-                            </div>
-                          )
-                        })
-                      }
+                <div className="reviews-container">
+                        <div className="reviews-title-header">
+                            <h3 className="reviews-title-heading">Reviews</h3>
+                        </div>
+                        {
+                            // Each individual review
+                            productReviews.map(review => {
+                            return (
+                                <div key={review.id} className="sing-review">
+                                    <h4>{review.title}</h4>
+                                    <StarRatingComponent name="boardgame-rating" starCount={5} value={review.rating} />
+                                    <h6>{changeDate(review.date)}</h6>
+                                    <p>{review.body}</p>
+                                </div>
+                            )
+                            })
+                        }
                 </div>
             </div>
         );

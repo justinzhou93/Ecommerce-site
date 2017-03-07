@@ -13,7 +13,7 @@ export class SingleProductContainer extends React.Component {
     }
 
     addToCartOnClick() {
-        this.props.addingToCart(this.props.currentUser.id, this.props.currentProduct.id)
+        this.props.addingToCart(this.props.currentUser.id, this.props.currentProduct.id, {quantity: 1, price: this.props.currentProduct.price})
     }
 
     render() {
@@ -31,6 +31,6 @@ const mapStateToProps = state => ({
     currentUser: state.auth.currentUser
 });
 
-const mapDispatchToProps = dispatch => ({addingToCart: (userId, productId) => dispatch(addCartItem(userId, productId))});
+const mapDispatchToProps = dispatch => ({addingToCart: (userId, productId, productInfo) => dispatch(addCartItem(userId, productId, productInfo))});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer);

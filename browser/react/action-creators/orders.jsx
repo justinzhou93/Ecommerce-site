@@ -38,3 +38,12 @@ export const loadSingleOrder = (orderId) => {
         .then(order => dispatch(setSingleOrder(order)));
   };
 };
+
+// ADMIN loadAllUserOrders
+export const loadAllOrders = () => {
+  return dispatch => {
+    axios.get('/api/orders')
+      .then(res => res.data)
+      .then(orders => dispatch())
+  }
+}

@@ -22,7 +22,7 @@ class CartModal extends React.Component {
         const userCart = this.props.currentUser.lineitems;
         return (
             <Modal onClose={this.onClose}>
-                <div className="user-profile-items" style={{backgroundColor: 'white'}}>
+                <div className="user-profile-items" style={{backgroundColor: 'white', width: '800px'}}>
                     <div className="order-items">
                         <div className="cart-hr-box">
                             <h3 className="cart-header">My Cart</h3>

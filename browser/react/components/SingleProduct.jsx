@@ -1,5 +1,5 @@
 import React from 'react';
-// import Star from 'react-star-rating';
+import StarRatingComponent from 'react-star-rating-component';
 
 export default function (props) {
     if (props.currentProduct) {
@@ -19,7 +19,7 @@ export default function (props) {
                 </div>
                 <div className="sing-product-reviews">
                     <div className = "reviews-title">
-                      <h1>REVIEWS</h1>
+                      <h1 className = 'reviews-title-heading'>REVIEWS</h1>
                     </div>
                       {
                         // Each individual review
@@ -27,9 +27,7 @@ export default function (props) {
                           return (
                             <div key={review.id} className = "sing-product-desc">
                               <h2>{review.title}</h2>
-                              {
-                                // <Star totalStars={review.rating} />
-                              }
+                                 <StarRatingComponent  name="boardgame-rating" starCount={5} value={review.rating} />
                               <p>{review.body}</p>
                             </div>
                           )

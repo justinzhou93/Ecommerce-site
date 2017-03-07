@@ -285,8 +285,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 }
 
 .sing-product-reviews {
-	display:flex;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+  align-items: center;
 }
 
 h4, h5, h6,
@@ -660,6 +663,12 @@ span.m_1 {
 }
 
 .reviews-title {
-		display: block;
-		margin: 3% 10% 3% 10%
+  font-size: 21px;
+  width: 50%;
+  justify-content: center;
+}
+
+.reviews-title-heading {
+  font-size: 42px;
+  text-decoration: underline;
 }

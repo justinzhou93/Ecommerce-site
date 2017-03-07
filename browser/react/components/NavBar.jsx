@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import { CART_MODAL } from '../modals/modaltypes';
+
+
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
@@ -17,12 +20,11 @@ export default class NavBar extends React.Component {
                 <div className="menu">
                     <ul className="megamenu skyblue">
                         <li><Link to={'/products'} className="color2">Products</Link></li>
-                        <li><Link to={'/categories'} className="color4">Categories</Link></li>
                         {this.props.currentUser ? this.renderLogout() : this.renderLoginSignup()}
                     </ul>
                 </div>
                 <ul className="megamenu skyblue cart-link">
-                    <li><a className="color2">Cart</a></li>
+                    <li><a onClick={this.props.showCart} className="color2">Cart</a></li>
                 </ul>
 
             </div>

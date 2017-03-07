@@ -37,7 +37,7 @@ export default class UserProfile extends React.Component {
                             {this.props.cardsOpen ? this.renderCreditCards() : null}
                         </div>
                         <div className="profile-items">
-                            {this.props.creditCardFormOpen ? <AddCreditCard /> : null}
+                            {this.props.creditCardFormOpen ? <AddCreditCard currentUser={this.props.currentUser} /> : null}
                         </div>
                     </div>
                     <div className="user-profile-items">

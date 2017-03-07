@@ -10,6 +10,7 @@ const CreditCard = db.model('credit_cards');
 const Review = db.model('reviews');
 const Order = db.model('orders');
 const LineItem = db.model('lineitems');
+const Product = db.model('products');
 
 
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
@@ -147,15 +148,15 @@ router.delete('/:userId/creditcard/:cardId', (req, res, next) => {
 /** --------------------------USER CART----------------------- */
 // get user's cart info
 router.get('/:userId/cart', (req, res, next) => {
-    User.findById(req.params.userId, {
-        include: [
-            {model: Address},
-            {model: CreditCard},
-            {model: LineItem},
-        ]
+    LineItem.findAll({
+      where: {
+        user_id: req.params.userId,
+        status: 'Cart'
+      },
+      include: [{model: Product}]
     })
-    .then(foundUser => {
-      res.json(foundUser);
+    .then(foundCart => {
+      res.json(foundCart);
     })
     .catch(next);
 });

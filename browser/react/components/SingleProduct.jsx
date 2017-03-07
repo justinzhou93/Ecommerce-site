@@ -12,7 +12,7 @@ export default function (props) {
                         <h2>{props.currentProduct.title}</h2>
                         <p>{props.currentProduct.description}</p>
                         <h4 className="price">${props.currentProduct.price}</h4>
-                        <a className="button" href="#">Add to cart</a>
+                        <a onClick={props.addToCartOnClick} className="button">Add to cart</a>
                     </div>
                 </div>
                 <div className="sing-product-reviews">

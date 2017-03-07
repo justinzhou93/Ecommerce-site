@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import UserProfile from '../components/UserProfile';
-import {addNewCreditCard} from '../action-creators/users';
 
 export class UserProfileContainer extends React.Component {
     constructor(props) {
@@ -17,7 +16,6 @@ export class UserProfileContainer extends React.Component {
         this.handleCardFormClick = this.handleCardFormClick.bind(this);
         this.handleReviewsClick = this.handleReviewsClick.bind(this);
         this.handleCardsClick = this.handleCardsClick.bind(this);
-        this.handleAddCardSubmit = this.handleAddCardSubmit.bind(this);
     }
 
     handleAddressClick(evt) {
@@ -38,15 +36,6 @@ export class UserProfileContainer extends React.Component {
         else this.setState({reviewsOpen: true});
     }
 
-    handleAddCardSubmit(evt) {
-        evt.preventDefault();
-        const cardInfo = {
-            //need to add card Info form data after route has been made
-        }
-        this.props.addNewCreditCart(this.props.currentUser.id, cardInfo);
-        this.setState({creditCardFormOpen: false})
-    }
-
     handleCardsClick(evt) {
         evt.preventDefault();
         if (this.state.cardsOpen) this.setState({cardsOpen: false});
@@ -64,7 +53,6 @@ export class UserProfileContainer extends React.Component {
                 handleCardsClick={this.handleCardsClick}
                 handleCardFormClick={this.handleCardFormClick}
                 handleReviewsClick={this.handleReviewsClick}
-                handleAddCardSubmit={this.handleAddCardSubmit}
             />
         )
     }
@@ -76,10 +64,4 @@ const mapStateToProps = state => {
     };
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addNewCreditCard: (userId, cardInfo) => {dispatch(addNewCreditCard(userId, cardInfo))}
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfileContainer);
+export default connect(mapStateToProps)(UserProfileContainer);

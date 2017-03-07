@@ -8,7 +8,7 @@ import { logout } from '../action-creators/auth';
 import { loadModal } from '../action-creators/modals';
 
 /** Modal Type Constant */
-import { LOGIN_MODAL, SIGNUP_MODAL } from '../modals/modaltypes';
+import { LOGIN_MODAL, SIGNUP_MODAL, CART_MODAL } from '../modals/modaltypes';
 
 export class NavBarContainer extends React.Component {
     constructor(props) {
@@ -16,6 +16,7 @@ export class NavBarContainer extends React.Component {
 
         this.showLoginMenu = this.showLoginMenu.bind(this);
         this.showSignupMenu = this.showSignupMenu.bind(this);
+        this.showCart = this.showCart.bind(this);
     }
 
     showLoginMenu() {
@@ -26,9 +27,14 @@ export class NavBarContainer extends React.Component {
         this.props.loadModal(SIGNUP_MODAL);
     }
 
+    showCart() {
+        this.props.loadModal(CART_MODAL);
+    }
+
     render() {
         return (
             <NavBar
+                showCart={this.showCart}
                 showLoginMenu={this.showLoginMenu}
                 showSignupMenu={this.showSignupMenu}
                 loggingOut={this.props.loggingOut}
@@ -46,7 +52,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadModal: modelType => dispatch(loadModal(modelType)),
+        loadModal: (modelType, payload) => dispatch(loadModal(modelType, payload)),
         loggingOut: () => dispatch(logout())
     };
 };

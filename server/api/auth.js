@@ -13,6 +13,7 @@ const Review = require('APP/db/models/review');
 const Order = require('APP/db/models/order');
 const OAuth = require('APP/db/models/oauth');
 const LineItem = require('APP/db/models/lineitem');
+const Product = require('APP/db/models/product');
 
 /*************************
  * Auth strategies
@@ -94,7 +95,8 @@ passport.deserializeUser(
         {model: Address},
         {model: CreditCard},
         {model: Review},
-        {model: Order, include: [{model: LineItem}]}
+        {model: Order, include: [{model: LineItem}]},
+        {model: LineItem, where: {status: 'Cart'}, required: false, include:[{model: Product}]}
       ]
     })
       .then(user => {
@@ -146,7 +148,8 @@ auth.post('/signup/local', (req, res, next) => {
           {model: Address},
           {model: CreditCard},
           {model: Review},
-          {model: Order, include: [{model: LineItem}]}
+          {model: Order, include: [{model: LineItem}]},
+          {model: LineItem, where: {status: 'Cart'}}
         ]
       }).then((foundUser) => {
         res.status(202).json(foundUser);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router';
+import {loadLoggedInUser} from './auth';
 
 /** Constants */
 export const SET_PRODUCT_LIST = 'SET_PRODUCT_LIST';
@@ -34,7 +35,8 @@ export const loadAllProducts = () => {
     return dispatch => {
         axios.get('/api/products')
             .then((res => res.data))
-            .then(products => dispatch(settingProductList(products)));
+            .then(products => dispatch(settingProductList(products)))
+            .then(() => dispatch(loadLoggedInUser()));
     };
 };
 

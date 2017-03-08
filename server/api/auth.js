@@ -96,7 +96,7 @@ passport.deserializeUser(
         {model: CreditCard},
         {model: Review},
         {model: Order, include: [{model: LineItem}]},
-        {model: LineItem, where: {status: 'Cart'}, required: false, include:[{model: Product}]}
+        {model: LineItem, where: {status: 'Cart'}, required: false, include: [{model: Product}]}
       ]
     })
       .then(user => {

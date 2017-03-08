@@ -12,8 +12,8 @@ router.param('id', (req, res, next, id) => {
             id: id
         },
         include: [
-            {model: Category, as: 'categories'},
-            {model: Review, as: 'reviews'}
+            {model: Category},
+            {model: Review}
         ]
     })
     .then(product => {
@@ -26,7 +26,6 @@ router.param('id', (req, res, next, id) => {
             next()
         }
     })
-    .catch(next);
 })
 
 // find all products in the database, with respective categories and reviews
@@ -46,7 +45,6 @@ router.get('/', (req, res, next) => {
 // for front page, where we want products, categorized by category. finds all categories,
 // eagerly loads the products in that category
 router.get('/categories', (req, res, next) => {
-    console.log('hello');
     Category.findAll({
         include: [
             {model: Product, as: 'products'}
@@ -135,7 +133,9 @@ router.post('/:id/reviews', (req, res, next) => {
       var productAssociation = newReview.setProduct(req.requestedProduct);
         return Promise.all([userAssociation, productAssociation]);
     })
-    .then(() => console.log('upgraded associations'))
+    .then(() => {
+        res.sendStatus(201);
+    })
     .catch(next)
 })
 

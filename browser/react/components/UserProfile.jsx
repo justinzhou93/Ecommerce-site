@@ -122,11 +122,12 @@ export default class UserProfile extends React.Component {
                 {
                     this.props.currentUser.reviews.length ? this.props.currentUser.reviews.map((review) => {
                         return (
-                            <div key={review.id} className="sing-review">
+                            <div key={review.id} className="profile-review">
                                 <h4>{review.title}</h4>
                                 <StarRatingComponent name="boardgame-rating" starCount={5} value={review.rating} />
                                 <h6>{changeDate(review.date)}</h6>
                                 <p>{review.body}</p>
+                                <br />
                                 <span><a onClick={() => this.props.deletingUserReview(review.product_id, review.id)} className="small-link-text">Delete this review</a></span>
                             </div>
                         );

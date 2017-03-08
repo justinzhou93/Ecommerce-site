@@ -21,7 +21,6 @@ class AddProductModal extends React.Component {
 
     addProductSubmit(evt) {
         evt.preventDefault();
-        console.log([evt.target.categories.value])
         const productInfo = {
             title: evt.target.title.value,
             description: evt.target.description.value,

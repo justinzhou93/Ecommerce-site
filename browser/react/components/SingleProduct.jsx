@@ -20,24 +20,30 @@ export default function (props) {
                             <h3 className="sing-product-price">${props.currentProduct.price}</h3>
                             <button onClick={props.addToCartOnClick} className="sing-product-price">Add to cart</button>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div className="reviews-container">
                         <div className="reviews-title-header">
-                            <h3 className="reviews-title-heading">Reviews</h3>
+                            <div className="reviews-header-box" />
+                            <div className="reviews-header-box">
+                                <h3 className="reviews-title-heading">Reviews</h3>
+                            </div>
+                            <div className="reviews-header-box" style={{textAlign: 'right', alignSelf: 'center'}}>
+                                <span><a className="review-add-link" onClick={props.handleAddReviewOnClick}>Add a review!</a></span>
+                            </div>
                         </div>
                         {
                             // Each individual review
-                            productReviews.map(review => {
-                            return (
-                                <div key={review.id} className="sing-review">
-                                    <h4>{review.title}</h4>
-                                    <StarRatingComponent name="boardgame-rating" starCount={5} value={review.rating} />
-                                    <h6>{changeDate(review.date)}</h6>
-                                    <p>{review.body}</p>
-                                </div>
-                            )
-                            })
+                            productReviews.length ? productReviews.map(review => {
+                                return (
+                                    <div key={review.id} className="sing-review">
+                                        <h4>{review.title}</h4>
+                                        <StarRatingComponent name="boardgame-rating" starCount={5} value={review.rating} />
+                                        <h6>{changeDate(review.date)}</h6>
+                                        <p>{review.body}</p>
+                                    </div>
+                                )
+                            }) : <h4 style={{marginTop: '20px', marginBottom: '2em'}}>This product currently has no reviews.</h4>
                         }
                 </div>
             </div>

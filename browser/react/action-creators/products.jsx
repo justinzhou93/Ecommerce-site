@@ -49,6 +49,17 @@ export const loadSingleProduct = (productId) => {
     };
 };
 
+// add review to product review
+export const addProductReview = (productId, reviewData) => {
+    return dispatch => {
+        axios.post(`/api/products/${productId}/reviews`, reviewData)
+            .then(() => {
+                dispatch(loadSingleProduct(productId));
+                dispatch(loadLoggedInUser());
+            })
+    };
+};
+
 /** ADMIN thunks */
 export const addProduct = (productInfo) => {
     return dispatch => {

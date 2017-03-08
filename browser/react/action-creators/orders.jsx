@@ -44,6 +44,6 @@ export const loadAllOrders = () => {
   return dispatch => {
     axios.get('/api/orders')
       .then(res => res.data)
-      .then(orders => dispatch())
-  }
+      .then(orders => dispatch(settingOrderList(orders)))
+  };
 }

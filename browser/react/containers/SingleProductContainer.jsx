@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import { addCartItem } from '../action-creators/users';
 
+import { loadModal } from '../action-creators/modals';
+
+import { ADD_REVIEW_MODAL } from '../modals/modaltypes';
 import SingleProduct from '../components/SingleProduct';
 
 export class SingleProductContainer extends React.Component {
@@ -10,10 +13,17 @@ export class SingleProductContainer extends React.Component {
         super(props);
 
         this.addToCartOnClick = this.addToCartOnClick.bind(this);
+        this.handleAddReviewOnClick = this.handleAddReviewOnClick.bind(this);
     }
 
-    addToCartOnClick() {
+    addToCartOnClick(evt) {
+        evt.preventDefault();
         this.props.addingToCart(this.props.currentUser.id, this.props.currentProduct.id, {quantity: 1, price: this.props.currentProduct.price})
+    }
+
+    handleAddReviewOnClick(evt) {
+        evt.preventDefault();
+        this.props.loadModal(ADD_REVIEW_MODAL, {currentProduct: this.props.currentProduct, currentUser: this.props.currentUser})
     }
 
     render() {
@@ -21,6 +31,7 @@ export class SingleProductContainer extends React.Component {
             <SingleProduct
                 currentProduct={this.props.currentProduct}
                 addToCartOnClick={this.addToCartOnClick}
+                handleAddReviewOnClick={this.handleAddReviewOnClick}
             />
         )
     }
@@ -31,6 +42,11 @@ const mapStateToProps = state => ({
     currentUser: state.auth.currentUser
 });
 
-const mapDispatchToProps = dispatch => ({addingToCart: (userId, productId, productInfo) => dispatch(addCartItem(userId, productId, productInfo))});
+const mapDispatchToProps = dispatch => {
+    return {
+        loadModal: (modelType, payload) => dispatch(loadModal(modelType, payload)),
+        addingToCart: (userId, productId, productInfo) => dispatch(addCartItem(userId, productId, productInfo))
+    }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer);

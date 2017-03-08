@@ -12,7 +12,6 @@ var db = require('APP/db');
 var Order = require('APP/db/models/order');
 
 var LineItem = require('APP/db/models/lineitem');
-var Category = require('APP/db/models/category');
 var Product = require('APP/db/models/product');
 var User = require('APP/db/models/user');
 var Review = require('APP/db/models/review');
@@ -20,7 +19,7 @@ var Promise = require('bluebird');
 
 
 describe('Products Route: ', function(){
-  var category, user, product, review;
+  var user, product, review;
   //clear db before beginning each run
 
   before('waiting for db to sync', () => db.didSync);
@@ -28,8 +27,6 @@ describe('Products Route: ', function(){
   beforeEach(function () {
     return db.sync({force: true})
     .then(()=>{
-
-    category = Category.create({title: "easy"})
 
     product = Product.create({
       title: 'newgame',
@@ -47,13 +44,10 @@ describe('Products Route: ', function(){
       password_digest: 'asdfasfd'
     })
 
-    Promise.all([category, product, user])
-    .spread((newCategory, newProduct, newUser) => {
-
-      category = newCategory
+    Promise.all([product, user])
+    .spread((newProduct, newUser) => {
       product = newProduct
       user = newUser
-      newProduct.setCategories(newCategory)
       return LineItem.create({
         quantity: 2,
         user_id: newUser.id,
@@ -74,18 +68,6 @@ describe('Products Route: ', function(){
 
   })
   });
-
-  // empty tables after each spec
-  // afterEach(function () {
-  //   return Promise.all([
-  //     Order.truncate({ cascade: true }),
-  //     LineItem.truncate({ cascade: true }),
-  //     Category.truncate({cascade: true}),
-  //     User.truncate({cascade: true}),
-  //     Product.truncate({cascade: true})
-  //   ]);
-  // });
-
 
   describe('PRODUCTS', function(){
       describe('GET /products', function(){
@@ -123,8 +105,7 @@ describe('Products Route: ', function(){
             description: 'another description',
             price: 12,
             inventory: 20,
-            imgUrl: 'www.espn.com',
-            categories: [category.id]
+            imgUrl: 'www.espn.com'
           })
           .expect(200)
           .end(function (err, res) {
@@ -171,74 +152,6 @@ describe('Products Route: ', function(){
           });
         })
       })
-  })
-
-  describe('CATEGORIES', function(){
-      describe('GET /products/categories', function(){
-        it('returns all categories in db', function () {
-          agent
-          .get('/products/categories')
-          .expect(200)
-          .expect(function (res) {
-            expect(res.body).to.be.an.instanceOf(Array);
-            expect(res.body[0].title).to.equal('easy');
-          })
-        })
-      });
-
-      describe('GET /products/categories/:categoryId', function(){
-        it('returns category, given id', function () {
-          agent
-          .get(`/products/categories/${category.id}`)
-          .expect(200)
-          .expect(function (res) {
-            expect(res.body.title).to.equal('easy');
-          })
-        });
-
-      });
-
-      describe('POST /products/categories/:categoryId', function(){
-        it('posts category given id', function () {
-          agent
-          .post(`/products/categories/${product.id}`)
-          .send({
-            title: 'medium'
-          })
-          .expect(200)
-          .end(function (err, res) {
-            if (err) return done(err);
-            expect(res.body.title).to.equal('medium');
-            Category.findOne({where:{title:'medium'}})
-            .then(function (b) {
-              expect(b).to.not.be.null;
-              done();
-            })
-            .catch(done);
-          });
-        });
-      });
-
-      describe('PUT /products/categories/:categoryId', function(){
-        it('updates category given id', function () {
-          agent
-          .put(`/products/categories/${category.id}`)
-          .send({
-            title: 'medium-hard'
-          })
-          .expect(201)
-          .end(function (err, res) {
-            if (err) return done(err);
-            expect(res.body.title).to.equal('medium-hard');
-            Category.findById(category.id)
-            .then(function (b) {
-              expect(b).to.not.be.null;
-              done();
-            })
-            .catch(done);
-          });
-        });
-      });
   })
 
   describe('REVIEWS', function(){

@@ -26,28 +26,4 @@ describe('Order model', function() {
       expect(order.status).to.equal('Created');
     });
   });
-
-  describe('associations', () => {
-    it('belongs to a user', () => {
-
-      let creatingUser = User.create({
-        firstName: 'Ben',
-        lastName: 'Gu',
-        email: 'test@test.com',
-        isAdmin: false
-      })
-      let creatingOrders = Order.create({
-        status: 'Created',
-        totalPrice: 20
-      })
-
-      return Promise.all([creatingUser, creatingOrders])
-        .spread((createdUser, createdOrder) => {
-          return createdOrder.setUser(createdUser)
-        })
-        .then(foundOrder => {
-          expect(foundOrder.user_id).to.exist;
-        })
-    })
-  })
 });

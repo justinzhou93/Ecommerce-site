@@ -49,6 +49,13 @@ class CartModal extends React.Component {
 
     renderCart() {
         const userCart = this.props.currentUser.lineitems;
+        const cartTotal = (cart) => {
+            let total = 0;
+            cart.forEach((item) => {
+                total += +item.price;
+            })
+            return total;
+        };
         return (
             <div>
                 {
@@ -63,6 +70,15 @@ class CartModal extends React.Component {
                         )
                     })
                 }
+                <div className="cart-total-box">
+                    <div className="cart-total">
+                        <b>Total cart price: </b>
+                    </div>
+                    <text className="cart-total">${cartTotal(userCart)}</text>
+                    <div className="cart-total">
+                        <button type="submit" className="btn btn-success">Proceed to Checkout!</button>
+                    </div>
+                </div>
             </div>
         )
     }

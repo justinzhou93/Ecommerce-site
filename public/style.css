@@ -22,6 +22,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	border-bottom: 1px solid black;
 }
 
+.cart-product-img-box {
+	display: flex;
+	width: 20%;
+	height: 10%;
+	align-self: center;
+}
+
+.cart-product-inv {
+	width: 20%;
+	text-align: center;
+}
+
+.cart-product-price {
+	width: 20%;
+	text-align: center;
+}
+
+.cart-links {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: 20%;
+}
+
 .cart-items-box {
 	display: flex;
 	flex-direction: row;
@@ -31,6 +56,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	border-bottom: 1px solid #e5e5e5;
 	width: auto;
 	justify-content: space-between;
+}
+
+.cart-total-box {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	width: auto;
+}
+
+.cart-total {
+	margin: 2em 2em 2em 2em;
 }
 
 /* --------- ADMIN PRODUCTS ---- */
@@ -398,10 +434,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	flex-direction: row;
 	width: auto;
 	justify-content: center;
+	align-items: center;
 }
 
 .sing-product-price {
-	margin: 1em;
+	margin-right: 1em;
 }
 
 .sing-product-reviews {

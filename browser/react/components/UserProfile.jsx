@@ -77,7 +77,7 @@ export default class UserProfile extends React.Component {
                                 <span><a onClick={() => this.props.deletingAddress(this.props.currentUser.id, address.id)} className="small-link-text">Delete</a></span>
                             </address>
                         );
-                    }) : <h5 style={{marginTop: '10px'}}>You currently have no credit cards!</h5>
+                    }) : <h5 style={{marginTop: '10px'}}>Your address book is empty!</h5>
                 }
             </div>
         );

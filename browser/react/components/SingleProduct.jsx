@@ -17,8 +17,8 @@ export default function (props) {
                             <p>{props.currentProduct.description}</p>
                         </div>
                         <div className="sing-product-cart">
-                            <h3 className="sing-product-price">${props.currentProduct.price}</h3>
-                            <button onClick={props.addToCartOnClick} className="sing-product-price">Add to cart</button>
+                            <b className="sing-product-price" style={{fontSize: '20px'}}>${props.currentProduct.price}</b>
+                            <button onClick={props.addToCartOnClick} type="button" className="btn btn-primary" style={{borderRadius: '4px'}}>Add to cart</button>
                         </div>
                     </div>
                 </div>

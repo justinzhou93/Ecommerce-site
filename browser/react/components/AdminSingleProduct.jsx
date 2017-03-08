@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import { DELETE_WARNING_MODAL, EDIT_PRODUCT_MODAL } from '../modals/modaltypes';
 
@@ -25,8 +26,8 @@ export default class AdminSingleProduct extends React.Component {
                     <img src={this.props.product.imgUrl} className="admin-product-img" />
                 </div>
                 <div className="admin-product-title">
-                    <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>{this.props.product.title}
-                    </h4>
+                    <Link to={`/products/${this.props.product.id}`} style={{fontWeight: 'bold', marginBottom: '0'}}>{this.props.product.title}
+                    </Link>
                 </div>
                 <div className="admin-product-desc">
                     <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>Product Description</h4>

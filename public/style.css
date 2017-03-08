@@ -172,6 +172,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	justify-content: center;
 }
 
+.add-button-box {
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+}
+
 /* ------------ ALL ORDERS ---------------- */
 
 .order-items {
@@ -230,7 +236,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	padding: 10px;
 	border: 1px solid grey;
 	border-radius: 4px;
-	width: 800px;
+	width: 70%;
 	max-width: 800px;
 	margin-bottom: 20px;
 }
@@ -242,10 +248,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	margin: 10px;
 }
 
+.profile-review-items {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+	width: 100%;
+}
+
+.profile-review-header {
+	font-size: 21px;
+}
+
+.profile-review {
+	border-top: 1px solid #e5e5e5;
+	padding: 20px;
+	margin: 1em 2em 0em 2em;
+}
+
 .managed-items {
 	padding-left: 10px;
 	margin-top: 10px;
 	border-bottom: 1px solid #e5e5e5;
+}
+
+.credit-card-box {
+	display: flex;
+	flex-direction: row;
+}
+
+.credit-card-headers {
+	font-weight: bold;
+	margin-right: 10px;
+	width: 30%;
+}
+
+.credit-card-info {
+	width: 50%;
 }
 
 .small-link-text {
@@ -264,7 +302,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 .products-container {
 	display: flex;
 	flex-flow: row wrap;
-	margin: 0 2em 2em 2em;
+	margin: 0 10em 2em 10em;
 	justify-content: space-around;
 	padding: 20px;
 	border-top: 1px solid black;
@@ -275,7 +313,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	margin-left: 4em;
+	margin-left: 20em;
 	padding-top: 20px;
 	width: 100%;
 }
@@ -284,7 +322,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   padding: 15px;
   display: flex;
   flex-direction: column;
-  width: 16%;
+  width: 20%;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -318,29 +356,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 /* ------------ SINGLE PRODUCT -------------- */
 .sing-product-container {
 	display: flex;
-	flex-direction: column;
+	margin: 2em 10em 2em 10em;
+	justify-content: space-around;
+	padding: 20px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
 .sing-product-img-container {
 	display: flex;
-	flex-direction: row;
-	width: auto;
+	align-items: center;
+	align-self: center;
+	width: 40%;
+	padding: 20px;
+	margin: 2em;
 }
 
 .sing-product-img {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	width: 60%;
+	width: 300px;
 	padding: 20px;
 }
 
-.sing-product-desc {
+.sing-product-desc-box {
 	display:flex;
 	flex-direction: column;
+	width: 60%;
 	justify-content: center;
-	width: 40%;
+}
+
+.sing-product-desc {
+	border-bottom: 1px solid #e5e5e5;
 	padding: 20px;
+	margin: 2em;
+}
+
+.sing-product-cart {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+	justify-content: center;
+}
+
+.sing-product-price {
+	margin: 1em;
 }
 
 .sing-product-reviews {
@@ -350,6 +411,46 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   margin: 10px;
   align-items: center;
 }
+
+.sing-review {
+	border-top: 1px solid #e5e5e5;
+	padding: 20px;
+	margin: 1em 2em 0em 2em;
+	width: 100%;
+}
+
+.reviews-container {
+	display: flex;
+	flex-direction: column;
+	margin: 2em 10em 2em 10em;
+	justify-content: space-around;
+	padding: 20px;
+	border-bottom: 1px solid black;
+	align-items: center;
+}
+
+.reviews-title-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.reviews-header-box {
+	width: 33%;
+	justify-content: center;
+}
+
+.reviews-title-heading {
+  font-size: 30px;
+}
+
+.review-add-link {
+	font-size: 18px;
+}
+
+
+/* ------------------------------------ */
 
 h4, h5, h6,
 h1, h2, h3 {margin-top: 0;}
@@ -713,20 +814,3 @@ span.m_1 {
     border-radius: 4px;
 }
 
-.reviews {
-		padding: 20px 10px 0px 10px;
-		margin: 3% 10% 3% 10%;
-		float:left;
-		display: inline-block
-}
-
-.reviews-title {
-  font-size: 21px;
-  width: 50%;
-  justify-content: center;
-}
-
-.reviews-title-heading {
-  font-size: 42px;
-  text-decoration: underline;
-}

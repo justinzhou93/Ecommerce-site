@@ -24,7 +24,6 @@ export class AddAddressContainer extends React.Component {
     render() {
         return (
             <AddAddress
-                currentUser={this.props.currentUser}
                 handleAddressSubmit={this.handleAddressSubmit}
             />
         );

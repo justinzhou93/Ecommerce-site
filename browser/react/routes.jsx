@@ -16,12 +16,12 @@ import AddAddressContainer from './containers/AddAddressContainer';
 import EditReviewContainer from './containers/EditReviewContainer';
 
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
-import {loadSingleOrder} from './action-creators/orders';
-import { getUserCart } from './action-creators/users';
+import {loadSingleOrder, loadAllOrders} from './action-creators/orders';
+import { loadLoggedInUser } from './action-creators/auth';
 
 /* -----------------     COMPONENT ROUTES     ------------------ */
 
-export function Root ({fetchProducts, fetchSingleProduct}) {
+export function Root ({fetchProducts, fetchSingleProduct, fetchAllOrders, fetchCurrentUser}) {
   return (
     <Router history={browserHistory} >
       <Route path="/" component={App} onEnter={fetchProducts}>
@@ -29,9 +29,9 @@ export function Root ({fetchProducts, fetchSingleProduct}) {
         <Route path="products" component={AllProductsContainer} onEnter={fetchProducts} />
         <Route path="products/:productId" component={SingleProductContainer} onEnter={fetchSingleProduct} />
 
-        <Route path="orders" component={AllOrdersContainer} />
+        <Route path="orders" component={AllOrdersContainer} onEnter={fetchAllOrders} />
 
-        <Route path="user" component={UserProfileContainer} />
+        <Route path="user" component={UserProfileContainer} onEnter={fetchCurrentUser} />
         <Route path="address/add" component={AddAddressContainer} />
 
         {/*<Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {GetCartFromServer} />*/}
@@ -48,9 +48,11 @@ export function Root ({fetchProducts, fetchSingleProduct}) {
 /* -----------------    CONTAINER/ONENTER HOOKS    ------------------ */
 
 const mapDispatchToProps = dispatch => ({
+  fetchCurrentUser: () => dispatch(loadLoggedInUser()),
   fetchProducts: () => dispatch(loadAllProducts()),
   fetchSingleProduct: nextRouterState => dispatch(loadSingleProduct(nextRouterState.params.productId)),
-  fetchSingleOrder: nextRouterState => dispatch(loadSingleOrder(nextRouterState.params.orderid))
+  fetchSingleOrder: nextRouterState => dispatch(loadSingleOrder(nextRouterState.params.orderid)),
+  fetchAllOrders: () => dispatch(loadAllOrders())
 });
 
 export default connect(null, mapDispatchToProps)(Root);

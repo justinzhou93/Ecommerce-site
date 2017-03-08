@@ -38,3 +38,11 @@ export const loadSingleOrder = (orderId) => {
         .then(order => dispatch(setSingleOrder(order)));
   };
 };
+
+// new action-thunk-creator that makes an axios call to make a post request to users/:id/orders
+export const submitNewOrder = (userid, order) => {
+  return (dispatch) => {
+    axios.post(`/api/users/${userid}/orders`, order)
+        .then(() => dispatch(loadSingleOrder));
+  }
+}

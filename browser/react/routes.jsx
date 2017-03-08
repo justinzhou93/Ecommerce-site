@@ -14,6 +14,7 @@ import UserProfileContainer from './containers/UserProfileContainer';
 
 import AddAddressContainer from './containers/AddAddressContainer';
 import EditReviewContainer from './containers/EditReviewContainer';
+import CartCheckOutContainer from './containers/CartCheckOutContainer';
 
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
 import {loadSingleOrder} from './action-creators/orders';
@@ -33,7 +34,7 @@ export function Root ({fetchProducts, fetchSingleProduct}) {
 
         <Route path="user" component={UserProfileContainer} />
         <Route path="address/add" component={AddAddressContainer} />
-
+        <Route path="checkout" component={CartCheckOutContainer}/>
         {/*<Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {GetCartFromServer} />*/}
         {/*<Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />*/}
         {/*ADMIN ROUTES*/}

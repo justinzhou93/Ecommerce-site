@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { submitNewOrder } from '../action-creators/orders'
 
 import Checkout from '../components/Checkout';
 
@@ -12,16 +13,22 @@ export class CheckoutContainer extends React.Component {
         this.selectAddressSubmit = this.selectAddressSubmit.bind(this);
     }
 
+    // NOTE: event handlers for the cart checkout container
     submitOrder(evt) {
       evt.preventDefault();
+      submitNewOrder(this.props.user.id)
     }
 
     selectCardSubmit(evt) {
       evt.preventDefault();
+      this.props.user.card = evt.target.card
+      this.setState({user: this.props.user})
     }
 
     selectAddressSubmit(evt) {
       evt.preventDefault();
+      this.props.user.address = evt.target.address;
+      this.setState({user: this.props.user})
     }
 
     render() {

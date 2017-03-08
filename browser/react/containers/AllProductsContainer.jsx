@@ -24,7 +24,7 @@ export class AllProductsContainer extends React.Component {
         const filteredProducts = this.props.productList.filter(product => product.title.toLowerCase().match(this.state.inputValue));
         return (
             this.props.currentUser && this.props.currentUser.isAdmin ?
-                <AdminProductsContainer productList={this.props.productList} /> :
+                <AdminProductsContainer productList={filteredProducts} /> :
                 <AllProducts
                     currentUser={this.props.currentUser}
                     productList={filteredProducts}

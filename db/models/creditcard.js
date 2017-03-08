@@ -3,7 +3,7 @@ const db = require('APP/db');
 
 const CreditCard = db.define('credit_cards', {
   number: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   name: {
@@ -11,15 +11,15 @@ const CreditCard = db.define('credit_cards', {
   	allowNull: false
   },
   month: {
-  	type: Sequelize.INTEGER,
+  	type: Sequelize.STRING,
   	allowNull: false
   },
   year: {
-  	type: Sequelize.INTEGER,
+  	type: Sequelize.STRING,
   	allowNull: false
   },
   CCV: {
-  	type: Sequelize.INTEGER,
+  	type: Sequelize.STRING,
   	allowNull: false
   }
 });

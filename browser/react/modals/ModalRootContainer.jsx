@@ -7,10 +7,11 @@ import LoginModal from './LoginModal';
 import AddProductModal from './AddProductModal';
 import DeleteWarningModal from './DeleteWarningModal';
 import EditProductModal from './EditProductModal';
+import AddReviewModal from './AddReviewModal';
 import CartModal from './CartModal';
 
 /** Modal Type Constants */
-import { LOGIN_MODAL, SIGNUP_MODAL, ADD_PRODUCT_MODAL, DELETE_WARNING_MODAL, EDIT_PRODUCT_MODAL, CART_MODAL } from './modaltypes';
+import { LOGIN_MODAL, SIGNUP_MODAL, ADD_PRODUCT_MODAL, DELETE_WARNING_MODAL, EDIT_PRODUCT_MODAL, CART_MODAL, ADD_REVIEW_MODAL } from './modaltypes';
 
 
 const MODAL_COMPONENTS = {
@@ -19,7 +20,8 @@ const MODAL_COMPONENTS = {
     ADD_PRODUCT_MODAL: AddProductModal,
     DELETE_WARNING_MODAL: DeleteWarningModal,
     EDIT_PRODUCT_MODAL: EditProductModal,
-    CART_MODAL: CartModal
+    CART_MODAL: CartModal,
+    ADD_REVIEW_MODAL: AddReviewModal
 };
 
 const ModalContainer = (props) => {

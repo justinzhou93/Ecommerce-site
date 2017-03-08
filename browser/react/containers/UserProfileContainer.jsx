@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import UserProfile from '../components/UserProfile';
+import { deleteAddress, deleteCreditCard, deleteUserReview } from '../action-creators/users';
 
 export class UserProfileContainer extends React.Component {
     constructor(props) {
@@ -53,6 +54,9 @@ export class UserProfileContainer extends React.Component {
                 handleCardsClick={this.handleCardsClick}
                 handleCardFormClick={this.handleCardFormClick}
                 handleReviewsClick={this.handleReviewsClick}
+                deletingAddress={this.props.deletingAddress}
+                deletingCreditCard={this.props.deletingCreditCard}
+                deletingUserReview={this.props.deletingUserReview}
             />
         )
     }
@@ -64,4 +68,12 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(UserProfileContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        deletingAddress: (userId, addressId) => {dispatch(deleteAddress(userId, addressId))},
+        deletingCreditCard: (userId, creditId) => {dispatch(deleteCreditCard(userId, creditId))},
+        deletingUserReview: (productId, reviewId) => {dispatch(deleteUserReview(productId, reviewId))}
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfileContainer);

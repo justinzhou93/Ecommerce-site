@@ -17,6 +17,7 @@ export class AllOrdersContainer extends React.Component {
         return (
             <AllOrders
                 currentUser={this.props.currentUser}
+                orderList={this.props.orderList}
             />
         );
     }
@@ -24,7 +25,8 @@ export class AllOrdersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.auth.currentUser
+        currentUser: state.auth.currentUser,
+        orderList: state.orders.orderList
     }
 }
 

@@ -8,7 +8,7 @@ const LineItem = db.define('lineitems', {
         type: Sequelize.INTEGER
     },
     price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
     },
     status: {
         type: Sequelize.ENUM('Cart', 'Purchased')
@@ -73,7 +73,7 @@ const LineItem = db.define('lineitems', {
     },
     getterMethods: {
         totalPrice: function () {
-            return this.quantity * this.price;
+            return this.quantity * +this.price;
         }
     },
     scopes: {

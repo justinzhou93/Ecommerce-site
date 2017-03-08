@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitNewOrder } from '../action-creators/orders'
-
 import Checkout from '../components/Checkout';
+import { submitNewOrder } from '../action-creators/orders'
 
 export class CheckoutContainer extends React.Component {
     constructor(props) {
         super(props);
-
         this.submitOrder = this.submitOrder.bind(this);
         this.selectCardSubmit = this.selectCardSubmit.bind(this);
         this.selectAddressSubmit = this.selectAddressSubmit.bind(this);
@@ -49,4 +47,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(UserProfileContainer);
+export default connect(mapStateToProps)(CheckoutContainer);

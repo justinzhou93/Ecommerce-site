@@ -46,3 +46,12 @@ export const submitNewOrder = (userid, order) => {
         .then(() => dispatch(loadSingleOrder));
   }
 }
+
+// ADMIN loadAllUserOrders
+export const loadAllOrders = () => {
+  return dispatch => {
+    axios.get('/api/orders')
+      .then(res => res.data)
+      .then(orders => dispatch(settingOrderList(orders)))
+  };
+}

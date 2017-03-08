@@ -27,8 +27,26 @@ export const addNewCreditCard = (userId, cardInfo) => dispatch => {
     .catch(() => dispatch(loadLoggedInUser()))
 };
 
+export const deleteCreditCard = (userId, cardId) => dispatch => {
+  axios.delete(`/api/users/${userId}/creditcard/${cardId}`)
+    .then(() => {
+      dispatch(loadLoggedInUser());
+      browserHistory.push('/user');
+    })
+    .catch(() => dispatch(loadLoggedInUser()))
+}
+
 export const addNewAddress = (userId, addressInfo) => dispatch => {
   axios.post(`/api/users/${userId}/address`, addressInfo)
+    .then(() => {
+      dispatch(loadLoggedInUser());
+      browserHistory.push('/user');
+    })
+    .catch(() => dispatch(loadLoggedInUser()))
+};
+
+export const deleteAddress = (userId, addressId) => dispatch => {
+  axios.delete(`/api/users/${userId}/address/${addressId}`)
     .then(() => {
       dispatch(loadLoggedInUser());
       browserHistory.push('/user');
@@ -42,11 +60,20 @@ export const addCartItem = (userId, productId, productInfo) => dispatch => {
       dispatch(loadLoggedInUser());
     })
     .catch(() => dispatch(loadLoggedInUser()))
-}
+};
 
 export const removeCartItem = (userId, itemId) => dispatch => {
   axios.delete(`/api/users/${userId}/cart/${itemId}`)
     .then(() => dispatch(loadLoggedInUser()))
+    .catch(() => dispatch(loadLoggedInUser()))
+};
+
+export const deleteUserReview = (productId, reviewId) => dispatch => {
+  axios.delete(`/api/products/${productId}/reviews/${reviewId}`)
+    .then(() => {
+      dispatch(loadLoggedInUser());
+      browserHistory.push('/user');
+    })
     .catch(() => dispatch(loadLoggedInUser()))
 };
 

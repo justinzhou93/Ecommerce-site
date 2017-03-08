@@ -63,7 +63,7 @@ export default function (props) {
                                 className="input-xlarge address-input"
                             />
                         </div>
-                        <div className="control-group">
+                        <div className="add-button-box">
                             <button type="submit" className="btn btn-success">Add Address</button>
                         </div>
                     </form>

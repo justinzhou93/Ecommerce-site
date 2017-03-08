@@ -10,7 +10,6 @@ const CreditCard = require('./creditcard');
 const Address = require('./address');
 const Product = require('./product');
 const Review = require('./review');
-const Category = require('./category');
 const LineItem = require('./lineitem');
 const Order = require('./order');
 
@@ -27,12 +26,10 @@ CreditCard.belongsTo(User);
 Review.belongsTo(Product);
 Product.hasMany(Review, {onDelete: 'cascade', hooks: true});
 Review.belongsTo(User);
-Product.belongsToMany(Category, {through: 'ProductCategory', onDelete: 'cascade', hooks: true});
-Category.belongsToMany(Product, {through: 'ProductCategory'});
 Order.belongsTo(User);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Order);
 LineItem.belongsTo(Product);
 LineItem.belongsTo(User);
 
-module.exports = {User, CreditCard, Address, Product, Review, Category, LineItem, Order};
+module.exports = {User, CreditCard, Address, Product, Review, LineItem, Order};

@@ -50,7 +50,6 @@ var agent = request.agent(app);
 var db = require('APP/db');
 var Order = require('APP/db/models/order');
 var LineItem = require('APP/db/models/lineitem');
-var Category = require('APP/db/models/category');
 var Product = require('APP/db/models/product');
 var User = require('APP/db/models/user');
 var Review = require('APP/db/models/review');
@@ -59,7 +58,7 @@ var CreditCard = require('APP/db/models/creditcard');
 var Promise = require('bluebird');
 
 describe('Users Route: ', function(){
-  var category, user, product, review, lineitem, address, creditcard;
+  var user, product, review, lineitem, address, creditcard;
   //clear db before beginning each run
 
   before('waiting for db to sync', () => db.didSync);
@@ -67,8 +66,6 @@ describe('Users Route: ', function(){
   beforeEach(function () {
     return db.sync({force: true})
     .then(() => {
-
-    category = Category.create({title: "easy"})
 
     product = Product.create({
       title: 'newgame',
@@ -86,8 +83,8 @@ describe('Users Route: ', function(){
       password_digest: 'asdfasfd'
     })
 
-    Promise.all([category, product, user])
-    .spread((newCategory, newProduct, newUser) => {
+    Promise.all([product, user])
+    .spread((newProduct, newUser) => {
       return LineItem.create({
         quantity: 2,
         user_id: user.id,

@@ -39,8 +39,11 @@ export const signup = (credentials) => {
     return dispatch => {
         axios.post('/api/auth/signup/local', credentials)
             .then(res => res.data)
-            .then(user => dispatch(setCurrentUser(user)))
-            .then(() => browserHistory.push('/'))
+            .then(() => {
+                const username = credentials.email;
+                const password = credentials.password;
+                dispatch(localLogin({username, password}))
+            })
             .catch(() => dispatch(setCurrentUser(null)))
     }
 };

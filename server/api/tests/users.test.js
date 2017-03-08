@@ -1,45 +1,3 @@
-// 'use strict'; // eslint-disable-line semi
-/*eslint-disable*/
-
-// const request = require('supertest-as-promised')
-// const {expect} = require('chai')
-// require('APP/db')
-// require('APP/db/models/user')
-// const app = require('../../start')
-
-// describe('/api/users', () => {
-//   describe('when not logged in', () => {
-//     it('GET /:id fails 401 (Unauthorized)', () =>
-//       request(app)
-//         .get(`/api/users/1`)
-//         .expect(401)
-//     )
-
-//     it('POST creates a user', () =>
-//       request(app)
-//         .post('/api/users')
-//         .send({
-//           email: 'beth@secrets.org',
-//           password: '12345'
-//         })
-//         .expect(201)
-//     )
-
-//     it('POST redirects to the user it just made', () =>
-//       request(app)
-//         .post('/api/users')
-//         .send({
-//           email: 'eve@interloper.com',
-//           password: '23456',
-//         })
-//         .redirects(1)
-//         .then(res => expect(res.body).to.contain({
-//           email: 'eve@interloper.com'
-//         }))
-//     )
-//   })
-// })
-
 'use strict';
 /*eslint-disable*/
 var expect = require('chai').expect;
@@ -119,17 +77,6 @@ describe('Users Route: ', function(){
 
   })
   });
-
-  // empty tables after each spec
-  // afterEach(function () {
-  //   return Promise.all([
-  //     Order.truncate({ cascade: true }),
-  //     LineItem.truncate({ cascade: true }),
-  //     Category.truncate({cascade: true}),
-  //     User.truncate({cascade: true}),
-  //     Product.truncate({cascade: true})
-  //   ]);
-  // });
 
   describe('USERS', function(){
       describe('GET /users', function(){

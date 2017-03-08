@@ -8,13 +8,12 @@ var agent = supertest.agent(app);
 var db = require('APP/db');
 var Order = require('APP/db/models/order');
 var LineItem = require('APP/db/models/lineitem');
-var Category = require('APP/db/models/category');
 var Product = require('APP/db/models/product');
 var User = require('APP/db/models/user');
 var Promise = require('bluebird');
 
 describe('Orders Route: ', function(){
-  var category, user, product;
+  var user, product;
   //clear db before beginning each run
 
   before('waiting for db to sync', () => db.didSync);
@@ -23,7 +22,6 @@ describe('Orders Route: ', function(){
     return db.sync({force: true})
     .then(() => {
 
-      category = Category.create({title:"easy"})
       product = Product.create({
         title: 'newgame',
         description: 'some description',
@@ -40,9 +38,8 @@ describe('Orders Route: ', function(){
         password_digest: 'asdfasfd'
       })
 
-      Promise.all([category, product, user])
-      .spread((newCategory, newProduct, newUser) => {
-        // newProduct.setCategories(newCategory)
+      Promise.all([product, user])
+      .spread((newProduct, newUser) => {
         return LineItem.create({
           quantity: 2,
           user_id: newUser.id,
@@ -52,17 +49,6 @@ describe('Orders Route: ', function(){
       })
     })
 });
-
-  // empty tables after each spec
-  // afterEach(function () {
-  //   return Promise.all([
-  //     Order.truncate({ cascade: true }),
-  //     LineItem.truncate({ cascade: true }),
-  //     Category.truncate({cascade: true}),
-  //     User.truncate({cascade: true}),
-  //     Product.truncate({cascade: true})
-  //   ]);
-  // });
 
   describe('GET /orders', function(){
     it('returns all orders in db', function () {

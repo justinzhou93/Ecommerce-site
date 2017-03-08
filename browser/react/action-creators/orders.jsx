@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { loadLoggedInUser } from './auth';
+
 /* -----------------    CONSTANTS    ------------------ */
 export const SET_ORDER_LIST = 'SET_ORDER_LIST';
 export const SET_SINGLE_ORDER = 'SET_SINGLE_ORDER';
@@ -40,11 +42,11 @@ export const loadSingleOrder = (orderId) => {
 };
 
 // new action-thunk-creator that makes an axios call to make a post request to users/:id/orders
-export const submitNewOrder = (userid, order) => {
+export const submitNewOrder = (userid) => {
   return (dispatch) => {
-    axios.post(`/api/users/${userid}/orders`, order)
-        .then(() => dispatch(loadSingleOrder));
-  }
+    axios.post(`/api/users/${userid}/orders`)
+        .then(() => dispatch(loadLoggedInUser()))
+  };
 }
 
 // ADMIN loadAllUserOrders

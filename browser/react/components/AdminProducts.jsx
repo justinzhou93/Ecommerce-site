@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 import AdminSingleProduct from './AdminSingleProduct';
 
@@ -8,7 +7,7 @@ export default function (props) {
         <div className="flex-container">
             <div className="admin-products-header">
                 <h2 className="my-account-text">Current Product List</h2>
-                <button onClick={props.showAddProductModal} className="admin-add-product">Add Product</button>
+                <a onClick={props.showAddProductModal} className="admin-add-product">Add Product</a>
             </div>
             <div className="admin-products-list">
                 {props.productList && props.productList.map((product) => {

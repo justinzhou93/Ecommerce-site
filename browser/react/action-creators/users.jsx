@@ -22,7 +22,6 @@ export const addNewCreditCard = (userId, cardInfo) => dispatch => {
   axios.post(`/api/users/${userId}/creditcard`, cardInfo)
     .then(() => {
       dispatch(loadLoggedInUser());
-      browserHistory.push('/user');
     })
     .catch(() => dispatch(loadLoggedInUser()))
 };

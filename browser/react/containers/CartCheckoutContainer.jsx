@@ -2,40 +2,40 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Checkout from '../components/Checkout';
 import { submitNewOrder } from '../action-creators/orders'
+import { removeCartItem } from '../action-creators/users'
 
 export class CheckoutContainer extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            cardFormOpen: false
+        };
+
+        this.handleCardFormClick = this.handleCardFormClick.bind(this);
         this.submitOrder = this.submitOrder.bind(this);
-        this.selectCardSubmit = this.selectCardSubmit.bind(this);
-        this.selectAddressSubmit = this.selectAddressSubmit.bind(this);
     }
 
     // NOTE: event handlers for the cart checkout container
     submitOrder(evt) {
       evt.preventDefault();
-      submitNewOrder(this.props.user.id)
+      this.props.submittingNewOrder(this.props.currentUser.id)
     }
 
-    selectCardSubmit(evt) {
-      evt.preventDefault();
-      this.props.user.card = evt.target.card
-      this.setState({user: this.props.user})
-    }
-
-    selectAddressSubmit(evt) {
-      evt.preventDefault();
-      this.props.user.address = evt.target.address;
-      this.setState({user: this.props.user})
+    handleCardFormClick(evt) {
+        evt.preventDefault();
+        if (this.state.cardFormOpen) this.setState({cardFormOpen: false});
+        else this.setState({cardFormOpen: true});
     }
 
     render() {
         return (
             <Checkout
+                cardFormOpen={this.state.cardFormOpen}
                 currentUser={this.props.currentUser}
-                submitOrder={this.handleAddressClick}
-                selectCardSubmit={this.handleCardsClick}
-                selectAddressSubmit={this.handleCardFormClick}
+                submitOrder={this.submitOrder}
+                removingCartItem={this.props.removingCartItem}
+                handleCardFormClick={this.handleCardFormClick}
             />
         )
     }
@@ -47,4 +47,11 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(CheckoutContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        removingCartItem: (userId, itemId) => (dispatch(removeCartItem(userId, itemId))),
+        submittingNewOrder: userId => dispatch(submitNewOrder(userId))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);

@@ -13,8 +13,9 @@ export default class UserProfile extends React.Component {
         if (this.props.currentUser) {
             return (
                 <div className="flex-container">
-                    <div className="my-account-header">
+                    <div className="my-account-header" style={{justifyContent: 'space-between'}}>
                         <h2 className="my-account-text">My Account</h2>
+                        <Link to="/checkout" className="admin-add-product">View cart/checkout</Link>
                     </div>
                     <div className="user-profile-items">
                         <div className="profile-items">
@@ -25,8 +26,6 @@ export default class UserProfile extends React.Component {
                             <span><a onClick={this.props.handleAddressClick}>Manage Addresses</a></span>
                             {this.props.addressesOpen ? this.renderAddresses() : null}
                         </div>
-
-                        <div className="profile-items" />
                     </div>
                     <div className="user-profile-items">
                         <div className="profile-items">

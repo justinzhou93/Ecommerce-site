@@ -6,12 +6,13 @@ const router = express.Router();
 
 const Order = db.model('orders');
 const LineItem = db.model('lineitems');
+const Product = db.model('products');
 
 // TODO: admin use only -- all orders
 router.get('/', function (req, res, next) {
     Order.findAll({
         include: [{
-            model: LineItem
+            model: LineItem, include: [{model: Product}]
         }]
     })
         .then((orders) => {

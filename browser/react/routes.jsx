@@ -26,7 +26,7 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchAllOrders, fetchC
     <Router history={browserHistory} >
       <Route path="/" component={App} onEnter={fetchProducts}>
         <IndexRedirect to="products" />
-        <Route path="products" component={AllProductsContainer} onEnter={fetchProducts} />
+        <Route path="products" component={AllProductsContainer} />
         <Route path="products/:productId" component={SingleProductContainer} onEnter={fetchSingleProduct} />
 
         <Route path="orders" component={AllOrdersContainer} onEnter={fetchAllOrders} />

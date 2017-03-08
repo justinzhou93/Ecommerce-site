@@ -5,6 +5,20 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
+/* --------- SEARCH BAR -------- */
+.search-bar-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin: 0em 10em 0em 10em;
+}
+
+.search-bar {
+	width: 400px;
+	align-self: center;
+	
+}
+
 /* --------- CART MODAL -------- */
 .cart-header {
 	font-size: 25px;
@@ -358,7 +372,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   padding: 15px;
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: auto;
   margin-top: 10px;
   margin-bottom: 20px;
 }

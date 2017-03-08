@@ -7,13 +7,12 @@ import { connect } from 'react-redux';
 import App from './components/App';
 import AllOrdersContainer from './containers/AllOrdersContainer';
 import AllProductsContainer from './containers/AllProductsContainer';
-// import CartCheckOutContainer from './containers/CartCheckOutContainer';
 // import OrderConfirmationContainer from './containers/OrderConfirmationContainer';
 import SingleProductContainer from './containers/SingleProductContainer';
 import UserProfileContainer from './containers/UserProfileContainer';
 
 import AddAddressContainer from './containers/AddAddressContainer';
-import EditReviewContainer from './containers/EditReviewContainer';
+import OrderConfirmation from './components/OrderConfirmation';
 import CartCheckOutContainer from './containers/CartCheckOutContainer';
 
 import {loadAllProducts, loadSingleProduct} from './action-creators/products';
@@ -35,12 +34,7 @@ export function Root ({fetchProducts, fetchSingleProduct, fetchAllOrders, fetchC
         <Route path="user" component={UserProfileContainer} onEnter={fetchCurrentUser} />
         <Route path="address/add" component={AddAddressContainer} />
         <Route path="checkout" component={CartCheckOutContainer} />
-        {/*<Route path="users/:userid/shoppingCart" component = {CartCheckOutContainer} onEnter = {GetCartFromServer} />*/}
-        {/*<Route path="users/:userid/orders/:orderid/confirmation" component = {OrderConfirmationContainer} />*/}
-        {/*ADMIN ROUTES*/}
-        {/*<Route path="users/?admin" component = {UserProfileContainer} />
-        <Route path="orders/?admin" component = {UserProfileContainer} />
-        <Route path="products/?admin" component = {UserProfileContainer} />*/}
+        <Route path="orderconfirmation" component={OrderConfirmation} />
       </Route>
     </Router>
   );

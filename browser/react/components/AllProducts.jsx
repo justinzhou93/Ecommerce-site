@@ -21,7 +21,7 @@ export default function (props) {
                                 <p>${product.price}</p>
                             </div>
                             <div className="product-price">
-                                <a className="button" onClick={() => {props.addingToCart(props.currentUser.id, product.id, {quantity: 1, price: product.price})}}>Add to cart</a>
+                                <button className="btn btn-primary" style={{borderRadius: '4px', padding: '2px 3px 2px 3px', fontSize: '15px'}} onClick={() => {props.addingToCart(props.currentUser.id, product.id, {quantity: 1, price: product.price})}}>Add to cart</button>
                             </div>
                         </div>
                     )

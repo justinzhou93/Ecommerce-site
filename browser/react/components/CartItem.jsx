@@ -16,22 +16,22 @@ export default class CartItem extends React.Component {
         const item = this.props.item;
         return (
             <div key={item.id}className="cart-items-box">
-                <div className="admin-product-img-box">
+                <div className="cart-product-img-box">
                     <img src={item.product.imgUrl} className="admin-product-img" />
                 </div>
-                <div className="admin-product-title">
+                <div className="admin-product-title" style={{width: '20%'}}>
                     <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>{item.product.title}
                     </h4>
                 </div>
-                <div className="admin-product-price">
-                    <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>Price</h4><br />
-                        ${item.price}
-                </div>
-                <div className="admin-product-inv">
+                <div className="cart-product-inv">
                     <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>Quantity</h4><br />
                         {item.quantity}
                 </div>
-                <div className="admin-links">
+                <div className="cart-product-price">
+                    <h4 style={{fontWeight: 'bold', marginBottom: '0'}}>Price</h4><br />
+                        ${item.price}
+                </div>
+                <div className="cart-links">
                     <a onClick={this.handleRemoveCartItem} className="admin-remove-link">Remove</a>
                 </div>
             </div>

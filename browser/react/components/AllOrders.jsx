@@ -9,7 +9,7 @@ export default function (props) {
               <h2 className="my-account-text">My Orders</h2>
           </div>
           {
-            props.currentUser.length ? props.currentUser.orders.map(order => {
+            props.currentUser.orders.length ? props.currentUser.orders.map(order => {
               return <SingleOrderContainer key={order.id} order={order} />
             }) : <h3 style={{marginTop: '2em'}}>You have made no orders!</h3>
           }

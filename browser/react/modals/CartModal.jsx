@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { hideModal, loadModal } from '../action-creators/modals';
 import { removeCartItem } from '../action-creators/users';
@@ -49,6 +50,13 @@ class CartModal extends React.Component {
 
     renderCart() {
         const userCart = this.props.currentUser.lineitems;
+        const cartTotal = (cart) => {
+            let total = 0;
+            cart.forEach((item) => {
+                total += +item.price;
+            })
+            return total;
+        };
         return (
             <div>
                 {
@@ -63,6 +71,15 @@ class CartModal extends React.Component {
                         )
                     })
                 }
+                <div className="cart-total-box">
+                    <div className="cart-total">
+                        <b>Total cart price: </b>
+                    </div>
+                    <text className="cart-total">${cartTotal(userCart)}</text>
+                    <div className="cart-total">
+                        <button type="submit" className="btn btn-success"><Link to="/checkout" onClick={this.onClose}>Proceed to Checkout!</Link></button>
+                    </div>
+                </div>
             </div>
         )
     }

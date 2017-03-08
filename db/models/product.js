@@ -11,7 +11,7 @@ const Product = db.define('products', {
     type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   inventory: {

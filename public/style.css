@@ -363,7 +363,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	margin-left: 20em;
+	padding-left: 10em;
 	padding-top: 20px;
 	width: 100%;
 }
